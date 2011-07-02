@@ -1,0 +1,67 @@
+{* Ui widget with 3 months calendar to pick-up particular day *}
+
+{if $EDTFRM.calendar}
+<table cellspacing="0" cellpadding="0">
+	<tr>
+		<td>
+			<table width="100%" cellspacing="0" cellpadding="0">
+				<tr>
+					<td class="stuffEdtCalLt" width="1"><div><div></div></div></td>
+					<td class="stuffEdtCalMenu" height="16">
+						<div onClick="frmEdtHideCalendar();" class="_uicmp_blue gtdClose">{$STUFFMESSAGES.close}</div>
+					</td>
+					<td class="stuffEdtCalRt" width="1"><div><div></div></div></td>
+				</tr>
+			</table>
+		</td>
+	</tr>
+	<tr>
+		<td class="stuffEdtCal">
+			<table cellpadding="0">
+				<tr>
+					{foreach from=$EDTFRM.calendar item=month}
+					<td class="stuffEdtCalName">
+						{$month.name}{*&nbsp;{$month.year}*}
+					</td>
+					{/foreach}
+				</tr>
+				<tr>
+					{foreach from=$EDTFRM.calendar key=No item=month}
+					<td class="stuffEdtCalMonth{if $No==3} stuffEdtCalMonthLast{/if}">
+						<table cellspacing="0" cellpadding="0">
+							<tr>
+								<td class="stuffEdtCalDayName stuffEdtCalMonthLt">{$STUFFMESSAGES.weekNameAbbrMonday}</td>
+								<td class="stuffEdtCalDayName">{$STUFFMESSAGES.weekNameAbbrTuesday}</td>
+								<td class="stuffEdtCalDayName">{$STUFFMESSAGES.weekNameAbbrWednesday}</td>
+								<td class="stuffEdtCalDayName">{$STUFFMESSAGES.weekNameAbbrThursday}</td>
+								<td class="stuffEdtCalDayName">{$STUFFMESSAGES.weekNameAbbrFriday}</td>
+								<td class="stuffEdtCalDayName">{$STUFFMESSAGES.weekNameAbbrSaturday}</td>
+								<td class="stuffEdtCalDayName stuffEdtCalMonthRt">{$STUFFMESSAGES.weekNameAbbrSunday}</td>
+							</tr>
+							{foreach name=calWeeks from=$month.weeks item=week}
+							<tr>
+								{foreach name=calDays from=$week key=index item=day}
+								<td class="stuffEdtCalDay{if $smarty.foreach.calWeeks.last}{if $smarty.foreach.calDays.first} stuffEdtCalMonthLb{elseif $smarty.foreach.calDays.last} stuffEdtCalMonthRb{/if}{/if}"><div onClick="frmEdtSetDate('{$day.click}');" class="_uicmp_blue{if $day.holiday==1} stuffEdtCalendarHoliday{/if}{if ($EDTFRM.todayDay==$day.day)&&($No==1)} stuffEdtCalToday{/if}">{$day.day}</div></td>
+								{/foreach}
+							</tr>
+							{/foreach}
+						</table>
+					</td>
+					{/foreach}
+				</tr>
+			</table>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<table width="100%" cellspacing="0" cellpadding="0">
+				<tr>
+					<td class="stuffEdtCalLb" width="1%"><div><div></div></div></td>
+					<td class="stuffEdtCalL" width="98%" height="100%"><div>&nbsp;</div></td>
+					<td class="stuffEdtCalRb" width="1%"><div><div></div></div></td>
+				</tr>
+			</table>
+		</td>
+	</tr>
+</table>
+{/if}

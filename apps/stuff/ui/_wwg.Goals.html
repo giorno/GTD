@@ -1,0 +1,16 @@
+{* Template to display Lifegoals widget *}
+<td class="_wwg">
+	<div id="_wwg.Goals">
+		<table cellspacing="0" width="100%">
+			<tr>
+				<td><div class="gtdFootCaption">{$GTDMESSAGES.capLifegoals}</div><div style="visiblity:visible;display:none;" id="wwgGoalsLoader" class="gtdAjaxLoader wwgGoalsLoader">{$GTDMESSAGES.ajaxUpdating}</div></td>
+			</tr>
+			<tr>
+				<td class="wwgGoalsContainer" id="_wwg.Goals:container">
+					{include file="$APP_STUFF_TEMPLATES/_wwg.Goals.ajx.html"}
+				</td>
+			</tr>
+		</table>
+	</div>
+</td>
+

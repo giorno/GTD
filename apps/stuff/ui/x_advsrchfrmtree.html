@@ -1,0 +1,65 @@
+{* Tree of contexts for Advanced search form results *}
+
+{if $USR_LIST_DATA}
+<table cellspacing="0" width="100%">
+	{foreach from=$USR_LIST_DATA key=CID item=context}
+	<tr>
+		<td colspan="10" class="stuffAsTreeHeader">
+			<table cellspacing="0">
+				<tr>
+					<td class="stuffAsTreeHeaderItem stuffAsTreeHeaderItemCount">{$context.count}</td>
+					{*<td class="stuffAsTreeHeaderItem">-</td>*}
+					<td class="stuffAsTreeHeaderItem">
+					{if $CID!='none'}
+						{assign var=USR_CTX value=$context.data}
+						{*assign var=mFwCtxBadgeCfg value='plain'}
+						{assign var=mFwCtxBdgAction value=''}
+						{assign var=mFwCtxBdgHtmlId value="advSrchCtx_$CID"}
+						{assign var=mFwCtxBdgId value=$context.scheme}
+						{assign var=mFwCtxBdgName value=$context.name}
+						{assign var=mFwCtxBdgDesc value=''*}
+						{include file="$CHASSIS_UI_ROOT/ctx.html"}
+					{/if}
+					</td>
+				</tr>
+			</table>
+		</td>
+	</tr>
+	{foreach from=$context.items name=data key=SID item=row}
+	<tr>
+		{foreach from=$row name=cells item=cell}
+						{if $smarty.foreach.data.last}
+							{assign var=almostAllItemClass value='_list_row_item _list_row_item_last'}
+						{else}
+							{assign var=almostAllItemClass value='_list_row_item'}
+						{/if}
+
+						{if $smarty.foreach.data.first}
+							{*assign var=almostAllItemClass value='_list_row_item stuffAsTreeFirstRow'*}
+							{assign var=allItemClass value="$almostAllItemClass stuffAsTreeFirstRow"}
+						{else}
+							{assign var=allItemClass value="$almostAllItemClass"}
+						{/if}
+						{if $smarty.foreach.cells.first}{assign var=allItemClass value="$allItemClass _list_col_first"}{/if}
+						{if $smarty.foreach.cells.last}{assign var=allItemClass value="$allItemClass _list_col_last"}{/if}
+{*$allItemClass*}
+			{include file="$CHASSIS_UI_ROOT/list/list_cell.html"}
+		{/foreach}
+		{*assign var=cell value=$row.name}
+		{include file="$CHASSIS_UI_ROOT/list/list_cell.html"*}
+	</tr>
+	{/foreach}
+	{/foreach}
+	<tr>
+		{* Yes! This is unprofessional solution, but only one really working in
+		MSIE 6.0. Without this image element first row would collapse its
+		width to almost zero *}
+		<td width="2%"><div style="width:68px;"><img src="inc/stuff/68px.gif"></div></td>
+		<td width="90%"></td>
+		<td width="1%"></td>
+		<td width="1%"></td>
+		<td width="3%"></td>
+		{*<td width="3%"></td>*}
+	</tr>
+</table>
+{/if}

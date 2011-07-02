@@ -1,0 +1,26 @@
+{* Implementation of UICMP Fold used by Stuff application, specialization
+   allowing use of boxes status *}
+
+   
+   <td id="{$USR_UICMP_FOLD->getHtmlId()}:td" class="_uicmp_fold">
+	   <div id="{$USR_UICMP_FOLD->getHtmlId()}" onClick="{$USR_UICMP_LAYOUT->getJsVar()}.show('{$USR_UICMP_TAB->getHtmlId()}');" class="_uicmp_fold{if $USR_UICMP_TAB->isHidden()}_hidden{/if}">
+			<table cellspacing="0" cellpadding="0" class="_uicmp">
+				<tr>
+					<td class="_uicmp_tab_lt"></td>
+					<td class="_uicmp_fold_t">
+						<div class="_uicmp_fold_content">
+							<table cellpadding="0" cellspacing="0">
+								<tr>
+									<td cclass="_uicmp_stuff_fold"><div class="_uicmp_fold_cap">{$USR_UICMP_FOLD->getTitle()}</div></td>
+									<td cclass="_uicmp_stuff_fold"><div class="_uicmp_stuff_fold_c{$USR_UICMP_FOLD->getPriority()}" id="{$USR_UICMP_FOLD->getHtmlId()}.ind">{$USR_UICMP_FOLD->getSize()}</div></td>
+								</tr>
+							</table>
+							
+							
+						</div>
+					</td>
+					<td class="_uicmp_tab_rt"></td>
+				</tr>
+			</table>
+		</div>
+	</td>

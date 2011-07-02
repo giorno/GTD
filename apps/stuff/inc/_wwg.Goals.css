@@ -1,0 +1,65 @@
+
+
+div.wwgGoalsLoader
+{
+	float:							left;
+	margin:							3px;
+}
+
+div.wwgGoalsW0,div.wwgGoalsW1,div.wwgGoalsW2,div.wwgGoalsW3,div.wwgGoalsW4
+{
+	background-color:				#e7e7ff;
+	border:							1px solid #ffffff;
+	margin:							2px;
+	padding:						1px;
+	padding-left:					8px;
+	padding-right:					8px;
+	cursor:							pointer;
+	color:							#222233;
+}
+div.wwgGoalsW0
+{
+	font-size:						12px;
+	margin-top:						6px;
+	margin-bottom:					6px;
+}
+div.wwgGoalsW1
+{
+	font-size:						14px;
+	margin-top:						5px;
+	margin-bottom:					5px;
+}
+div.wwgGoalsW2
+{
+	font-size:						16px;
+	margin-top:						4px;
+	margin-bottom:					4px;
+}
+div.wwgGoalsW3
+{
+	font-size:						18px;
+	margin-top:						3px;
+	margin-bottom:					3px;
+}
+div.wwgGoalsW4
+{
+	font-size:						20px;
+	margin-top:						2px;
+	margin-bottom:					2px;
+	background-color:				#284b43;
+	color:							#ffffff;
+}
+td.wwgGoalsContainer
+{
+	padding-bottom:					4px;
+}
+
+div.wwgGoalsW0:hover,div.wwgGoalsW1:hover,div.wwgGoalsW2:hover,div.wwgGoalsW3:hover
+{
+	background-color:				#00668b;
+	color:							#ffffff;
+}
+div.wwgGoalsW4:hover
+{
+	/*background-color:				#33c533;*/
+}

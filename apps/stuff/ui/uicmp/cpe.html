@@ -1,0 +1,192 @@
+{* CPE form (Collect/Process/Edit) *}
+
+<td>
+	<table width="100%" cellpadding="0" cellspacing="0">
+		<tbody>
+			<tr>
+				<td class="_uicmp_body_frm">
+					<table width="100%" cellpadding="0" cellspacing="0">
+						<tr>
+							<td colspan="2">
+								<table width="100%" cellspacing="0" cellpadding="0">
+									<tr>
+										<td class="_uicmp_frm_prompt_above_1st">{$APP_STUFF_MSG.cpeStoreIn}</td>
+										<td width="100%" class="_uicmp_frm_prompt_above_rest">
+											<table cellpadding="0" cellspacing="0" width="100%">
+												<tr>
+													<td>
+														<div id="{$USR_UICMP_CMP->getHtmlId()}.pTask" style="font-weight:bold;"></div>
+														<div class="_uicmp_data">
+															<div id="{$USR_UICMP_CMP->getHtmlId()}.msg.collect">{$APP_STUFF_MSG.cpeTitle}</div>
+															<div id="{$USR_UICMP_CMP->getHtmlId()}.msg.process">{$APP_STUFF_MSG.cpeTitleProcess}</div>
+															<div id="{$USR_UICMP_CMP->getHtmlId()}.msg.edit">{$APP_STUFF_MSG.cpeTitleEdit}</div>
+															<div id="{$USR_UICMP_CMP->getHtmlId()}.msg.bt.save">{$APP_STUFF_MSG.cpeBtSave}</div>
+															<div id="{$USR_UICMP_CMP->getHtmlId()}.msg.bt.process">{$APP_STUFF_MSG.cpeBtProcess}</div>
+															<div id="{$USR_UICMP_CMP->getHtmlId()}.msg.bt.attprj">{$APP_STUFF_MSG.cpeAttToPrj}</div>
+															<div id="{$USR_UICMP_CMP->getHtmlId()}.msg.bt.chprj">{$APP_STUFF_MSG.cpeChangePrj}</div>
+															{*<div id="{$USR_UICMP_CMP->getHtmlId()}.msg.bt.edit">{$APP_STUFF_MSG.cpeBtEdit}</div>*}
+															{foreach from=$APP_STUFF_MSG.cpe.pt key=box item=prompt}
+															<div id="{$USR_UICMP_CMP->getHtmlId()}.msg.pt.{$box}">{$prompt}</div>
+															{/foreach}
+														</div>
+													</td>
+													<td width="100%"></td>
+													<td><div class="_uicmp_gi" id="{$USR_UICMP_CMP->getHtmlId()}.btCpy" onClick="{$USR_UICMP_CMP->getJsVar()}.cp_task();">{$APP_STUFF_MSG.cpeBtCopy}</div></td>
+												</tr>
+											</table>
+										</td>
+									</tr>
+									<tr>
+										<td class="_uicmp_frm_field_1st">
+											<select id="{$USR_UICMP_CMP->getHtmlId()}.box" onChange="{$USR_UICMP_CMP->getJsVar()}.box_switched( );">
+												{html_options options=$APP_STUFF_MSG.cpe.box}
+											</select>
+										</td>
+										<td class="_uicmp_frm_field_rest">
+											<input onKeyUp="{$USR_UICMP_CMP->getJsVar()}.preview( );" type="text" class="_uicmp_frm_input" id="{$USR_UICMP_CMP->getHtmlId()}.task">
+										</td>
+									</tr>
+									<tr>
+										<td colspan="2" class="_uicmp_frm_prompt_above_1st">
+											<table cellpadding="0" cellspacing="0" width="100%">
+												<tr>
+													<td>{$APP_STUFF_MSG.cpeDetails}</td>
+													<td width="100%"></td>
+													<td><div class="_uicmp_gi" id="{$USR_UICMP_CMP->getHtmlId()}.btCpyD" onClick="{$USR_UICMP_CMP->getJsVar()}.cp_details();">{$APP_STUFF_MSG.cpeBtCopy}</div></td>
+												</tr>
+											</table>
+										</td>
+									</tr>
+									<tr>
+										<td colspan="2" class="_uicmp_frm_field_1st">
+											<textarea id="{$USR_UICMP_CMP->getHtmlId()}.details" class="resizable" style="height: {$USR_UICMP_CMP->getTaH()}px;"></textarea>
+										</td>
+									</tr>
+								</table>
+							</td>
+						</tr>
+						<tbody>
+							<tr>
+								<td class="_uicmp_frm_prompt">{$APP_STUFF_MSG.cpeCtxs}</td>
+								<td width="100%" colspan="2" class="_uicmp_frm_field">
+									<div class="_uicmp_cdes_cloud" id="{$USR_UICMP_CMP->getHtmlId()}.ctxs"></div>
+								</td>
+							</tr>
+							<tr>
+								<td class="_uicmp_frm_prompt">{$APP_STUFF_MSG.cpePriority}</td>
+								<td colspan="2">
+									<table cellpadding="0" cellspacing="0" class="frm">
+										<tr>
+											<td class="_uicmp_frm_field">
+												<select onChange="{$USR_UICMP_CMP->getJsVar()}.pty_switched( );;" id="{$USR_UICMP_CMP->getHtmlId()}.pty">
+													{foreach from=$APP_STUFF_MSG.cpe.pty item=name key=value}
+														<option value="{$value}">{$name}</option>
+													{/foreach}
+												</select>
+											</td>
+											<td class="_stuff_cpe_pty">
+												<div id="{$USR_UICMP_CMP->getHtmlId()}.pty.preview" class="_stuff_pty_ind _stuff_pty_ind_0" style="width: 52px;">
+													<div id="{$USR_UICMP_CMP->getHtmlId()}.pty.rule" style="width: 0px;"></div>
+												</div>
+											</td>
+										</tr>
+									</table>
+								</td>
+							</tr>
+							<tr>
+								<td class="_uicmp_frm_prompt">{$APP_STUFF_MSG.cpePlace}</td>
+								<td class="_uicmp_frm_field">
+									<input type="text" class="_uicmp_frm_input" id="{$USR_UICMP_CMP->getHtmlId()}.loc">
+								</td>
+							</tr>
+							<tr>
+								<td class="_uicmp_frm_prompt">
+									<table  cellspacing="0" cellpadding="0">
+										<tr>
+											<td class="_uicmp_gi_chk">
+												<input onClick="{$USR_UICMP_CMP->getJsVar()}.date_toggle( );" id="{$USR_UICMP_CMP->getHtmlId()}.date" type="checkbox">
+											</td>
+											<td class="_uicmp_gi_chk"><div class="_uicmp_blue" id="{$USR_UICMP_CMP->getHtmlId()}.pDate" onClick="document.getElementById('{$USR_UICMP_CMP->getHtmlId()}.date').click();">{$APP_STUFF_MSG.cpeDate}</div></td>
+										</tr>
+									</table
+								</td>
+								<td class="_uicmp_frm_field">
+									<table cellspacing="0" cellpadding="0">
+										<tr>
+											<td class="_uicmp_fri">
+												{html_select_date end_year="+12" day_extra="id={$USR_UICMP_CMP->getHtmlId()}.day disabled=disabled" month_extra="id={$USR_UICMP_CMP->getHtmlId()}.month disabled=disabled" year_extra="id={$USR_UICMP_CMP->getHtmlId()}.year disabled=disabled"}
+											</td>
+											<td class="_uicmp_fri"><div id="{$USR_UICMP_CMP->getHtmlId()}.btToday" onClick="{$USR_UICMP_CMP->getJsVar()}.date_set_today( );" class="_uicmp_blue _uicmp_gi_now">{$APP_STUFF_MSG.cpeToday}</div></td>
+											<td class="_uicmp_fri"><div id="{$USR_UICMP_CMP->getHtmlId()}.btTomorrow" onClick="{$USR_UICMP_CMP->getJsVar()}.date_set_tomorrow( );" class="_uicmp_blue _uicmp_gi_right">{$APP_STUFF_MSG.cpeTomorrow}</div></td>
+											<td class="_uicmp_fri">
+												<div onClick="{$USR_UICMP_CMP->getJsVar()}.cal_show();" id ="{$USR_UICMP_CMP->getHtmlId()}.btCal" class="_uicmp_blue _uicmp_gi_cal">{$APP_STUFF_MSG.cpeCalendar}</div>
+											</td>
+										</tr>
+									</table>
+								</td>
+
+							</tr>
+							<tr>
+								<td class="_uicmp_frm_prompt">
+									<table  cellspacing="0" cellpadding="0">
+										<tr>
+											<td class="_uicmp_gi_chk">
+												<input onClick="{$USR_UICMP_CMP->getJsVar()}.time_toggle( );" id="{$USR_UICMP_CMP->getHtmlId()}.time" type="checkbox">
+											</td>
+										<td class="_uicmp_gi_chk"><div class="_uicmp_blue" id="{$USR_UICMP_CMP->getHtmlId()}.pTime" onClick="document.getElementById('{$USR_UICMP_CMP->getHtmlId()}.time').click();">{$APP_STUFF_MSG.cpeTime}</div></td>
+										</tr>
+									</table>
+								</td>
+								<td class="_uicmp_frm_field">
+									<table cellspacing="0" cellpadding="0">
+										<tr>
+											<td class="_uicmp_fri">
+												{html_select_time hour_extra="id={$USR_UICMP_CMP->getHtmlId()}.hour disabled=disabled" minute_extra="id={$USR_UICMP_CMP->getHtmlId()}.minute disabled=disabled" use_24_hours=true display_seconds=false}
+											</td>
+											{assign var='USR_PRESETS' value=$USR_UICMP_CMP->getPresets()}
+											{if $USR_PRESETS}
+											{foreach name=presets from=$USR_PRESETS key=time item=preset}
+											<td class="_uicmp_fri" >
+												<div onClick="{$USR_UICMP_CMP->getJsVar()}.time_set('{$time}');" id ="{$USR_UICMP_CMP->getHtmlId()}.btPreset_{$smarty.foreach.presets.iteration}" class="_uicmp_blue">{$preset}</div>
+											</td>
+											{/foreach}
+											{/if}
+										</tr>
+									</table>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</td>
+			</tr>
+
+			{* Assignment to a project *}
+			<tr>
+				<td colspan="3" id="{$USR_UICMP_CMP->getHtmlId()}.prj" class="_uicmp_frm_hdr">
+					<table cellspacing="0" cellpadding="0" width="100%">
+						<tr>
+							<td class="_uicmp_frm_hdr_item"><div class="_uicmp_frm_hdr_cap">{$APP_STUFF_MSG.cpeProject}</div></td>
+							<td class="_uicmp_frm_hdr_item">
+								<div onClick="{$USR_UICMP_CMP->getJsVar()}.picker_show( );" id="{$USR_UICMP_CMP->getHtmlId()}.btChPrj" class="_uicmp_blue _uicmp_gi_gear">{$APP_STUFF_MSG.cpeChangePrj}</div>
+							</td>
+							<td class="_uicmp_frm_hdr_item">
+								<div onClick="{$USR_UICMP_CMP->getJsVar()}.prj_erase( );" id="{$USR_UICMP_CMP->getHtmlId()}.btRmPrj" class="_uicmp_blue _uicmp_gi_close">{$APP_STUFF_MSG.cpeDetachPrj}</div>
+							</td>
+							<td width="99%"></td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td class="_uicmp_body_frm">
+					<div id="{$USR_UICMP_CMP->getHtmlId()}.prjEmpty" class="_stuff_cpe_prj">
+						<div class="_stuff_cpe_prj_noprj">{$APP_STUFF_MSG.cpeNoPrj}</div>
+					</div>
+					<div id="{$USR_UICMP_CMP->getHtmlId()}.prjDetails" class="_stuff_cpe_prj"></div>
+			</tr>
+			<tr>
+				<td id="{$USR_UICMP_CMP->getHtmlId()}.history"></td>
+			</tr>
+		</tbody>
+	</table>
+</td>

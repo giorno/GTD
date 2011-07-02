@@ -1,0 +1,162 @@
+{* Smarty template for Ajax transported HTML table with history of stuff *}
+
+<table width="100%" cellspacing="0" cellpadding="0">
+	{* Subtasks (if item is a project) *}
+	{if $SUBTASKS}
+	<tr><td class="_stuff_cpe_vspacer"></td></tr>
+	<tr>
+		<td class="_uicmp_frm_hdr">
+			<table cellspacing="0" cellpadding="0" width="100%">
+				<tr>
+					<td class="_uicmp_frm_hdr_item"><div class="_uicmp_frm_hdr_cap">{$APP_STUFF_MSG.cpeSubTasks}</div></td>
+				</tr>
+			</table>
+		</td>
+	</tr>
+	<tr>
+		<td class="_uicmp_body_frm">
+			<div class="_stuff_cpe_prj">
+				<table cellspacing="0" cellpadding="0" width="100%">
+				{foreach from=$SUBTASKS item=row}
+					<tr>
+						{foreach from=$row item=cell}
+						{include file="$CHASSIS_UI_ROOT/list/list_cell.html"}
+						{/foreach}
+					</tr>
+				{/foreach}
+				</table>
+			</div>
+		</td>
+	</tr>
+	{/if}
+
+	{* Main history of records *}
+	{if $HISTORY}
+	<tr><td class="_stuff_cpe_vspacer"></td></tr>
+	<tr>
+		<td class="_uicmp_frm_hdr">
+			<table cellspacing="0" cellpadding="0" width="100%">
+				<tr>
+					<td class="_uicmp_frm_hdr_item"><div class="_uicmp_frm_hdr_cap">{$APP_STUFF_MSG.cpeHistory}</div></td>
+					<td class="_uicmp_frm_hdr_item">
+						<div onClick="waScrollToEl('frmEdt1stRecord');" id="txtFrmEdtScrollToFirst" class="_uicmp_blue _uicmp_gi_bottom">{$APP_STUFF_MSG.cpeBtScroll}</div>
+					</td>
+					<td width="99%"></td>
+				</tr>
+			</table>
+		</td>
+	</tr>
+	{foreach name=history from=$HISTORY item=record}
+	{*math assign="style" equation="(a+(x%2))%2" a=$smarty.foreach.history.iteration x=$smarty.foreach.history.total*}
+	<tr>
+		<td class="_stuff_cpe_hist_cont">
+			<div class="_stuff_cpe_hist_cont">
+				{* Task/Caption *}
+				{if $record.flags.ro}
+				<div{if $smarty.foreach.history.last} id="frmEdt1stRecord"{/if} class="_stuff_cpe_hist_cap">
+				{else}
+				<div{if $smarty.foreach.history.last} id="frmEdt1stRecord"{/if} onClick="{$JS_VAR}.edit( {$DATA.id} , {$record.sequence} );" class="_uicmp_blue _stuff_cpe_hist_cap">
+				{/if}
+				{$record.task}
+				</div>
+
+				{* Contexts *}
+				{if $record.badges}
+				<div class="_stuff_cpe_hist_ctxs">{foreach from=$record.badges item=USR_CTX}{include file="$CHASSIS_UI_ROOT/ctx.html"}{/foreach}</div>
+				{/if}
+
+				{* Description *}
+				{if $record.flags.ro}
+				<div class="_stuff_cpe_hist_sys">
+					{if $record.sysData.ID=='__WELCOMEMSGv1__'}
+						{include file="$APP_STUFF_TEMPLATES/s_welcomemsg.html"}
+					{elseif $record.sysData.ID=='__BIRTHDAYv1__'}
+						{include file="$APP_STUFF_TEMPLATES/s_birthday.html"}
+					{/if}
+				{else}
+					{if $record.descF!=""}
+				<div class="_stuff_cpe_hist_desc">
+					{else}
+				<div>
+					{/if}
+					{$record.descF}
+				</div>
+				{/if}
+				</div>
+			</div>
+
+			{* Second line, containing rest of record details *}
+			<div class="_stuff_cpe_hist_2nd">
+				<table cellspacing="0" cellpadding="0" width="100%">
+					<tr>
+						{* Box and priority *}
+						<td class="_stuff_cpe_hist_box">
+							<table cellspacing="0" cellpadding="0">
+							<tr>
+								<td>
+									{*assign var=AUX_BOX value="box`$record.box`"*}
+									{$APP_STUFF_MSG.cpe.box[$record.box]}
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<table cellspacing="0" cellpadding="0">
+										<tr>
+											<td class="_stuff_cpe_hist_pty">
+												<div class="_stuff_pty_ind _stuff_pty_ind_{$record.priority}">
+													<div style="width: {$record.priority*25}%"></div>
+												</div>
+											</td>
+										</tr>
+									</table>
+
+								</td>
+							</tr>
+						</table>
+						</td>
+						<td class="N716pxH">
+							
+						{* Date *}
+						{if $record.dateSet==1}</td><td class="_stuff_cpe_hist_2nd_item">{$record.dateVal}</td>{/if}
+
+						{* Time *}
+						{if $record.timeSet==1}<td class="_stuff_cpe_hist_2nd_item">{$record.timeVal}</td>{/if}
+
+						{* Place *}
+						{if $record.place}<td class="_stuff_cpe_hist_2nd_item">{$record.place}</td>{/if}
+
+						{* Recorded date/time *}
+						<td width="99%"></td>
+						<td class="_stuff_cpe_hist_2nd_rec">{$record.recDate}</td>
+						<td class="_stuff_cpe_hist_2nd_rec">{$record.recTime}</td>
+					</tr>
+				</table>
+			</div>
+		</td>
+	</tr>
+	{if !$smarty.foreach.history.last}
+	<tr>
+		<td class="_stuff_cpe_hist_hl"></td>
+	</tr>
+	{/if}
+	{/foreach}
+	{/if}
+</table>
+
+{* Data XHTML *}
+{if $DATA}
+<div id="hdataRoot" class="_uicmp_data">
+	<div id="hdataName">{$DATA.task}</div>
+	<div id="hdataSid">{$DATA.id}</div>
+	<div id="hdataPid">{$DATA.pid}</div>
+	<div id="hdataBox">{$DATA.box}</div>
+	<div id="hdataPlace">{$DATA.place}</div>
+	<div id="hdataDesc">{$DATA.desc}</div>
+	<div id="hdataPriority">{$DATA.priority}</div>
+	<div id="hdataDateSet">{$DATA.dateSet}</div>
+	<div id="hdataTimeSet">{$DATA.timeSet}</div>
+	<div id="hdataDateYear">{$DATA.dateYear}</div><div id="hdataDateMonth">{$DATA.dateMonth}</div><div id="hdataDateDay">{$DATA.dateDay}</div>
+	<div id="hdataTimeHour">{$DATA.timeHour}</div><div id="hdataTimeMinute">{$DATA.timeMinute}</div>
+	<div id="hdataCtxs">{foreach name=contexts from=$DATA.contexts key=cid item=val}{$cid}{if !$smarty.foreach.contexts.last},{/if}{/foreach}</div>
+</div>
+{/if}

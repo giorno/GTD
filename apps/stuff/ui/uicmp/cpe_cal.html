@@ -1,0 +1,50 @@
+{* Content of calendar dialog *}
+{assign var=USR_UICMP_DATA value=$USR_UICMP_DLG->getData()}
+<div id="{$USR_UICMP_DLG->getHtmlId()}.cnt">
+	<table cellspacing="0" cellpadding="0">
+		<tr>
+			<td>
+				<div class="_uicmp_blue _uicmp_dlg_close" id="{$USR_UICMP_DLG->getHtmlId()}.btClose" onClick="{$USR_UICMP_DLG->getJsVar()}.close( );">
+					{$APP_STUFF_MSG.cpeBtClose}
+				</div>
+				<div class="_uicmp_data">
+					<div id="{$USR_UICMP_DLG->getHtmlId()}.today">{$USR_UICMP_DATA.today}</div>
+					<div id="{$USR_UICMP_DLG->getHtmlId()}.tomorrow">{$USR_UICMP_DATA.tomorrow}</div>
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<table cellpadding="0" cellspacing="0">
+					<tr>
+						{foreach from=$USR_UICMP_DATA.cal key=index item=month}
+						<td class="_stuff_cpe_cal_cap{if $index==3} _stuff_cpe_cal_cap_last{/if}">
+							{$month.name}
+						</td>
+						{/foreach}
+					</tr>
+					<tr>
+						{foreach from=$USR_UICMP_DATA.cal key=index item=month}
+						<td class="_stuff_cpe_cal_m{if $index==3} _stuff_cpe_cal_m_last{/if}">
+							<table cellspacing="0" cellpadding="0">
+								<tr>
+									{foreach from=$APP_STUFF_MSG.dow item=dow}
+									<td class="_stuff_cpe_cal_d_name">{$dow}</td>
+									{/foreach}
+								</tr>
+								{foreach from=$month.weeks item=week}
+								<tr>
+									{foreach from=$week item=day}
+									<td class="_stuff_cpe_cal_d"><div{if array_key_exists('click',$day)} onClick="{$USR_UICMP_DLG->getJsVar()}.set('{$day.click}');"{/if} class="_uicmp_blue{if $day.holiday==1} _stuff_cpe_cal_hd{/if}{if ($USR_UICMP_DATA.today_day==$day.day)&&($index==1)} _stuff_cpe_cal_td{/if}">{$day.day}</div></td>
+									{/foreach}
+								</tr>
+								{/foreach}
+							</table>
+						</td>
+						{/foreach}
+					</tr>
+				</table>
+			</td>
+		</tr>
+	</table>
+</div>

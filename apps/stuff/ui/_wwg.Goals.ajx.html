@@ -1,0 +1,7 @@
+{if $WWG_GOALS}
+	{foreach from=$WWG_GOALS item=goal key=id}
+		<div id="_wwg.Goals:{$id}" onClick="_wwgGoalsClick({$id});" class="wwgGoalsW{$goal.weight}">{$goal.name}</div>
+	{/foreach}
+{else}
+{$GTDMESSAGES.msgNoLifegoalsContext1}<a class="_wwgMi" href="{$N7_URL->myUrl('settings')}">{$GTDMESSAGES.msgNoLifegoalsAnchor}</a>{$GTDMESSAGES.msgNoLifegoalsContext2}
+{/if}

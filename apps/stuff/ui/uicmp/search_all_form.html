@@ -1,0 +1,69 @@
+{* HTML code for Stuff app All tab search form *}
+{assign var='STUFF_SEARCH_FRM_DATA' value=$USR_UICMP_CMP->getData()}
+<td class="_uicmp_srch_frm">
+	<div class="_uicmp_srch_frm">
+		<table cellspacing="0" cellpadding="0" width="100%">
+			<tr>
+				<td colspan="7">
+					<table cellspacing="0" cellpadding="0" class="_stuff_search_all">
+						<tr>
+							<td width="100%" class="_uicmp_search_field"><input onKeyUp="if ( waEventKeycode(event) == 13 ) {$USR_UICMP_CMP->getJsVar()}.search();" id="{$USR_UICMP_CMP->getHtmlId()}:input" class="_uicmp_frm_input" type="text" value="{$USR_UICMP_CMP->getKeywords()}"></td>
+							<td class="_uicmp_search_field"><input onClick="{$USR_UICMP_CMP->getJsVar()}.search();" type="button" value="{$CHASSIS_UICMP_MESSAGES.srchBtSearch}"></td>
+							<td {*class="_uicmp_search_field"*}><input onClick="{$USR_UICMP_CMP->getJsVar()}.showAll();"type="button" value="{$CHASSIS_UICMP_MESSAGES.srchBtShowAll}"></td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td class="_stuff_search_all_prompt">{$APP_STUFF_MSG.advSearchField}</td>
+				<td class="_stuff_search_all_prompt">{$APP_STUFF_MSG.advSearchBox}</td>
+				<td class="_stuff_search_all_prompt">{$APP_STUFF_MSG.advSearchLabeled}</td>
+				<td class="_stuff_search_all_prompt">{$APP_STUFF_MSG.advSearchDisplay}</td>
+				<td></td>
+				<td></td>
+				<td width="100%"></td>
+			</tr>
+			<tr>
+				<td class="_uicmp_search_field">
+					<select id="{$USR_UICMP_CMP->getHtmlId()}:field">
+						{html_options options=$STUFF_SEARCH_FRM_DATA.field selected=$STUFF_SEARCH_FRM_DATA.selField}
+					</select>
+				</td>
+				<td class="_uicmp_search_field">
+					<select id="{$USR_UICMP_CMP->getHtmlId()}:box">
+						{html_options options=$STUFF_SEARCH_FRM_DATA.box selected=$STUFF_SEARCH_FRM_DATA.selBox}
+					</select>
+				</td>
+				<td class="_uicmp_search_field" id="frmAdvContextContainer">
+					{include file="$APP_STUFF_TEMPLATES/x_advsrchfrmctxs.html"}
+				</td>
+				<td class="_uicmp_search_field">
+					<select id="{$USR_UICMP_CMP->getHtmlId()}:display">
+						{html_options options=$STUFF_SEARCH_FRM_DATA.display selected=$STUFF_SEARCH_FRM_DATA.selDisplay}
+					</select>
+				</td>
+				<td class="_uicmp_search_field">
+					<table cellspacing="0" cellpadding="0">
+						<tr>
+							<td>
+								<input type="checkbox" {if $STUFF_SEARCH_FRM_DATA.showCtxs=='1'}checked="checked"{/if}id="{$USR_UICMP_CMP->getHtmlId()}.ChkBox">
+							</td>
+							<td class="_uicmp_gi_chk"><div id="{$USR_UICMP_CMP->getHtmlId()}.showCtxs" class="_uicmp_blue" onClick="document.getElementById( '{$USR_UICMP_CMP->getHtmlId()}.ChkBox').click();">{$STUFFMESSAGES.advSearchShowBadges}</div></td>
+						</tr>
+					</table>
+				</td>
+				{*<td class="_uicmp_search_field"><div id="{$USR_UICMP_CMP->getHtmlId()}:indicator" class="_uicmp_search_indicator_hidden">{$CHASSIS_UICMP_MESSAGES.ajxLoading}</div></td>*}
+				{if !$USR_UICMP_CMP->isEmpty()}
+				{assign var='USR_UICMP_ITEM' value=$USR_UICMP_CMP->getFirst()}
+				{while $USR_UICMP_ITEM}
+					<td class="_uicmp_gi">{include file=$USR_UICMP_ITEM->getRenderer()}</td>
+					{assign var='USR_UICMP_ITEM' value=$USR_UICMP_CMP->getNext()}
+					{if $USR_UICMP_ITEM}
+					{*<td></td>*}
+					{/if}
+				{/while}
+				{/if}
+			</tr>
+		</table>
+	</div>
+</td>

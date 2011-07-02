@@ -1,0 +1,21 @@
+{if $cell->manager=='manStuffPriority'}
+	<td class="{$allItemClass} {$cell->data.class}">
+		<div class="_stuff_pty_ind _stuff_pty_ind_{$cell->data.value}">
+			<div style="width: {$cell->data.value*25}%">
+				
+			</div>
+		</div>
+	</td>
+{elseif $cell->manager=='manStuffDateTime'}
+	<td class="{$allItemClass} iFwListRowItemDate {if $smarty.foreach.cells.first} iFwListColFirst{/if} {$cell->data.class}" width="1%" nowrap="nowrap" align="left">{if $cell->data.date!=''}{$cell->data.date}{else}<div></div>{/if}</td>
+	<td class="{$allItemClass}{if $smarty.foreach.cells.last} iFwListColLast{/if} {$cell->data.class}" width="1%" nowrap="nowrap" align="left">{if $cell->data.time!=''}{$cell->data.time}{else}<div></div>{/if}</td>
+{elseif $cell->manager=='manStuffIconDone'}
+	<td width="1%" class="{$allItemClass} iFwListRowItemIcon {$cell->data.class}">
+		<div title="{$cell->data.alt}" onClick="{$cell->data.code}" class="_stuff_list_ico_done"></div>
+	</td>
+{elseif $cell->manager=='manStuff2m'}
+	<td width="1%" class="{$allItemClass} iFwListRowItemIcon {$cell->data.class}">
+		<div title="{$cell->data.alt}" onClick="{$cell->data.code}" class="_stuff_list_ico_2m"></div>
+	</td>
+{else}
+{/if}

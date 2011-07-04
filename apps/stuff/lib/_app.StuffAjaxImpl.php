@@ -246,20 +246,8 @@ class StuffAjaxImpl extends Stuff implements SemApplicator
 					 */
 					case 'refresh':
 						require_once CHASSIS_LIB . '_cdes.php';
-						//$settings = new StuffSettings( );
 						$cdes = new _cdes( _session_wrapper::getInstance( )->getUid( ), StuffConfig::T_STUFFCTX, n7_globals::lang( ) );
-						$cdes->display( StuffCfgFactory::getCfg( 'usr.lst.Contexts'), $_POST['id'], $_POST['cdes_ed'], n7_globals::settings( )->get( 'usr.lst.len' ), n7_globals::settings( )->get( 'usr.lst.pagerhalf' ), $_POST['keywords'], $_POST['page'], $_POST['order'], $_POST['dir'] );
-
-						/*if ( $results !== false )
-						{
-							$smarty->assignByRef( 'USR_LIST_DATA', $results );
-							_smarty_wrapper::getInstance( )->setContent( CHASSIS_UI . '/list/list.html' );
-							_smarty_wrapper::getInstance( )->render( );
-						}
-						else
-						{
-							
-						}*/
+						$cdes->display( StuffCfgFactory::getCfg( 'usr.lst.Contexts'), $_POST['id'], $_POST['cdes_ed'], n7_globals::settings( )->get( 'usr.lst.len' ), n7_globals::settings( )->get( 'usr.lst.pagerhalf' ), $_POST['keywords'], $_POST['page'], $_POST['order'], $_POST['dir'], '_wwg_goals_refresh' );
 					break;
 
 					/**
@@ -368,12 +356,10 @@ class StuffAjaxImpl extends Stuff implements SemApplicator
 						$result = $engine->FromFragment( $_POST['cpe_js_var'], $_POST['id'] );
 
 						$smarty->assignByRef( 'USR_LIST_DATA', $results );
-
 						
 						$smarty->assign( 'cell', $result['toRender'] );
 						$smarty->assign( 'DESC', $result['desc'] );
-						//$smarty->assign( 'JS_VAR', $_POST['cpe_js_var'] );		// item action to show picker
-						//$smarty->assign( 'FORM_ID', $_POST['form_id'] );	// to generate HTML IDs
+
 						_smarty_wrapper::getInstance( )->setContent( APP_STUFF_UI . 'uicmp/x_project.html' );
 						_smarty_wrapper::getInstance( )->render( );
 					break;
@@ -411,7 +397,6 @@ class StuffAjaxImpl extends Stuff implements SemApplicator
 					break;
 
 					case 'edit':
-						//var_dump($_POST);break;
 						require_once APP_STUFF_LIB . 'class.StuffEditor.php';
 						$editor = new StuffEditor( _session_wrapper::getInstance( )->getUid( ) );
 							$editor->ImportXml( htmlspecialchars_decode( $_POST['data'] ) );
@@ -476,143 +461,6 @@ class StuffAjaxImpl extends Stuff implements SemApplicator
 					break;
 				}
 			break;
-
-			/*
-			 * Search in other boxes.
-			 */
-			/*case 'searchInbox':
-			case 'searchNa':
-			case 'searchWf':
-			case 'searchSd':
-			case 'searchAr':*/
-				//require_once APP_STUFF_LIB . 'class.StuffSearchBoxes.php';
-					//$Engine = new StuffSearchBoxes( _session_wrapper::getInstance( )->getUid( ) );
-
-				/*	switch ( $_POST['action'] )
-					{
-						case 'searchInbox':
-							$box = 'Inbox';
-							$boxName = $this->messages['boxInbox'];
-							$boxJsInstance = 'stuffBoxes[0]';
-						break;
-
-						case 'searchNa':
-							$box = 'Na';
-							$boxName = $this->messages['boxNextActions'];
-							$boxJsInstance = 'stuffBoxes[2]';
-						break;
-
-						case 'searchWf':
-							$box = 'Wf';
-							$boxName = $this->messages['boxWaitingFor'];
-							$boxJsInstance = 'stuffBoxes[3]';
-						break;
-
-						case 'searchSd':
-							$box = 'Sd';
-							$boxName = $this->messages['boxSomeday'];
-							$boxJsInstance = 'stuffBoxes[4]';
-						break;
-
-						case 'searchAr':
-							$box = 'Ar';
-							$boxName = $this->messages['boxArchive'];
-							$boxJsInstance = 'stuffBoxes[5]';
-						break;
-					}
-
-					$results = $this->getSe( )->srchBox( $box, n7_globals::settings( )->get( 'usr.lst.len' ), $_POST['search'], $_POST['page'], $_POST['field'], $_POST['dir'] );
-					if ( $results !== false )
-					{
-						$__SMARTY->assign( 'mFwListData', $results );
-						$__SMARTY->display( CHASSIS_UI . '/list.html' );
-					}
-					else
-					{
-						if ( trim( $_POST['search'] ) != '' )
-							$__SMARTY->assign( 'MESSAGE', sprintf( $this->messages['noResultsNoMatch'], "<span onClick=\"{$boxJsInstance}.showAll( );\" class=\"_uicmp_blue_b\">" . $this->messages['btShowAll'] . "</span>", "<span onClick=\"{$boxJsInstance}.focus( );\" class=\"_uicmp_blue_b\">" . $this->messages['noResultsChangePhrase'] . "</span>" ) );
-						else
-							$__SMARTY->assign( 'MESSAGE', sprintf( $this->messages['noResultsEmptyBox'], $boxName ) );
-
-						$__SMARTY->display( 'x_empty.html' );
-					}
-			break;*/
-
-			/*
-			 * Set weight of goal to given value.
-			 */
-			/*case 'setGoalWeight':
-				$this->goals = new Goals( );
-				$this->goals->setWeight( );
-			break;*/
-
-			/*
-			 * Load contexts cloud for the form.
-			 */
-			//case 'loadGoals':
-				//var_dump($_POST );
-				//break;
-			//		$this->goals = new Goals( );
-					//$__SMARTY->assign( 'LIFEGOALS', $this->getSe( )->Lifegoals( n7_globals::settings( )->get( 'Lifegoals' ), n7_globals::settings( )->get( 'LifegoalsBox' ) ) );
-			//		$smarty->display( APP_STUFF_UI . '_wwg.Goals.ajx.html' );
-			//break;
-
-			/*
-			 * Perform advanced search.
-			 */
-			/*case 'advSearch':
-					$results = $this->getSe( )->AdvSearch( $_POST['search'], $_POST['box'], $_POST['in'], $_POST['ctx'], $_POST['display'], $_POST['showCtxs'], n7_globals::settings( )->get( 'usr.lst.len' ), $_POST['page'], $_POST['field'],  $_POST['dir'] );
-
-					if ( $results !== false )
-					{
-						$__SMARTY->assign( 'mFwListData', $results );
-						switch ( $_POST['display'] )
-						{
-							case StuffSearchBoxes::ADVSRCHDISP_TREE:
-								$__SMARTY->display( APP_STUFF_UI . '/x_advsrchfrmtree.html' );
-							break;
-
-							case StuffSearchBoxes::ADVSRCHDISP_LIST:
-							default:
-								$__SMARTY->display( CHASSIS_UI . '/list.html' );
-							break;
-						}
-
-					}
-					else
-					{*/
-						//$__SMARTY->assign( 'MESSAGE', sprintf( $this->messages['emptyBox'], $boxName ) );
-						//
-						/*if ( trim( $_POST['search'] ) != '' )
-							$__SMARTY->assign( 'MESSAGE', sprintf( $this->messages['noResultsNoMatch'], "<span onClick=\"asShowAll( );\" class=\"_uicmp_blue_b\">" . $this->messages['btShowAll'] . "</span>", "<span onClick=\"stuffBoxes[7].focus( );\" class=\"_uicmp_blue_b\">" . $this->messages['noResultsChangePhrase'] . "</span>" ) );
-
-						$__SMARTY->display( 'x_empty.html' );
-					}
-			break;*/
-
-			/*
-			 * Return SELECT box with prefilled contexts for Advanced search form.
-			 */
-			/*case 'advSearchCtxs':
-				require_once N7_SOLUTION_LIB . 'class.GtdContext.php';
-				require_once APP_STUFF_LIB . 'class.StuffConfig.php';
-
-					$ADVSRCHFRM['selCtx'] = (string)$_POST['sel'];
-
-					$ADVSRCHFRM['ctx']['0']  = $this->messages['advSrchAllCtxs'];
-					$ctxs = _cdes::allCtxs( _session_wrapper::getInstance( )->getUid( ), StuffConfig::T_STUFFCTX );
-					if ( is_array( $ctxs ) )
-					{
-						foreach ( $ctxs as $CID => $data )
-							$ADVSRCHFRM['ctx']["{$CID}"]  = $data['name'];
-					}
-
-					$__SMARTY->assign( 'ADVSRCHFRM', $ADVSRCHFRM );
-					$__SMARTY->display( APP_STUFF_UI . 'x_advsrchfrmctxs.html' );
-			break;
-
-			default:
-			break;*/
 		}
 	}	
 

@@ -3,10 +3,9 @@
 /**
  * @file _app.StuffMainImpl.php
  * @author giorno
- *
- * Main implementation of Stuff application for Request-Response phase. Ajax
- * server implementation is placed in separate class.
- *
+ * @package GTD
+ * @subpackage Stuff
+ * @license Apache License, Version 2.0, see LICENSE file
  */
 
 require_once CHASSIS_LIB . 'apps/_app_registry.php';
@@ -32,6 +31,10 @@ require_once APP_STUFF_LIB . '_wwg.Goals.php';
 require_once APP_STUFF_LIB . 'uicmp/_vcmp_stuff_search_all.php';
 require_once APP_STUFF_LIB . 'class.StuffCfgFactory.php';
 
+/**
+ * Main implementation of Stuff application for Request-Response phase. Ajax
+ * server implementation is placed in separate class.
+ */
 class StuffMainImpl extends Stuff implements SemProvider
 {
 
@@ -75,11 +78,16 @@ class StuffMainImpl extends Stuff implements SemProvider
 	public function event ( $event )
 	{
 		/**
-		 * Updated settings.
+		 * Actions performed upon app registration.
 		 */
-		if ( $event | _app_registry::EV_REGISTERED )
+		if ( $event & _app_registry::EV_REGISTERED )
 		{
-			$this->goals = new Goals( $this->id );
+			/**
+			 * Initialize Lifegoals widget if Lifegoals were configured.
+			 */
+			$goals_on = StuffCfgFactory::getInstance( )->get( 'usr.goals.on' );
+			if ( (int)$goals_on > 0 )
+				$this->goals = new Goals( $this );
 		}
 	}
 

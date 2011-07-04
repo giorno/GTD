@@ -1,65 +1,62 @@
 
-
-div.wwgGoalsLoader
+/* Indicator container */
+td._wwg_goals_ind
 {
-	float:							left;
-	margin:							3px;
-}
-
-div.wwgGoalsW0,div.wwgGoalsW1,div.wwgGoalsW2,div.wwgGoalsW3,div.wwgGoalsW4
-{
-	background-color:				#e7e7ff;
-	border:							1px solid #ffffff;
-	margin:							2px;
-	padding:						1px;
 	padding-left:					8px;
-	padding-right:					8px;
-	cursor:							pointer;
-	color:							#222233;
+	vertical-align:					middle;
 }
-div.wwgGoalsW0
-{
-	font-size:						12px;
-	margin-top:						6px;
-	margin-bottom:					6px;
-}
-div.wwgGoalsW1
-{
-	font-size:						14px;
-	margin-top:						5px;
-	margin-bottom:					5px;
-}
-div.wwgGoalsW2
-{
-	font-size:						16px;
-	margin-top:						4px;
-	margin-bottom:					4px;
-}
-div.wwgGoalsW3
+
+/* Cloud caption */
+td._wwg_goals_cap
 {
 	font-size:						18px;
-	margin-top:						3px;
-	margin-bottom:					3px;
+	font-weight:					bold;
 }
-div.wwgGoalsW4
-{
-	font-size:						20px;
-	margin-top:						2px;
-	margin-bottom:					2px;
-	background-color:				#284b43;
-	color:							#ffffff;
-}
-td.wwgGoalsContainer
+td._wwg_goals_cnt
 {
 	padding-bottom:					4px;
+	max-width:						320px;
+	min-width:						320px;
+	width:							320px;
 }
 
-div.wwgGoalsW0:hover,div.wwgGoalsW1:hover,div.wwgGoalsW2:hover,div.wwgGoalsW3:hover
+div._wwg_goals_w0,div._wwg_goals_w1,div._wwg_goals_w2,div._wwg_goals_w3,div._wwg_goals_w4
 {
-	background-color:				#00668b;
-	color:							#ffffff;
+	border:							1px solid #ffffff;
+	margin:							0px;
+	margin-top:						4px;
+	margin-right:					4px;
+	padding:						1px;
+	padding-left:					4px;
+	padding-right:					4px;
+	cursor:							pointer;
+	color:							#222233;
+	border-radius:					2px;
+	-moz-border-radius:				2px;
+	font-size:						12px;
 }
-div.wwgGoalsW4:hover
+div._wwg_goals_w0
 {
-	/*background-color:				#33c533;*/
+	background-color:				#f7f7f7;
+	border-color:					#f7f7f7;
+}
+div._wwg_goals_w1
+{
+	background-color:				#e7e7e7;
+	border-color:					#e7e7e7;
+}
+div._wwg_goals_w2
+{
+	background-color:				#d7d7d7;
+	border-color:					#d7d7d7;
+}
+div._wwg_goals_w3
+{
+	background-color:				#c7c7c7;
+	border-color:					#c7c7c7;
+}
+div._wwg_goals_w4
+{
+	background-color:				#b7b7b7;
+	border-color:					#afafaf;
 }

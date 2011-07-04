@@ -978,6 +978,9 @@ function _vcmp_cpe ( my_name, layout, cal, picker, folds, tab_id, title_id, bt_i
 												scope.layout.back( );
 
 											scope.reset( );
+											
+											if ( typeof _wwgGoals_i !== 'undefined' )
+												_wwgGoals_i.refresh( );
 										}
 									}
 								);

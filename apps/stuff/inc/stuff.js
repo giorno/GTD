@@ -42,8 +42,8 @@ function _stuff_archive ( data )
 						asynchronous: false,
 						method: 'post',
 						parameters: reqParams,
-						onCreate: function ( ) { ind.show( 'executing', '_uicmp_ind_gray' ); },
-						onFailure: function ( ) { ind.show( 'e_unknown', '_uicmp_ind_red' ); },
+						onCreate: function ( ) {ind.show( 'executing', '_uicmp_ind_gray' );},
+						onFailure: function ( ) {ind.show( 'e_unknown', '_uicmp_ind_red' );},
 						onSuccess: function ( data )
 						{
 							ind.fade( 'executed', '_uicmp_ind_green' );
@@ -51,7 +51,8 @@ function _stuff_archive ( data )
 							srch.refresh( );
 							_uicmp_stuff_folds_i.update( );
 
-							/** @todo update goals */
+							if ( typeof _wwgGoals_i !== 'undefined' )
+								_wwgGoals_i.refresh( );
 						}
 					}
 				);
@@ -109,8 +110,8 @@ function _stuff_purge_batch ( data )
 						asynchronous: false,
 						method: 'post',
 						parameters: reqParams,
-						onCreate: function ( ) { ind.show( 'executing', '_uicmp_ind_gray' ); },
-						onFailure: function ( ) { ind.show( 'e_unknown', '_uicmp_ind_red' ); },
+						onCreate: function ( ) {ind.show( 'executing', '_uicmp_ind_gray' );},
+						onFailure: function ( ) {ind.show( 'e_unknown', '_uicmp_ind_red' );},
 						onSuccess: function ( data )
 						{
 							ind.fade( 'executed', '_uicmp_ind_green' );
@@ -118,7 +119,8 @@ function _stuff_purge_batch ( data )
 							srch.refresh( );
 							_uicmp_stuff_folds_i.update( );
 
-							/** @todo update goals */
+							if ( typeof _wwgGoals_i !== 'undefined' )
+								_wwgGoals_i.refresh( );
 						}
 					}
 				);

@@ -184,6 +184,14 @@ $__msgStuff['eo']['collect']			= 'Collect new thing';
 $__msgStuff['eo']['again']				= 'Change keywords and search again';
 $__msgStuff['eo']['all']				= 'Show all content';
 
+/**
+ * Lifegoals widget.
+ */
+$__msgStuff['goals']['caption']			= 'Lifegoals';
+$__msgStuff['goals']['i']['loading']	= 'Loading...';
+$__msgStuff['goals']['i']['loaded']		= 'Loaded';
+$__msgStuff['goals']['i']['e_unknown']	= $__msgStuff['cpe']['e_unknown'];
+$__msgStuff['goals']['empty']			= 'You do not have any goals. Please make yourself one or change settings.';
 
 $__msgStuff['prjParent']				= 'Parent';
 

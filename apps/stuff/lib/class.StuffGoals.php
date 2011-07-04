@@ -21,7 +21,7 @@ class StuffGoals extends StuffSearch
 	/*
 	 * Set new value of goal weight for Stuff.
 	 */
-	public function SetWeight( $SID, $weight )
+	public function setWeight( $SID, $weight )
 	{
 		_db_query( 'BEGIN' );
 
@@ -64,6 +64,7 @@ class StuffGoals extends StuffSearch
 		/**
 		 * Logic to select proper boxes by user setting.
 		 */
+		$where = '';
 		switch ( $boxes )
 		{
 			case 0:

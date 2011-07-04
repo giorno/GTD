@@ -3,8 +3,9 @@
 /**
  * @file _app.StuffAjaxImpl.php
  * @author giorno
- *
- * Ajax server side implementation of Stuff application.
+ * @package GTD
+ * @subpackage Stuff
+ * @license Apache License, Version 2.0, see LICENSE file
  */
 
 require_once CHASSIS_LIB . 'ui/_smarty_wrapper.php';
@@ -16,6 +17,9 @@ require_once N7_SOLUTION_LIB . 'sem/sem_decoder.php';
 require_once APP_STUFF_LIB . '_app.Stuff.php';
 require_once APP_STUFF_LIB . '_wwg.Goals.php';
 
+/**
+ * Ajax server side implementation of Stuff application.
+ */
 class StuffAjaxImpl extends Stuff implements SemApplicator
 {
 	public function exec ( )
@@ -448,94 +452,43 @@ class StuffAjaxImpl extends Stuff implements SemApplicator
 				}
 			break;
 
-			
-
-			/*
-			 * Move stuff to the Archive box.
+			/**
+			 * Handling Lifegoals webwidget actions.
 			 */
-		/*	case 'archive':
-				require_once APP_STUFF_LIB . 'class.StuffProcessor.php';
-				$processor = new StuffProcessor( _session_wrapper::getInstance( )->getUid( ) );
-					$processor->Archive( $_POST['SID'], $_POST['label'] );
-			break;*/
-
-			/*
-			 * Definitive removal of stuff. This cannot be undone. All data from boxes
-			 * are about to lost.
-			 */
-			/*case 'purgeStuff':
-				require_once APP_STUFF_LIB . 'class.StuffProcessor.php';
-				$processor = new StuffProcessor( _session_wrapper::getInstance( )->getUid( ) );
-					$processor->Purge( $_POST['SID'] );
-			break;*/
-
-			/*
-			 * Definitive removal of more than one stuff. Applicable only on archived
-			 * items.
-			 */
-			
-
-			/*
-			 * Search projects and return list of projects
-			 */
-			/*case 'searchPrj':
+			case 'goals':
+				switch ($_POST['method'])
+				{
+					/**
+					 * Provides cloud of Lifegoals.
+					 */
+					case 'refresh':
+						$this->goals = new Goals( );
+						_smarty_wrapper::getInstance( )->getEngine( )->assignByRef( 'WWG_GOALS_MSG', $this->messages );
+						$smarty->display( APP_STUFF_UI . '_wwg.Goals.ajx.html' );
+					break;
 				
-			break;*/
-
-			/*
-			 * Provide list of items for Project to be picked from
-			 */
-			/*case 'searchPrjToPick':
-				require_once APP_STUFF_LIB . 'class.StuffProject.php';
-					$Engine = new StuffProject( _session_wrapper::getInstance( )->getUid( ) );
-
-					$results = $Engine->SearchPrjPicker( $_POST['search'], StuffConfig::PRJPICKPAGESIZE, $_POST['page'], $_POST['field'], $_POST['dir'] );
-
-					if ( $results !== false )
-					{
-						$__SMARTY->assign( 'mFwListData', $results );
-						$__SMARTY->display( CHASSIS_UI . '/list.html' );
-					}
-					else
-					{
-						if ( trim( $_POST['search'] ) != '' )
-							$__SMARTY->assign( 'MESSAGE', sprintf( $this->messages['noResultsNoMatch'], "<span onClick=\"stuffBoxes[9].showAll( );\" class=\"_uicmp_blue_b\">" . $this->messages['btShowAll'] . "</span>", "<span onClick=\"stuffBoxes[9].focus( );\" class=\"_uicmp_blue_b\">" . $this->messages['noResultsChangePhrase'] . "</span>" ) );
-						else
-							$__SMARTY->assign( 'MESSAGE', sprintf( $this->messages['noResultsEmptyBox'], $boxName ) );
-
-						$__SMARTY->display( 'x_empty.html' );
-					}
-			break;*/
-
-			/*
-			 * Project fragment (name, details) to be shown in form Project section
-			 */
-			/*case 'frmPrjFrag':
-				require_once APP_STUFF_LIB . 'class.StuffProject.php';
-
-					$engine = new StuffProject( _session_wrapper::getInstance( )->getUid( ) );
-
-					$result = $engine->FromFragment( $_POST['id'] );
-					$__SMARTY->assign( 'cell', $result['toRender'] );
-					$__SMARTY->assign( 'DESC', $result['desc'] );
-					$__SMARTY->assign( 'APP_STUFF_UI', APP_STUFF_UI );
-					$__SMARTY->display( APP_STUFF_UI . 'x_project.html' );
-			break;*/
-
-			
+					/**
+					 * Saves new weight for item.
+					 */
+					case 'set_weight':
+						$this->goals = new Goals( );
+						$this->goals->setWeight( );
+					break;
+				}
+			break;
 
 			/*
 			 * Search in other boxes.
 			 */
-			case 'searchInbox':
+			/*case 'searchInbox':
 			case 'searchNa':
 			case 'searchWf':
 			case 'searchSd':
-			case 'searchAr':
+			case 'searchAr':*/
 				//require_once APP_STUFF_LIB . 'class.StuffSearchBoxes.php';
 					//$Engine = new StuffSearchBoxes( _session_wrapper::getInstance( )->getUid( ) );
 
-					switch ( $_POST['action'] )
+				/*	switch ( $_POST['action'] )
 					{
 						case 'searchInbox':
 							$box = 'Inbox';
@@ -583,107 +536,31 @@ class StuffAjaxImpl extends Stuff implements SemApplicator
 
 						$__SMARTY->display( 'x_empty.html' );
 					}
-			break;
-
-			
-
-			
-
-			/*
-			 * Save context.
-			 */
-			/*case 'saveCtx':
-				require_once APP_STUFF_LIB . 'class.StuffContext.php';
-					$Context = new StuffContext( _session_wrapper::getInstance( )->getUid( ) );
-					$Context->ImportXml( htmlspecialchars_decode( $_POST['data'] ) );
-					if ( is_array( $Context->Errors ) )
-					{
-						echo implode( ',', $Context->Errors );
-					}
-					else
-					{
-						$Context->Add( );
-						echo 'OK';
-					}
-			break;/
-
-			/*
-			 * Search/list contexts.
-			 */
-			/*case 'searchCtx':
-				require_once APP_STUFF_LIB . 'class.StuffContext.php';
-					$Context = new StuffContext( _session_wrapper::getInstance( )->getUid( ) );
-					$results = $Context->Search( n7_globals::settings( )->get( 'usr.lst.len' ), $_POST['search'], $_POST['page'], $_POST['field'], $_POST['dir'] );
-
-					if ( $results !== false )
-					{
-						$__SMARTY->assign( 'mFwListData', $results );
-						$__SMARTY->display( CHASSIS_UI . '/list.html' );
-					}
-					else
-					{
-						if ( trim( $_POST['search'] ) != '' )
-							$__SMARTY->assign( 'MESSAGE', sprintf( $this->messages['noResultsNoMatch'], "<span onClick=\"stuffBoxes[6].showAll( );\" class=\"_uicmp_blue_b\">" . $this->messages['btShowAll'] . "</span>", "<span onClick=\"stuffBoxes[6].focus( );\" class=\"_uicmp_blue_b\">" . $this->messages['noResultsChangePhrase'] . "</span>" ) );
-						else
-							$__SMARTY->assign( 'MESSAGE', sprintf( $this->messages['noResultsNoContexts'], "<span onClick=\"stuffShowTab('stFrmCtx');ctxHelper.setModeCreate(  );\" class=\"_uicmp_blue_b\">" . $this->messages['editorCapNewCtx'] . "</span>" ) );
-
-						$__SMARTY->display( 'x_empty.html' );
-					}
-			break;*/
-
-			/*
-			 * Permanently remove context.
-			 */
-			/*case 'removeCtx':
-				require_once APP_STUFF_LIB . 'class.StuffContext.php';
-					$Context = new StuffContext( _session_wrapper::getInstance( )->getUid( ) );
-					$Context->Remove( $_POST['id'] );
-			break;*/
-
-			/*
-			 * Provide cloud with all contexts.
-			 */
-			/*case 'loadContextsCloud':
-				require_once APP_STUFF_LIB . 'class.StuffContext.php';
-					$Context = new StuffContext( _session_wrapper::getInstance( )->getUid( ) );
-					$contexts = $Context->All( $_POST['prefix'], $_POST['instance'] );
-
-					if ( is_array( $contexts ) )
-					{
-						$__SMARTY->assign( 'DATA', $contexts );
-						$__SMARTY->assign( 'PREFIX', $_POST['prefix'] );
-					}
-					else
-					{
-						$__SMARTY->assign( 'NOCONTEXTS', $__msgCommon['editorNoContexts'] );
-					}
-
-					$__SMARTY->display( APP_STUFF_UI . 'x_contexts.html' );
 			break;*/
 
 			/*
 			 * Set weight of goal to given value.
 			 */
-			case 'setGoalWeight':
+			/*case 'setGoalWeight':
 				$this->goals = new Goals( );
 				$this->goals->setWeight( );
-			break;
+			break;*/
 
 			/*
 			 * Load contexts cloud for the form.
 			 */
-			case 'loadGoals':
+			//case 'loadGoals':
 				//var_dump($_POST );
 				//break;
-					$this->goals = new Goals( );
+			//		$this->goals = new Goals( );
 					//$__SMARTY->assign( 'LIFEGOALS', $this->getSe( )->Lifegoals( n7_globals::settings( )->get( 'Lifegoals' ), n7_globals::settings( )->get( 'LifegoalsBox' ) ) );
-					$smarty->display( APP_STUFF_UI . '_wwg.Goals.ajx.html' );
-			break;
+			//		$smarty->display( APP_STUFF_UI . '_wwg.Goals.ajx.html' );
+			//break;
 
 			/*
 			 * Perform advanced search.
 			 */
-			case 'advSearch':
+			/*case 'advSearch':
 					$results = $this->getSe( )->AdvSearch( $_POST['search'], $_POST['box'], $_POST['in'], $_POST['ctx'], $_POST['display'], $_POST['showCtxs'], n7_globals::settings( )->get( 'usr.lst.len' ), $_POST['page'], $_POST['field'],  $_POST['dir'] );
 
 					if ( $results !== false )
@@ -703,20 +580,20 @@ class StuffAjaxImpl extends Stuff implements SemApplicator
 
 					}
 					else
-					{
+					{*/
 						//$__SMARTY->assign( 'MESSAGE', sprintf( $this->messages['emptyBox'], $boxName ) );
 						//
-						if ( trim( $_POST['search'] ) != '' )
+						/*if ( trim( $_POST['search'] ) != '' )
 							$__SMARTY->assign( 'MESSAGE', sprintf( $this->messages['noResultsNoMatch'], "<span onClick=\"asShowAll( );\" class=\"_uicmp_blue_b\">" . $this->messages['btShowAll'] . "</span>", "<span onClick=\"stuffBoxes[7].focus( );\" class=\"_uicmp_blue_b\">" . $this->messages['noResultsChangePhrase'] . "</span>" ) );
 
 						$__SMARTY->display( 'x_empty.html' );
 					}
-			break;
+			break;*/
 
 			/*
 			 * Return SELECT box with prefilled contexts for Advanced search form.
 			 */
-			case 'advSearchCtxs':
+			/*case 'advSearchCtxs':
 				require_once N7_SOLUTION_LIB . 'class.GtdContext.php';
 				require_once APP_STUFF_LIB . 'class.StuffConfig.php';
 
@@ -735,7 +612,7 @@ class StuffAjaxImpl extends Stuff implements SemApplicator
 			break;
 
 			default:
-			break;
+			break;*/
 		}
 	}	
 

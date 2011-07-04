@@ -1,12 +1,16 @@
 {* Template to display Lifegoals widget *}
-<td class="_wwg">
+<td class="_wwg n7_pool_fi">
 	<div id="_wwg.Goals">
-		<table cellspacing="0" width="100%">
+		<table cborder="1" cellpadding="0" cellspacing="0" cwidth="100%" class="_uicmp">
 			<tr>
-				<td><div class="gtdFootCaption">{$GTDMESSAGES.capLifegoals}</div><div style="visiblity:visible;display:none;" id="wwgGoalsLoader" class="gtdAjaxLoader wwgGoalsLoader">{$GTDMESSAGES.ajaxUpdating}</div></td>
+				<td width="1"class="_wwg_goals_cap">{$WWG_GOALS_MSG.goals.caption}</td>
+				<td cwidth="99%" class="_wwg_goals_ind">
+					{assign var=USR_UICMP_ITEM value=$WWG_GOALS_IND}
+					{include file=$USR_UICMP_ITEM->getRenderer()}
+				</td>
 			</tr>
 			<tr>
-				<td class="wwgGoalsContainer" id="_wwg.Goals:container">
+				<td colspan="2" class="_wwg_goals_cnt" id="_wwg.Goals:container">
 					{include file="$APP_STUFF_TEMPLATES/_wwg.Goals.ajx.html"}
 				</td>
 			</tr>

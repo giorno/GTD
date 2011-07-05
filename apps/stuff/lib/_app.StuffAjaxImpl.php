@@ -237,30 +237,31 @@ class StuffAjaxImpl extends Stuff implements SemApplicator
 			 * Handling of requests from CDES client code.
 			 */
 			case 'cdes':
+				$this->handleCdes( StuffConfig::T_STUFFCTX, StuffCfgFactory::getCfg( 'usr.lst.Contexts' ), '_wwg_goals_refresh' );
 				
-				switch ( $_POST['method'] )
-				{
+				/*switch ( $_POST['method'] )
+				{*/
 					/**
 					 * This comes from CDES search part, so it should be handled
 					 * same way as normal search.
 					 */
-					case 'refresh':
+					/*case 'refresh':
 						require_once CHASSIS_LIB . '_cdes.php';
 						$cdes = new _cdes( _session_wrapper::getInstance( )->getUid( ), StuffConfig::T_STUFFCTX, n7_globals::lang( ) );
-						$cdes->display( StuffCfgFactory::getCfg( 'usr.lst.Contexts'), $_POST['id'], $_POST['cdes_ed'], n7_globals::settings( )->get( 'usr.lst.len' ), n7_globals::settings( )->get( 'usr.lst.pagerhalf' ), $_POST['keywords'], $_POST['page'], $_POST['order'], $_POST['dir'], '_wwg_goals_refresh' );
-					break;
+						$cdes->display( StuffCfgFactory::getCfg( 'usr.lst.Contexts' ), $_POST['id'], $_POST['cdes_ed'], n7_globals::settings( )->get( 'usr.lst.len' ), n7_globals::settings( )->get( 'usr.lst.pagerhalf' ), $_POST['keywords'], $_POST['page'], $_POST['order'], $_POST['dir'], '_wwg_goals_refresh' );
+					break;*/
 
 					/**
 					 * Copy of standard UICMP logic handling resize event.
 					 */
-					case 'resize':
+					/*case 'resize':
 						$this->saveSize( (int)$_POST['size'] );
-					break;
+					break;*/
 
 					/**
 					 * Save context editor data.
 					 */
-					case 'save':
+					/*case 'save':
 						require_once CHASSIS_LIB . '_cdes.php';
 						$cdes = new _cdes( _session_wrapper::getInstance( )->getUid( ), StuffConfig::T_STUFFCTX, n7_globals::lang( ) );
 						if ( trim( $_POST['disp'] ) == '' )
@@ -271,17 +272,17 @@ class StuffAjaxImpl extends Stuff implements SemApplicator
 							echo "saved";
 						else
 							echo "e_unknown";
-					break;
+					break;*/
 
 					/**
 					 * Remove context.
 					 */
-					case 'remove':
+					/*case 'remove':
 						require_once CHASSIS_LIB . '_cdes.php';
 						$cdes = new _cdes( _session_wrapper::getInstance( )->getUid( ), StuffConfig::T_STUFFCTX, n7_globals::lang( ) );
 						$cdes->remove( $_POST['ctx'] );
 					break;
-				}
+				}*/
 			break;
 
 			/**

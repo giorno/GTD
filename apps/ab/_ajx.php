@@ -11,7 +11,7 @@
  */
 
 require_once dirname( __FILE__ ) . '/_cfg.php';
-/*require_once APP_AB_LIB . 'class.AbAppAjaxImpl.php';
-AbAjaxImpl::getInstance();*/
+require_once APP_AB_LIB . '_app.AbAjaxImpl.php';
+AbAjaxImpl::getInstance( );
 
 ?>

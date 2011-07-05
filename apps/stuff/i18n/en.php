@@ -100,6 +100,28 @@ $__msgStuff['dow']['sa']				= 'Sa';
 $__msgStuff['dow']['su']				= 'Su';
 
 /**
+ * Default contexts created on first login.
+ */
+$__msgStuff['1st_login'][0]				= array( 'E-mail',		'wee',	'Stuff to be done by e-mail' );
+$__msgStuff['1st_login'][1]				= array( 'Calls',		'des',	'Stuff to be done over the phone' );
+$__msgStuff['1st_login'][2]				= array( 'At Work',		'flw',	'In the office or workplace' );
+$__msgStuff['1st_login'][3]				= array( 'At Home',		'cle',	'At home or in my spare time' );
+$__msgStuff['1st_login'][4]				= array( 'At Computer',	'roq',	'Always when at PC or internet' );
+$__msgStuff['1st_login'][5]				= array( 'Lifegoals',	'sky',	'These are where I go' );
+$__msgStuff['1st_login'][6]				= array( 'Review',		'blu',	'Items to read, check or review' );
+
+/**
+ * Welcome message.
+ */
+$__msgStuff['wlc']['cap']				= 'What you should know about this application';
+$__msgStuff['wlc']['intro']				= 'Creativity. Stress relief. More time. This application is for all of you, who want to change or to find the way of managing their time and actions. Useful things to start:';
+$__msgStuff['wlc']['li1']				= 'In your account settings you may adjust this application so it fits your needs. Do not forget to set properly your timezone.';
+$__msgStuff['wlc']['li2']				= 'On the Labels tab you will find set of colorful stickers, which will help you to organize your stuff. You may want to change them or create new ones. Feel free to do anything.';
+$__msgStuff['wlc']['li3']				= 'Visit our blog.';
+$__msgStuff['wlc']['li4']				= 'Read David Allen\'s book Getting Things Done.';
+$__msgStuff['wlc']['li5']				= 'Always know where your towel is.';
+
+/**
  * CDES solution strings.
  */
 $__msgStuff['cdesFold']					= 'Labels';

@@ -84,7 +84,7 @@ $__msgStuff['cpe']['loaded']			= 'Načteno';
 $__msgStuff['cpe']['preparing']			= 'Připravuji...';
 $__msgStuff['cpe']['prepared']			= 'Připraveno';
 $__msgStuff['cpe']['e_unknown']			= 'Chyba: neznáma chyba! Kontaktujte správce.';
-$__msgStuff['cpe']['e_empty']			= 'Chyba: Prázdný řetězec!';
+$__msgStuff['cpe']['e_empty']			= 'Chyba: prázdný řetězec!';
 $__msgStuff['cpe']['e_date']			= 'Chyba: nepovolený formát datumu!';
 $__msgStuff['cpe']['e_loop']			= 'Chyba: projekt v podúlohách!';
 
@@ -98,6 +98,28 @@ $__msgStuff['dow']['th']				= 'Čt';
 $__msgStuff['dow']['fr']				= 'Pá';
 $__msgStuff['dow']['sa']				= 'So';
 $__msgStuff['dow']['su']				= 'Ne';
+
+/**
+ * Default contexts created on first login.
+ */
+$__msgStuff['1st_login'][0]				= array( 'E-mail',		'wee',	'Věci na vybavení elektronickou poštou' );
+$__msgStuff['1st_login'][1]				= array( 'Telefonicky',	'des',	'Věci na vybavení po telefónu' );
+$__msgStuff['1st_login'][2]				= array( 'V práci',		'flw',	'V kanceláři nebo na pracovišti' );
+$__msgStuff['1st_login'][3]				= array( 'Doma',		'cle',	'Doma nebo ve volném čase' );
+$__msgStuff['1st_login'][4]				= array( 'Na počítači',	'roq',	'Vždy když jsem při počítači nebo na internetu' );
+$__msgStuff['1st_login'][5]				= array( 'Cíle',		'sky',	'Toto chci dosáhnout' );
+$__msgStuff['1st_login'][6]				= array( 'Přečíst',		'blu',	'Prečíst, zkontrolovat nebo prohlédnout' );
+
+/**
+ * Welcome message.
+ */
+$__msgStuff['wlc']['cap']				= 'Co by ste měli vědět o této aplikaci';
+$__msgStuff['wlc']['intro']				= 'Kreativita. Méně stresu. A více času. Tato aplikace je pro vás všechny, kteří chtějí najít nebo změnit způsob řízení času a aktivit. Užitočné věci na začátek:';
+$__msgStuff['wlc']['li1']				= 'Přizpůsobte si tuto aplikaci v nastaveních vašeho účtu tak, aby vyhovovala vaším potřebám. Určitě si nezabudněte nastaviť časovou zónu.';
+$__msgStuff['wlc']['li2']				= 'Na záložce Nálepky najdete sadu předpřipravěných značek, které vám pomůžou udržovat vaše záznamy. Můžete je upravovat a vytvářet nové. Udělejte s nimi cokoliv.';
+$__msgStuff['wlc']['li3']				= 'Navštivte náš blog.';
+$__msgStuff['wlc']['li4']				= 'Přečtěte si knihu Davida Allena Getting Things Done.';
+$__msgStuff['wlc']['li5']				= 'Pamatujte si vždy kde máte váš ručník.';
 
 /**
  * CDES solution strings.

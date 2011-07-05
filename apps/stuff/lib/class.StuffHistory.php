@@ -165,7 +165,7 @@ class StuffHistory extends StuffConfig
 					$this->LastData['sysData']['blogUrl'] = $__BLOGS[$sdLang];
 					switch ( $this->LastData['sysData']['ID'] )
 					{
-						case self::ID_WELCOMEMSGv1: $this->LastData['sysData']['i18n'] = $__welcomeMsg[$sdLang]; break;
+						case self::ID_WELCOMEMSGv1: $this->LastData['sysData']['i18n'] = $this->messages['wlc']; break;
 					}
 				}
 				

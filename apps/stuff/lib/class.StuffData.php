@@ -28,6 +28,13 @@ class StuffData extends StuffConfig
 	private $Id;
 
 	/**
+	 * Reference to localization messages and formats.
+	 *
+	 * @var <refarray>
+	 */
+	private $messages = null;
+
+	/**
 	 * Constructor. Takes serialized string and performs some basic extraction.
 	 *
 	 * @param <string> $serialized serialized record data from database
@@ -36,6 +43,15 @@ class StuffData extends StuffConfig
 	{
 		$this->Data = unserialize( $serialized );
 		$this->Id = $this->Data['ID'];
+
+		/**
+		 * Getting array of localization messages containing date and time
+		 * formats.
+		 */
+		$app = _app_registry::getInstance()->getById( Stuff::APP_ID );
+
+		if ( !is_null( $app ) )
+			$this->messages = &$app->getMessages( );
 	}
 
 	/**
@@ -51,12 +67,10 @@ class StuffData extends StuffConfig
 	 */
 	public function GetDetails ( )
 	{
-		global $__welcomeMsg;
-
 		switch ($this->Id)
 		{
 			case self::ID_WELCOMEMSGv1:
-				return $__welcomeMsg[$this->Data['l']]['s1'] . $__welcomeMsg[$this->Data['l']]['li1_1'] . $__welcomeMsg[$this->Data['l']]['li1_settings'] . $__welcomeMsg[$this->Data['l']]['li1_99'];
+				return $this->messages['wlc']['intro'] . ' ' . $this->messages['wlc']['li1'];
 			break;
 
 			case self::ID_BIRTHDAYv1:

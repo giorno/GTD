@@ -101,6 +101,28 @@ $__msgStuff['dow']['sa']				= 'So';
 $__msgStuff['dow']['su']				= 'Ne';
 
 /**
+ * Default contexts created on first login.
+ */
+$__msgStuff['1st_login'][0]				= array( 'E-mail',		'wee',	'Veci na vybavenie elektronickou poštou' );
+$__msgStuff['1st_login'][1]				= array( 'Telefonicky',	'des',	'Veci na vybavenie po telefóne' );
+$__msgStuff['1st_login'][2]				= array( 'V práci',		'flw',	'V kancelárii alebo na pracovisku' );
+$__msgStuff['1st_login'][3]				= array( 'Doma',		'cle',	'Doma alebo vo voľnom čase' );
+$__msgStuff['1st_login'][4]				= array( 'Na počítači',	'roq',	'Vždy keď som pri počítači alebo na internete' );
+$__msgStuff['1st_login'][5]				= array( 'Ciele',		'sky',	'Toto chcem dosiahnuť' );
+$__msgStuff['1st_login'][6]				= array( 'Prezrieť',	'blu',	'Prečítať, skontrolovať alebo prezrieť' );
+
+/**
+ * Welcome message.
+ */
+$__msgStuff['wlc']['cap']				= 'Čo by ste mali vedieť o tejto aplikácii';
+$__msgStuff['wlc']['intro']				= 'Kreativita. Menej stresu. A viac času. Táto aplikácia je pre všetkých vás, ktorí chcete nájsť alebo zmeniť spôsob riadenia času a aktivít. Užitočné veci na začiatok:';
+$__msgStuff['wlc']['li1']				= 'Prispôsobte si túto aplikáciu v nastaveniach vášho účtu tak, aby vyhovovala vašim potrebám. Určite si nezabudnite nastaviť časovú zónu.';
+$__msgStuff['wlc']['li2']				= 'Na záložke Nálepky nájdete sadu predpripravených značiek, ktoré vám pomôžu udržiavať vaše záznamy. Môžete ich upravovať a pridávať nové. Urobte s nimi čokoľvek.';
+$__msgStuff['wlc']['li3']				= 'Navštívte náš blog.';
+$__msgStuff['wlc']['li4']				= 'Prečítajte si knihu Davida Allena Getting Things Done.';
+$__msgStuff['wlc']['li5']				= 'Vedzte vždy kde máte váš ručník.';
+
+/**
  * CDES solution strings.
  */
 $__msgStuff['cdesFold']					= 'Nálepky';

@@ -1,10 +1,9 @@
 {* rendering for system welcome message (message created upon first login) *}
-{$record.sysData.i18n.s1}
+{$record.sysData.i18n.intro}
 <ul>
-	<li>{$record.sysData.i18n.li1_1}<a href="{*$LINKPROVIDER->ComposeAction('settings')*}" class="sysDataLink">{$record.sysData.i18n.li1_settings}</a>{$record.sysData.i18n.li1_99}</li>
-	<li>{$record.sysData.i18n.li2_1}<span onClick="stuffShowTab('stContexts')" class="sysDataLink">{$record.sysData.i18n.li2_contexts}</span>{$record.sysData.i18n.li2_99}</li>
-	<li>{$record.sysData.i18n.li3_1}<a href="{*$record.sysData.blogUrl*}" target="_new" class="sysDataLink">{$record.sysData.i18n.li3_blog}</a>{$record.sysData.i18n.li3_99}</li>
+	<li>{$record.sysData.i18n.li1}</li>
+	<li>{$record.sysData.i18n.li2}</li>
+	<li>{$record.sysData.i18n.li3}</li>
 	<li>{$record.sysData.i18n.li4}</li>
+	<li>{$record.sysData.i18n.li5}</li>
 </ul>
-{$record.sysData.i18n.s2}<br/><br/>
-{$record.sysData.i18n.signature}

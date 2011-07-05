@@ -1,16 +1,16 @@
 <?php
-/* 
+
+/**
  * @file class.StuffHistory.php
- *
- * Facility to provide Stuff's history in form of (very complex) array.
- *
  * @author giorno
+ * @package GTD
+ * @subpackage Stuff
+ * @license Apache License, Version 2.0, see LICENSE file
  */
 
 require_once CHASSIS_LIB . '_cdes.php';
 require_once CHASSIS_LIB . 'apps/_app_registry.php';
 
-require_once N7_SOLUTION_ROOT . 'i18n/system/welcomemsg.php';
 require_once N7_SOLUTION_LIB . 'libtz.php';
 
 require_once APP_STUFF_LIB . 'class.StuffConfig.php';
@@ -18,6 +18,9 @@ require_once APP_STUFF_LIB . 'class.StuffEditor.php';
 require_once APP_STUFF_LIB . 'class.StuffSearch.php';
 require_once APP_STUFF_LIB . 'class.StuffData.php';
 
+/**
+ * Facility to provide Stuff's history in form of (very complex) array.
+ */
 class StuffHistory extends StuffConfig
 {
 	/*
@@ -76,7 +79,7 @@ class StuffHistory extends StuffConfig
 	 */
 	private function TzScrum ( )
 	{
-		global $__LC_TIME/*, $__STUFFINBOXHISTORYDATE, $__STUFFINBOXHISTORYTIME*/;
+		global $__LC_TIME;
 
 		setlocale( LC_TIME, $__LC_TIME );
 		
@@ -96,7 +99,7 @@ class StuffHistory extends StuffConfig
 	 */
 	private function Load ( )
 	{
-		global $__LC_TIME/*, $__STUFFINBOXRECORDEDDATETIME, $__STUFFINBOXRECORDEDDATESHORT, $__STUFFINBOXRECORDEDTIME,*/, $__welcomeMsg, $__BLOGS;
+		global $__LC_TIME, $__welcomeMsg, $__BLOGS;
 
 		setlocale( LC_TIME, $__LC_TIME );
 		

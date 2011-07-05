@@ -58,7 +58,6 @@ class StuffMainImpl extends Stuff implements SemProvider
 		
 		_app_registry::getInstance( )->setDefault( $this->id );
 
-		//$this->headTemplatePath = APP_STUFF_UI . 'x_head.html';
 		$this->indexTemplatePath = APP_STUFF_UI . 'index.html';
 
 		_smarty_wrapper::getInstance( )->getEngine( )->assign( 'APP_STUFF_TEMPLATES', APP_STUFF_UI );

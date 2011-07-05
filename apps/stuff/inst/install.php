@@ -3,8 +3,8 @@
 /**
  * @file install.php
  * @author giorno
- * @package N7
- * @subpackage AI
+ * @package GTD
+ * @subpackage Stuff
  * @license Apache License, Version 2.0, see LICENSE file
  * 
  * Install script for Stuff app.

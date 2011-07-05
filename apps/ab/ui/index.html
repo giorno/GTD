@@ -1,0 +1,21 @@
+{* Renderer of AddressBook app UI
+ *
+ * @file index.html
+ * @author giorno
+ * @package GTD
+ * @subpackage AB
+ * @license Apache License, Version 2.0, see LICENSE file
+ *}
+
+<table width="100%" cellspacing="0" cellpadding="0">
+	<tr>
+		<td class="_uicmp_layout_gap"></td>
+		<td class="_uicmp_layout">
+			{if $APP_AB_LAYOUT}
+				{assign var='USR_UICMP_LAYOUT' value=$APP_AB_LAYOUT}
+				{include file="$CHASSIS_UI_UICMP/layout.html"}
+			{/if}
+		</td>
+		<td class="_uicmp_layout_gap"></td>
+	</tr>
+</table>

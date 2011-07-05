@@ -11,6 +11,7 @@ td._wwg_goals_cap
 {
 	font-size:						18px;
 	font-weight:					bold;
+	white-space:					nowrap;
 }
 td._wwg_goals_cnt
 {

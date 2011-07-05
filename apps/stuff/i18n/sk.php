@@ -186,6 +186,15 @@ $__msgStuff['eo']['collect']			= 'Vložiť novú vec';
 $__msgStuff['eo']['again']				= 'Zmeniť frázu a zopakovať vyhľadávanie';
 $__msgStuff['eo']['all']				= 'Zobrazit celý obsah';
 
+/**
+ * Lifegoals widget.
+ */
+$__msgStuff['goals']['caption']			= 'Životné ciele';
+$__msgStuff['goals']['i']['loading']	= 'Načítavam...';
+$__msgStuff['goals']['i']['loaded']		= 'Načítané';
+$__msgStuff['goals']['i']['e_unknown']	= $__msgStuff['cpe']['e_unknown'];
+$__msgStuff['goals']['empty']			= 'Nemáte žiadne ciele. Vytvorte si nejaký alebo zmeňte nastavenia.';
+
 $__msgStuff['editorStatusPreparing']    = 'Pripravujem formulár...';
 $__msgStuff['editorStatusLoading']      = 'Načítavam záznam...';
 $__msgStuff['editorStatusLoaded']       = 'Načítané';

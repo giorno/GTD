@@ -80,7 +80,7 @@ $__msgStuff['cpe']['pty'][4]			= 'Kritická';
 $__msgStuff['cpe']['saving']			= 'Ukládám...';
 $__msgStuff['cpe']['saved']				= 'Uloženo';
 $__msgStuff['cpe']['loading']			= 'Načítám...';
-$__msgStuff['cpe']['loaded']			= 'Načítano';
+$__msgStuff['cpe']['loaded']			= 'Načteno';
 $__msgStuff['cpe']['preparing']			= 'Připravuji...';
 $__msgStuff['cpe']['prepared']			= 'Připraveno';
 $__msgStuff['cpe']['e_unknown']			= 'Chyba: neznáma chyba! Kontaktujte správce.';
@@ -185,6 +185,15 @@ $__msgStuff['nomatch']['All']			= $__msgStuff['nomatch']['box'];
 $__msgStuff['eo']['collect']			= 'Vložit novou věc';
 $__msgStuff['eo']['again']				= 'Změnit frázi a hledat znovu';
 $__msgStuff['eo']['all']				= 'Zobrazit celý obsah';
+
+/**
+ * Lifegoals widget.
+ */
+$__msgStuff['goals']['caption']			= 'Životní cíle';
+$__msgStuff['goals']['i']['loading']	= 'Načítám...';
+$__msgStuff['goals']['i']['loaded']		= 'Načteno';
+$__msgStuff['goals']['i']['e_unknown']	= $__msgStuff['cpe']['e_unknown'];
+$__msgStuff['goals']['empty']			= 'Nemáte žádné cíle. Vytvořte si nějaký nebo změňte nastavení.';
 
 //$__msgStuff['editorUseOriginal']        = 'Poslední';
 $__msgStuff['editorStatusPreparing']    = 'Připravuji formulář...';

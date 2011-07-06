@@ -21,12 +21,8 @@ $__msgAb['icon']							= 'Address Book';
 $__msgAb['cdes']['fold']					= 'Labels';
 $__msgAb['cdes']['title']					= 'Labels to tag your contacts';
 
-/*$__msgAb['tabAllContacts']                = 'All contacts';
-$__msgAb['tabBirthdays']                  = 'Birthdays';
-$__msgAb['tabContexts']                   = 'Labels';
-
-$__msgAb['capAllContacts']				= 'People and organizations';
-$__msgAb['capContexts']					= 'Labels to mark contacts';*/
+$__msgAb['f_all']							= 'All contacts';
+$__msgAb['t_all']							= 'People and organizations';
 
 /**
  * Add/edit contact form.

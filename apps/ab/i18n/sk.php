@@ -21,12 +21,8 @@ $__msgAb['icon']							= 'Adresár';
 $__msgAb['cdes']['fold']					= 'Nálepky';
 $__msgAb['cdes']['title']					= 'Nálepky pre označovanie kontaktov';
 
-/*$__msgAb['tabAllContacts']                = 'Všetky kontakty';
-$__msgAb['tabBirthdays']                  = 'Narodeniny';
-$__msgAb['tabContexts']                   = 'Nálepky';
-
-$__msgAb['capAllContacts']				= 'Ľudia a organizácie';
-$__msgAb['capContexts']					= 'Nálepky pre označovanie kontaktov';*/
+$__msgAb['f_all']							= 'Všetky kontakty';
+$__msgAb['t_all']							= 'Ľudia a organizácie';
 
 /**
  * Add/edit contact form.

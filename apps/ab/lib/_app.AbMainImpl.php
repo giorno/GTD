@@ -44,9 +44,22 @@ class AbMainImpl extends Ab
 			$layout->createSep( );
 			
 			$url		= n7_globals::getInstance()->get( 'url' )->myUrl( ) . 'ajax.php';	// Ajax server URL
-			$params		= Array( 'app' => $this->id/*, 'action' => 'folds'*/ );					// Ajax request parameters
+			$params		= Array( 'app' => $this->id, 'action' => 'pers' );					// Ajax request parameters
 			$pageSize	= n7_globals::settings( )->get( 'usr.lst.len' );
 			
+			$tab = $layout->createTab( $this->id . '.Cpe' );
+				$tab->unstack( );
+			
+			$params['action'] = 'search';
+			
+			$tab = $layout->createTab( $this->id . '.All', FALSE );
+				$tab->createFold( $this->messages['f_all'] );
+				$tab->getHead( )->add( new _uicmp_title( $tab, $tab->getId( ) . '.Title', $this->messages['t_all'] ) );
+				$srch = $tab->createSearch( $this->getVcmpSearchId( 'All' ), 0, $url, $params, StuffCfgFactory::getCfg( 'usr.lst.All' ), $pageSize );
+				$rszr = $srch->getResizer( );
+				
+				/*$rszr->add( new _uicmp_gi( $rszr, $rszr->getId( ) . '.mi1', _uicmp_gi::IT_A,  $this->messages['cpeMenuItem'], $cpe->getJsVar() . '.collect();', '_uicmp_gi_add' ) );*/
+				
 			/**
 			 * Redefine Ajax parameters 'action' value for CDES.
 			 */

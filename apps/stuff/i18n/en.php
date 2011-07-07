@@ -46,6 +46,7 @@ $__msgStuff['cpeBtScroll']				= 'Scroll to first record';
 $__msgStuff['cpeStoreIn']				= 'Store in';
 $__msgStuff['cpeDetails']				= 'Details';
 $__msgStuff['cpeCtxs']					= 'Labels';
+$__msgStuff['cpeNoCtxs']				= 'No labels available.';
 $__msgStuff['cpePriority']				= 'Priority';
 $__msgStuff['cpePlace']					= 'Place';
 $__msgStuff['cpeDate']					= 'Date';

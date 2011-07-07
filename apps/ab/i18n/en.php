@@ -25,13 +25,25 @@ $__msgAb['f_all']							= 'All contacts';
 $__msgAb['t_all']							= 'People and organizations';
 
 /**
- * Add/edit contact form.
+ * Person editor form.
  */
-/*$__msgAb['editfrmCapAdd']                 = 'New person';
-$__msgAb['editfrmCapEdit']                = 'Edit person';
-$__msgAb['editfrmBackToRoster']           = 'Back to Contacts';
-$__msgAb['editfrmFieldDisplay']           = 'Display name';
-$__msgAb['editfrmFieldDisplayPredefined'] = 'use predefined format';
+$__msgAb['perse']['bt_back']				= 'Back';
+$__msgAb['perse']['title']					= 'New person';
+$__msgAb['perse']['display']				= 'Display name';
+$__msgAb['perse']['predef']					= 'use predefined format';
+$__msgAb['perse']['labels']					= $__msgAb['cdes']['fold'];
+$__msgAb['perse']['no_labels']				= 'No labels available.';
+$__msgAb['perse']['fmt'][0]					= 'Nickname [FirstName Surname]';
+$__msgAb['perse']['fmt'][10]				= 'FirstName Surname';
+$__msgAb['perse']['fmt'][20]				= 'Surname FirstName';
+$__msgAb['perse']['fmt'][30]				= 'FirstName SecondName Surname';
+$__msgAb['perse']['fmt'][40]				= 'Surname, FirstName SecondName';
+$__msgAb['perse']['fmt'][50]				= 'FirstName Surname-SecondSurname';
+$__msgAb['perse']['fmt'][60]				= 'FirstName SecondName Surname-SecondSurname';
+$__msgAb['perse']['fmt'][70]				= 'Surname-SecondSurname, FirstName SecondName';
+
+/*$__msgAb['editfrmCapEdit']                = 'Edit person';
+
 $__msgAb['editfrmFieldTitles']            = 'Title(s)';
 $__msgAb['editfrmFieldFirstName']         = 'First name';
 $__msgAb['editfrmFieldSecondName']        = 'Second name';
@@ -70,10 +82,12 @@ $__msgAb['compfrmCapAdd']                 = 'New company';
 $__msgAb['compfrmCapEdit']                = 'Edit company';
 $__msgAb['compfrmFieldName']              = 'Company full name';
 $__msgAb['compfrmFieldDisplay']           = 'Display name';
+*/
 
-$__msgAb['listAddNewContact']             = 'Add new person';
-$__msgAb['listAddNewCompany']             = 'new company';
-$__msgAb['listAddNewCompanyTop']          = 'New company';
+$__msgAb['mi_add_person']					= 'Add new person';
+$__msgAb['mi_add_company']					= 'Add new company';
+
+/*$__msgAb['listAddNewCompanyTop']          = 'New company';
 $__msgAb['listAddNewDepartment']          = 'new department';
 $__msgAb['listEmptyPerson']               = 'person not named!';
 $__msgAb['listEmptyCompany']              = 'company not named!';
@@ -93,17 +107,7 @@ $__msgAb['tagCompany']                    = 'Company';
 
 $__msgAb['noResultsNoContacts']           = "You have no contacts. Try to %s or %s.";*/
 
-/**
- * Formats of predefined display names.
- */
-/*$__ACFORMATS[0]                         = 'Nickname [FirstName Surname]';
-$__ACFORMATS[10]                        = 'FirstName Surname';
-$__ACFORMATS[20]                        = 'Surname FirstName';
-$__ACFORMATS[30]                        = 'FirstName SecondName Surname';
-$__ACFORMATS[40]                        = 'Surname, FirstName SecondName';
-$__ACFORMATS[50]                        = 'FirstName Surname-SecondSurname';
-$__ACFORMATS[60]                        = 'FirstName SecondName Surname-SecondSurname';
-$__ACFORMATS[70]                        = 'Surname-SecondSurname, FirstName SecondName';
+
 
 /**
  *

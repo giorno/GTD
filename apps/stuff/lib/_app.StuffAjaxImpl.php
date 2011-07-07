@@ -311,7 +311,7 @@ class StuffAjaxImpl extends Stuff implements SemApplicator
 						require_once CHASSIS_LIB . '_cdes.php';
 						require_once CHASSIS_LIB . 'uicmp/_uicmp_cdes_cloud.php';
 						$cloud = new _uicmp_cdes_cloud( NULL, NULL, $_POST['js_var'], _cdes::allCtxs( _session_wrapper::getInstance( )->getUid( ), StuffConfig::T_STUFFCTX ), $_POST['id'] );
-
+						$cloud->setErrorMsg( $this->messages['cpeNoCtxs'] );
 						_smarty_wrapper::getInstance( )->getEngine( )->assignByRef( 'USR_UICMP_CMP', $cloud );
 						_smarty_wrapper::getInstance( )->setContent( $cloud->getRenderer( ) );
 						_smarty_wrapper::getInstance( )->render( );

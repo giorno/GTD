@@ -1,0 +1,23 @@
+
+/**
+ * @file _uicmp.css
+ * @author giorno
+ * @package GTD
+ * @subpackage AB
+ * @license Apache License, Version 2.0, see LICENSE file
+ *
+ * Styles for Address Book application UICMP components.
+ */
+ 
+/* Style for hidden form widgets */
+._uicmp_ab_hidden
+{
+	visibility:				hidden;
+	display:				none;
+}
+/**/
+._uicmp_ab_visible
+{
+	visibility:				visible;
+	display:				block;
+}

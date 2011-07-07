@@ -49,18 +49,19 @@ class _uicmp_stuff_fold extends _uicmp_fold
 	private static $initialized = FALSE;
 
 	/**
-	 * Ajax request URL.
+	 * Ajax request URL. Globally shared among all instances.
 	 *
 	 * @var <string>
 	 */
-	private static $url = NULL;
+	private static $g_url = NULL;
 
 	/**
-	 * Ajax request parameters. Associative array
+	 * Ajax request parameters. Associative array. Globally shared among all
+	 * instances.
 	 *
 	 * @var <array>
 	 */
-	private static $params = NULL;
+	private static $g_params = NULL;
 
 	/**
 	 * ID of text element in application icon.
@@ -102,7 +103,7 @@ class _uicmp_stuff_fold extends _uicmp_fold
 	{
 		if ( !self::$initialized )
 		{
-			$requirer->call( _uicmp_layout::RES_JSPLAIN, 'var ' . self::getJsName( )  . ' = new _uicmp_stuff_folds( \'' . self::$url . '\', ' . self::toJsArray( self::$params ) . ', \'' . self::$icoId . '\' );' );
+			$requirer->call( _uicmp_layout::RES_JSPLAIN, 'var ' . self::getJsName( )  . ' = new _uicmp_stuff_folds( \'' . self::$g_url . '\', ' . self::toJsArray( self::$g_params ) . ', \'' . self::$icoId . '\' );' );
 			self::$initialized = TRUE;
 		}
 	}
@@ -115,8 +116,8 @@ class _uicmp_stuff_fold extends _uicmp_fold
 	 */
 	public static function setParams ( $url, $params, $icoId )
 	{
-		self::$url		= $url;
-		self::$params	= $params;
+		self::$g_url		= $url;
+		self::$g_params	= $params;
 		self::$icoId	= $icoId;
 	}
 

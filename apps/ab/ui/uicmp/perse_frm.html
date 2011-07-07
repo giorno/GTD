@@ -1,0 +1,51 @@
+{* Renderer of AddressBook app person-class contact editor form.
+ *
+ * @file index.html
+ * @author giorno
+ * @package GTD
+ * @subpackage AB
+ * @license Apache License, Version 2.0, see LICENSE file
+ *}
+ 
+ <td>
+	<table width="100%" cellpadding="0" cellspacing="0">
+		<tbody>
+			<tr>
+				<td class="_uicmp_body_frm">
+					<table width="100%" cellpadding="0" cellspacing="0">
+						<tr>
+							<td class="_uicmp_frm_prompt">{$APP_AB_MSG.perse.display}</td>
+							<td class="_uicmp_frm_field" width="100%">
+								<input onKeyUp="{$USR_UICMP_CMP->getJsVar()}.preview();" class="_uicmp_frm_input" id="{$USR_UICMP_CMP->getHtmlId()}.display" type="text">
+								<select onChange="{$USR_UICMP_CMP->getJsVar()}.preview();" class="_uicmp_frm_input _uicmp_ab_hidden" id="{$USR_UICMP_CMP->getHtmlId()}.format">
+								{foreach from=$APP_AB_MSG.perse.fmt key=index item=format}
+									<option value="{$index}">{$format}</option>
+								{/foreach}
+								</select>
+							</td>
+						</tr>
+						<tr>
+							<td></td>
+							<td width="100%" class="_uicmp_frm_field">
+								<table  cellspacing="0" cellpadding="0">
+									<tr>
+										<td class="_uicmp_gi_chk">
+											<input onClick="{$USR_UICMP_CMP->getJsVar()}.predef( );" id="{$USR_UICMP_CMP->getHtmlId()}.predef" type="checkbox">
+										</td>
+										<td class="_uicmp_gi_chk"><div class="_uicmp_blue" id="{$USR_UICMP_CMP->getHtmlId()}.pPredef" onClick="document.getElementById('{$USR_UICMP_CMP->getHtmlId()}.predef').click();">{$APP_AB_MSG.perse.predef}</div></td>
+									</tr>
+								</table
+							</td>
+						</tr>						
+						<tr>
+							<td class="_uicmp_frm_prompt">{$APP_AB_MSG.perse.labels}</td>
+							<td width="100%" colspan="2" class="_uicmp_frm_field">
+								<div class="_uicmp_cdes_cloud" id="{$USR_UICMP_CMP->getHtmlId()}.ctxs"></div>
+							</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+ </td>

@@ -25,13 +25,24 @@ $__msgAb['f_all']							= 'Všechny kontakty';
 $__msgAb['t_all']							= 'Lidé a organizace';
 
 /**
- * Add/edit contact form.
+ * Person editor form.
  */
-/*$__msgAb['editfrmCapAdd']                 = 'Nová osoba';
-$__msgAb['editfrmCapEdit']                = 'Upravit osobu';
-$__msgAb['editfrmBackToRoster']           = 'Zpět na Kontakty';
-$__msgAb['editfrmFieldDisplay']           = 'Zobrazovať jako';
-$__msgAb['editfrmFieldDisplayPredefined'] = 'použít předvolený formát';
+$__msgAb['perse']['bt_back']				= 'Zpět';
+$__msgAb['perse']['title']					= 'Nová osoba';
+$__msgAb['perse']['display']				= 'Zobrazovať jako';
+$__msgAb['perse']['predef']					= 'použít předvolený formát';
+$__msgAb['perse']['labels']					= $__msgAb['cdes']['fold'];
+$__msgAb['perse']['no_labels']				= 'Nálepky nejsou k dispozici.';
+$__msgAb['perse']['fmt'][0]					= 'Přezdívka [Křestní jméno Přijmení]';
+$__msgAb['perse']['fmt'][10]				= 'Křestní jméno Přijmení';
+$__msgAb['perse']['fmt'][20]				= 'Přijmení Křestní jméno';
+$__msgAb['perse']['fmt'][30]				= 'Křestní jméno Druhé jméno Přijmení';
+$__msgAb['perse']['fmt'][40]				= 'Přijmení, Křestní jméno Druhé jméno';
+$__msgAb['perse']['fmt'][50]				= 'Křestní jméno Přijmení-Druhé přijmení';
+$__msgAb['perse']['fmt'][60]				= 'Křestní jméno Druhé meno Přijmení-Druhé přijmení';
+$__msgAb['perse']['fmt'][70]				= 'Přijmení-Druhé přijmení, Krstné jméno Druhé jméno';
+
+/*$__msgAb['editfrmCapEdit']                = 'Upravit osobu';
 $__msgAb['editfrmFieldTitles']            = 'Titul(y)';
 $__msgAb['editfrmFieldFirstName']         = 'Křestní jméno';
 $__msgAb['editfrmFieldSecondName']        = 'Druhé jméno';
@@ -72,9 +83,11 @@ $__msgAb['compfrmFieldName']              = 'Úplný název';
 $__msgAb['compfrmFieldDisplay']           = 'Zobrazovat ako';*/
 
 /*$__msgAb['listCap']                       = 'Kontakty';*/
-/*$__msgAb['listAddNewContact']             = 'Pťidat novou osobu';
-$__msgAb['listAddNewCompany']             = 'novou spoleočnost';
-$__msgAb['listAddNewCompanyTop']          = 'Nová společnost';
+
+$__msgAb['mi_add_person']					= 'Přidat novou osobu';
+$__msgAb['mi_add_company']					= 'Přidat novou spoleočnost';
+
+/*$__msgAb['listAddNewCompanyTop']          = 'Nová společnost';
 $__msgAb['listAddNewDepartment']          = 'nové oddělení';
 $__msgAb['listEmptyPerson']               = 'nepojmenovaná osoba!';
 $__msgAb['listEmptyCompany']              = 'nepojmenovaná společnost!';
@@ -93,18 +106,6 @@ $__msgAb['tagPerson']                     = 'Osoba';
 $__msgAb['tagCompany']                    = 'Společnost';
 
 $__msgAb['noResultsNoContacts']           = "Nemáte žádné kontakty. Zkuste %s nebo %s.";*/
-
-/**
- * Formats of predefined display names.
- */
-/*$__ACFORMATS[0]                         = 'Přezdívka [Křestní jméno Přijmení]';
-$__ACFORMATS[10]                        = 'Křestní jméno Přijmení';
-$__ACFORMATS[20]                        = 'Přijmení Křestní jméno';
-$__ACFORMATS[30]                        = 'Křestní jméno Druhé jméno Přijmení';
-$__ACFORMATS[40]                        = 'Přijmení, Křestní jméno Druhé jméno';
-$__ACFORMATS[50]                        = 'Křestní jméno Přijmení-Druhé přijmení';
-$__ACFORMATS[60]                        = 'Křestní jméno Druhé meno Přijmení-Druhé přijmení';
-$__ACFORMATS[70]                        = 'Přijmení-Druhé přijmení, Krstné jméno Druhé jméno';*/
 
 /**
  *

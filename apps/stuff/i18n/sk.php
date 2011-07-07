@@ -47,6 +47,7 @@ $__msgStuff['cpeBtScroll']				= 'Na prvý záznam';
 $__msgStuff['cpeStoreIn']				= 'Uložiť do';
 $__msgStuff['cpeDetails']				= 'Detaily';
 $__msgStuff['cpeCtxs']					= 'Nálepky';
+$__msgStuff['cpeNoCtxs']				= 'Nálepky nie sú k dispozícii.';
 $__msgStuff['cpePriority']				= 'Priorita';
 $__msgStuff['cpePlace']					= 'Miesto';
 $__msgStuff['cpeDate']					= 'Dátum';

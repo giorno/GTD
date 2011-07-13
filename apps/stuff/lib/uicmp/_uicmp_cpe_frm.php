@@ -37,14 +37,6 @@ class _uicmp_cpe_frm extends _uicmp_comp
 	}
 
 	/**
-	 * Hack to allow virtual component _vcmp_cpe to extract requirer
-	 * object from _uicmp_layout instance.
-	 *
-	 * @return <_requirer>
-	 */
-	//public function getRequirer ( ) { return parent::getRequirer( ); }
-
-	/**
 	 * Read interface for initial (saved) textarea height.
 	 *
 	 * @return <int>

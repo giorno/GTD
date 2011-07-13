@@ -16,9 +16,11 @@
 						<tr>
 							<td class="_uicmp_frm_prompt">{$APP_AB_MSG.perse.display}</td>
 							<td class="_uicmp_frm_field" width="100%">
+								{assign var=USR_UICMP_STRINGS value=$USR_UICMP_CMP->getStrings()}
+								{include file=$USR_UICMP_STRINGS->getRenderer()}
 								<input onKeyUp="{$USR_UICMP_CMP->getJsVar()}.preview();" class="_uicmp_frm_input" id="{$USR_UICMP_CMP->getHtmlId()}.display" type="text">
 								<select onChange="{$USR_UICMP_CMP->getJsVar()}.preview();" class="_uicmp_frm_input _uicmp_ab_hidden" id="{$USR_UICMP_CMP->getHtmlId()}.format">
-								{foreach from=$APP_AB_MSG.perse.fmt key=index item=format}
+								{foreach from=$APP_AB_MSG.perse.js.fmt key=index item=format}
 									<option value="{$index}">{$format}</option>
 								{/foreach}
 								</select>
@@ -30,7 +32,7 @@
 								<table  cellspacing="0" cellpadding="0">
 									<tr>
 										<td class="_uicmp_gi_chk">
-											<input onClick="{$USR_UICMP_CMP->getJsVar()}.predef( );" id="{$USR_UICMP_CMP->getHtmlId()}.predef" type="checkbox">
+											<input onClick="{$USR_UICMP_CMP->getJsVar()}.predef_toggle( );" id="{$USR_UICMP_CMP->getHtmlId()}.predef" type="checkbox">
 										</td>
 										<td class="_uicmp_gi_chk"><div class="_uicmp_blue" id="{$USR_UICMP_CMP->getHtmlId()}.pPredef" onClick="document.getElementById('{$USR_UICMP_CMP->getHtmlId()}.predef').click();">{$APP_AB_MSG.perse.predef}</div></td>
 									</tr>
@@ -46,6 +48,116 @@
 					</table>
 				</td>
 			</tr>
+		</tbody>
+		<tr>
+			<td class="_uicmp_frm_hdr">
+				<table cellspacing="0" cellpadding="0" width="100%">
+					<tr>
+						<td class="_uicmp_frm_hdr_item"><div class="_uicmp_frm_hdr_cap">{$APP_AB_MSG.perse.personal}</div></td>
+					</tr>
+				</table>
+			</td>
+		</tr>
+		<tr>
+			<td class="_uicmp_body_frm">
+				<table width="100%" cellspacing="0" cellpadding="0">
+					<tr>
+						<td width="20%" class="_uicmp_frm_prompt_above_1st">{$APP_AB_MSG.perse.nick}</td>
+						<td width="20%" class="_uicmp_frm_prompt_above_rest">{$APP_AB_MSG.perse.first}</td>
+						<td width="60%" class="_uicmp_frm_prompt_above_rest">{$APP_AB_MSG.perse.surname}</td>
+					</tr>
+					<tr>
+						<td class="_uicmp_frm_field_1st">
+							<input onKeyUp="{$USR_UICMP_CMP->getJsVar()}.preview();" class="_uicmp_frm_input" id="{$USR_UICMP_CMP->getHtmlId()}.nick" type="text">
+						</td>
+						<td class="_uicmp_frm_field_rest">
+							<input onKeyUp="{$USR_UICMP_CMP->getJsVar()}.preview();" class="_uicmp_frm_input" id="{$USR_UICMP_CMP->getHtmlId()}.first" type="text">
+						</td>
+						<td class="_uicmp_frm_field_rest">
+							<input onKeyUp="{$USR_UICMP_CMP->getJsVar()}.preview();" class="_uicmp_frm_input" id="{$USR_UICMP_CMP->getHtmlId()}.surname" type="text">
+						</td>
+					</tr>
+					<tr>
+						<td class="_uicmp_frm_prompt_above_1st">{$APP_AB_MSG.perse.titles}</td>
+						<td class="_uicmp_frm_prompt_above_rest">{$APP_AB_MSG.perse.second}</td>
+						<td class="_uicmp_frm_prompt_above_rest">{$APP_AB_MSG.perse.ssurname}</td>
+					</tr>
+					<tr>
+						<td class="_uicmp_frm_field_1st">
+							<input onKeyUp="{$USR_UICMP_CMP->getJsVar()}.preview();" class="_uicmp_frm_input" id="{$USR_UICMP_CMP->getHtmlId()}.titles" type="text">
+						</td>
+						<td class="_uicmp_frm_field_rest">
+							<input onKeyUp="{$USR_UICMP_CMP->getJsVar()}.preview();" class="_uicmp_frm_input" id="{$USR_UICMP_CMP->getHtmlId()}.second" type="text">
+						</td>
+						<td class="_uicmp_frm_field_rest">
+							<input onKeyUp="{$USR_UICMP_CMP->getJsVar()}.preview();" class="_uicmp_frm_input" id="{$USR_UICMP_CMP->getHtmlId()}.ssurname" type="text">
+						</td>
+					</tr>
+					<tr>
+						<td class="_uicmp_frm_prompt_above_1st">
+							<table  cellspacing="0" cellpadding="0">
+								<tr>
+									<td class="_uicmp_gi_chk">
+										<input onClick="{$USR_UICMP_CMP->getJsVar()}.bday_toggle( );" id="{$USR_UICMP_CMP->getHtmlId()}.bday" type="checkbox">
+									</td>
+									<td class="_uicmp_gi_chk"><div class="_uicmp_blue" id="{$USR_UICMP_CMP->getHtmlId()}.pBDay" onClick="document.getElementById('{$USR_UICMP_CMP->getHtmlId()}.bday').click();">{$APP_AB_MSG.perse.birthday}</div></td>
+								</tr>
+							</table>
+						</td>
+						<td class="_uicmp_frm_prompt_above_rest">{$APP_AB_MSG.perse.anames}</td>
+						<td class="_uicmp_frm_prompt_above_rest">{$APP_AB_MSG.perse.asurnames}</td>
+					</tr>
+					<tr>
+						<td class="_uicmp_frm_field_1st">
+							{html_select_date end_year="+12" day_extra="id={$USR_UICMP_CMP->getHtmlId()}.day disabled=disabled" month_extra="id={$USR_UICMP_CMP->getHtmlId()}.month disabled=disabled" year_extra="id={$USR_UICMP_CMP->getHtmlId()}.year disabled=disabled"}
+						</td>
+						<td class="_uicmp_frm_field_rest">
+							<input onKeyUp="{$USR_UICMP_CMP->getJsVar()}.preview();" class="_uicmp_frm_input" id="{$USR_UICMP_CMP->getHtmlId()}.anames" type="text">
+						</td>
+						<td class="_uicmp_frm_field_rest">
+							<input onKeyUp="{$USR_UICMP_CMP->getJsVar()}.preview();" class="_uicmp_frm_input" id="{$USR_UICMP_CMP->getHtmlId()}.asurnames" type="text">
+						</td>
+					</tr>
+					<tr>
+						<td colspan="3" class="_uicmp_frm_prompt_above_1st">{$APP_AB_MSG.perse.comments}</td>
+					</tr>
+					<tr>
+						<td colspan="3" class="_uicmp_frm_field_1st">
+							<textarea id="{$USR_UICMP_CMP->getHtmlId()}.comments" class="resizable" style="height: {$USR_UICMP_CMP->getTaH()}px;"></textarea>
+						</td>
+					</tr>
+				</table>
+			</td>
+		</tr>
+		<tr>
+			<td class="_uicmp_frm_hdr">
+				<table cellspacing="0" cellpadding="0" width="100%">
+					<tr>
+						<td class="_uicmp_frm_hdr_item"><div class="_uicmp_frm_hdr_cap">{$APP_AB_MSG.perse.phones}</div></td>
+					</tr>
+				</table>
+			</td>
+		</tr>
+		<tr>
+			<td class="_uicmp_body_frm">
+				<table cellspacing="0" cellpadding="0" width="100%">
+					<tr>
+						<td width="20%" class="_uicmp_frm_prompt_above_1st">{$APP_AB_MSG.typed.kind}</td>
+						<td width="20%" class="_uicmp_frm_prompt_above_rest">{$APP_AB_MSG.typed.value}</td>
+						<td width="*" class="_uicmp_frm_prompt_above_rest">{$APP_AB_MSG.typed.comment}</td>
+						<td width="1%" class="_uicmp_frm_prompt_above_rest"></td>
+					</tr>
+					<tbody id="{$USR_UICMP_CMP->getHtmlId()}.typed">
+						
+					</tbody>
+					<tbody id="{$USR_UICMP_CMP->getHtmlId()}.custom">
+						
+					</tbody>
+				</table>
+			</td>
+		</tr>
+		<tbody id="{$USR_UICMP_CMP->getHtmlId()}.addresses">
+			
 		</tbody>
 	</table>
  </td>

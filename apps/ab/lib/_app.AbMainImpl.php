@@ -39,13 +39,14 @@ class AbMainImpl extends Ab
 	public function exec ( )
 	{
 		$smarty = _smarty_wrapper::getInstance( )->getEngine( );
+		$settings = AbCfgFactory::getInstance( );
 		
 		$layout = n7_ui::getInstance( )->getLayout( );
 		
 			$layout->createSep( );
 			
 			$url		= n7_globals::getInstance()->get( 'url' )->myUrl( ) . 'ajax.php';	// Ajax server URL
-			$params		= Array( 'app' => $this->id, 'action' => 'pers' );					// Ajax request parameters
+			$params		= Array( 'app' => $this->id, 'action' => 'perse' );					// Ajax request parameters
 			$pageSize	= n7_globals::settings( )->get( 'usr.lst.len' );
 
 			/**
@@ -53,7 +54,10 @@ class AbMainImpl extends Ab
 			 */
 			$tab = $layout->createTab( $this->id . '.PersE' );
 				$tab->unstack( );
-				$perse = new _vcmp_perse( $tab, $tab->getId( ) . '.Sol', $url, $params, $this->messages['perse'] );
+				/**
+				 * @todo implement TAH settign value instead of constant
+				 */
+				$perse = new _vcmp_perse( $tab, $tab->getId( ) . '.Sol', $url, $params, $this->messages['perse'], $settings->get( 'usr.ta.h.perse' ) );
 				$tab->addVcmp( $perse );
 			
 			$params['action'] = 'search';

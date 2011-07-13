@@ -25,58 +25,89 @@ $__msgAb['f_all']							= 'Všetky kontakty';
 $__msgAb['t_all']							= 'Ľudia a organizácie';
 
 /**
+ * Pretyped contact fields.
+ */
+$__msgAb['typed']['kind']					= 'Typ';
+$__msgAb['typed']['value']					= 'Číslo, Id, atď.';
+$__msgAb['typed']['comment']				= 'Poznámka';
+$__msgAb['typed']['add_row']				= 'Pridať riadok';
+$__msgAb['typed']['del_row']				= 'Odobrať';
+$__msgAb['typed']['types']['phone']			= 'Telefón';
+$__msgAb['typed']['types']['cell']			= 'Mobil';
+$__msgAb['typed']['types']['fax']			= 'Fax';
+$__msgAb['typed']['types']['email']			= 'E-mail';
+$__msgAb['typed']['types']['www']			= 'www';
+$__msgAb['typed']['types']['SIP']			= 'SIP';
+$__msgAb['typed']['types']['JabberID']		= 'JabberID';
+$__msgAb['typed']['types']['MSN']			= 'MSN';
+$__msgAb['typed']['types']['ICQ']			= 'ICQ';
+$__msgAb['typed']['types']['Yahoo']			= 'Yahoo';
+$__msgAb['typed']['types']['AOL']			= 'AOL';
+
+/**
+ * Addresses.
+ */
+$__msgAb['address']['address']				= 'Adresa';
+$__msgAb['address']['no']					= ' č. ';
+$__msgAb['address']['add_address']			= 'Pridať adresu';
+$__msgAb['address']['del_address']			= 'Odobrať túto adresu';
+$__msgAb['address']['field']['address']		= $__msgAb['address']['address'];
+$__msgAb['address']['field']['phones']		= 'Telefón(y)';
+$__msgAb['address']['field']['faxes']		= 'Fax(y)';
+$__msgAb['address']['field']['zip']			= 'PSČ';
+$__msgAb['address']['field']['city']		= 'Mesto';
+$__msgAb['address']['field']['country']		= 'Krajina';
+$__msgAb['address']['field']['comment']		= $__msgAb['typed']['comment'];
+
+/**
  * Person editor form.
  */
 $__msgAb['perse']['bt_back']				= 'Späť';
+$__msgAb['perse']['bt_save']				= 'Uložiť kontakt';
 $__msgAb['perse']['title']					= 'Nová osoba';
 $__msgAb['perse']['display']				= 'Zobrazovať ako';
 $__msgAb['perse']['predef']					= 'použiť predvolený formát';
 $__msgAb['perse']['labels']					= $__msgAb['cdes']['fold'];
 $__msgAb['perse']['no_labels']				= 'Nálepky nie sú k dispozícii.';
-$__msgAb['perse']['fmt'][0]					= 'Prezývka [Krstné meno Priezvisko]';
-$__msgAb['perse']['fmt'][10]				= 'Krstné meno Priezvisko';
-$__msgAb['perse']['fmt'][20]				= 'Priezvisko Krstné meno';
-$__msgAb['perse']['fmt'][30]				= 'Krstné meno Druhé meno Priezvisko';
-$__msgAb['perse']['fmt'][40]				= 'Priezvisko, Krstné meno Druhé meno';
-$__msgAb['perse']['fmt'][50]				= 'Krstné meno Priezvisko-Druhé priezvisko';
-$__msgAb['perse']['fmt'][60]				= 'Krstné meno Druhé meno Priezvisko-Druhé priezvisko';
-$__msgAb['perse']['fmt'][70]				= 'Priezvisko-Druhé priezvisko, Krstné meno Druhé meno';
+$__msgAb['perse']['personal']				= 'Osobné informácie';
+$__msgAb['perse']['first']					= 'Krstné meno';
+$__msgAb['perse']['surname']				= 'Priezvisko';
+$__msgAb['perse']['nick']					= 'Prezývka';
+$__msgAb['perse']['titles']					= 'Titul(y)';
+$__msgAb['perse']['second']					= 'Druhé meno';
+$__msgAb['perse']['ssurname']				= 'Druhé priezvisko';
+$__msgAb['perse']['anames']					= 'Ďalšie mená';
+$__msgAb['perse']['asurnames']				= 'Ďalšie priezviská';
+$__msgAb['perse']['birthday']				= 'Narodeniny';
+$__msgAb['perse']['comments']				= 'Poznámka';
+$__msgAb['perse']['phones']					= 'Telefóny, e-maily, atď.';
+$__msgAb['perse']['js']['fmt'][0]			= 'Prezývka [Krstné meno Priezvisko]';
+$__msgAb['perse']['js']['fmt'][10]			= 'Krstné meno Priezvisko';
+$__msgAb['perse']['js']['fmt'][20]			= 'Priezvisko Krstné meno';
+$__msgAb['perse']['js']['fmt'][30]			= 'Krstné meno Druhé meno Priezvisko';
+$__msgAb['perse']['js']['fmt'][40]			= 'Priezvisko, Krstné meno Druhé meno';
+$__msgAb['perse']['js']['fmt'][50]			= 'Krstné meno Priezvisko-Druhé priezvisko';
+$__msgAb['perse']['js']['fmt'][60]			= 'Krstné meno Druhé meno Priezvisko-Druhé priezvisko';
+$__msgAb['perse']['js']['fmt'][70]			= 'Priezvisko-Druhé priezvisko, Krstné meno Druhé meno';
+$__msgAb['perse']['js']['types']			= $__msgAb['typed']['types'];
+$__msgAb['perse']['js']['edit']				= 'Upraviť osobu';
+$__msgAb['perse']['js']['create']			= $__msgAb['perse']['title'];
+$__msgAb['perse']['js']['add_row']			= $__msgAb['typed']['add_row'];
+$__msgAb['perse']['js']['del_row']			= $__msgAb['typed']['del_row'];
+$__msgAb['perse']['js']['address']			= $__msgAb['address'];
+$__msgAb['perse']['ind']['preparing']		= 'Pripravujem...';
+$__msgAb['perse']['ind']['prepared']		= 'Pripravené';
+$__msgAb['perse']['ind']['saving']			= 'Ukladám...';
+$__msgAb['perse']['ind']['saved']			= 'Uložené';
+$__msgAb['perse']['ind']['e_unknown']		= 'Chyba: neznáma chyba! Kontaktujte správcov.';
+$__msgAb['perse']['ind']['e_bday']			= 'Chyba: nesprávna hodnota v poli Narodeniny! Opravte dátum alebo vypnite pole úplne.';
 
-/*$__msgAb['editfrmCapEdit']                = 'Upraviť osobu';
-$__msgAb['editfrmFieldTitles']            = 'Titul(y)';
-$__msgAb['editfrmFieldFirstName']         = 'Krstné meno';
-$__msgAb['editfrmFieldSecondName']        = 'Druhé meno';
-$__msgAb['editfrmFieldAnotherNames']      = 'Ďalšie mená';
-$__msgAb['editfrmFieldFirstSurname']      = 'Priezvisko';
-$__msgAb['editfrmFieldSecondSurname']     = 'Druhé priezvisko';
-$__msgAb['editfrmFieldAnotherSurnames']   = 'Ďalšie priezviská';
-$__msgAb['editfrmFieldNick']              = 'Prezývka';
-$__msgAb['editfrmFieldBirthday']          = 'Narodeniny';
-$__msgAb['editfrmFieldPhones']            = 'Telefón(y)';
-$__msgAb['editfrmFieldFaxes']             = 'Fax(y)';
-$__msgAb['editfrmFieldAddress']           = 'Adresa';
-$__msgAb['editfrmFieldAddressNo']         = ' č. ';
-$__msgAb['editfrmFieldDesc']              = 'Poznámka';
-$__msgAb['editfrmFieldZip']               = 'PSČ';
-$__msgAb['editfrmFieldCity']              = 'Mesto';
-$__msgAb['editfrmFieldCountry']           = 'Krajina';
+/*
 $__msgAb['editfrmFieldComments']          = 'Poznámky';
-$__msgAb['editfrmFieldPhKind']            = 'Typ';
-$__msgAb['editfrmFieldPhNumberOrId']      = 'Číslo, Id, atď.';
-$__msgAb['editfrmFieldPhComment']         = 'Poznámka';
-$__msgAb['editfrmSepPersonal']            = 'Osobné informácie';
-$__msgAb['editfrmSepPhones']              = 'Telefóny, e-maily, atď.';
 $__msgAb['editfrmSepAddress']             = 'Adresa';
-$__msgAb['editfrmAddRow']                 = 'Pridať riadok';
-$__msgAb['editfrmErase']                  = 'Odobrať';
-$__msgAb['editfrmAddAddress']             = 'Pridať adresu';
-$__msgAb['editfrmEraseAddress']           = 'Odobrať túto adresu';
-$__msgAb['editfrmSave']                   = 'Uložiť kontakt';
 $__msgAb['editfrmSaveAsNew']              = 'Uložiť ako nový';
 $__msgAb['editfrmReset']                  = 'Reset';
 $__msgAb['editfrmCaptionError']           = "Chyba!";
-$__msgAb['editfrmWrongBrithday']          = "Nesprávna hodnota v poli <b>Nerodeniny</b>! Opravte dátum alebo vypnite pole úplne.";
-
 $__msgAb['compfrmCapAdd']                 = 'Nová spoločnosť';
 $__msgAb['compfrmCapEdit']                = 'Upraviť spoločnosť';
 $__msgAb['compfrmFieldName']              = 'Úplný názov';
@@ -103,30 +134,5 @@ $__msgAb['tagPerson']                     = 'Osoba';
 $__msgAb['tagCompany']                    = 'Spoločnosť';
 
 $__msgAb['noResultsNoContacts']           = "Nemáte žiadne kontakty. Skúste %s alebo %s.";*/
-
-/**
- *
- * Basic set of predefined contact fields.
- */
-/*$__ACTYPES['phone']						= 'Telefón';
-$__ACTYPES['cell']						= 'Mobil';
-$__ACTYPES['fax']						= 'Fax';
-$__ACTYPES['email']						= 'E-mail';
-$__ACTYPES['www']						= 'www';
-$__ACTYPES['SIP']						= 'SIP';
-$__ACTYPES['JabberID']					= 'JabberID';
-$__ACTYPES['MSN']						= 'MSN';
-$__ACTYPES['ICQ']						= 'ICQ';
-$__ACTYPES['Yahoo']						= 'Yahoo';
-$__ACTYPES['AOL']						= 'AOL';
-
-
-setlocale( LC_ALL, 'sk_SK.UTF-8' );*/
-
-/*
- * Append common strings.
- */
-/*include N7_SOLUTION_ROOT . 'i18n/common/sk.php';
-$__msgAb = array_merge( $__msgAb, $__msgCommon );*/
 
 ?>

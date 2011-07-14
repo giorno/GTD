@@ -1,3 +1,4 @@
+
 /**
  * @file _uicmp_stuff.js
  * @author giorno
@@ -24,7 +25,36 @@ function _uicmp_ab_opt_add( select, name, value )
 		select.add( opt );
 	}
 }
+
+/**
+ * Commont parent to all multielement widgets (typed, custom, addresses).
+ */
+function _uicmp_ab_multiel (  )
+{
+	/**
+	 * Identifier of widget. Must be set in descendant.
+	 */
+	this.id = null;
+	
+	/**
+	 * Shortcut to build HTML element with id and style.
+	 */
+	this.element = function ( tag, sub_id, style )
+	{
+		var el = document.createElement( tag );
 		
+		if ( sub_id != null )
+			el.id = this.id + '.' + sub_id;
+		
+		if ( style != null )
+			el.className = style;
+		
+		return el;
+	};
+}
+
+_uicmp_ab_typed.prototype = new _uicmp_ab_multiel;
+
 /**
  * This class is instantiated in form instances. Parameters should be provided
  * but parent instance.
@@ -80,44 +110,19 @@ function _uicmp_ab_typed ( id, parent_id, ctrl, types, action )
 	{
 		var parentEl = document.getElementById( me.parent_id );
 
-		var tr = document.createElement( 'tr' );
-			tr.id = me.id + '.tr';
-
-			var tdType = document.createElement( 'td' );
-				tdType.id = me.id + '.td_type';
-				tdType.className = '_uicmp_frm_field_1st';
-
-				var selectType = document.createElement( 'select' );
-					selectType.id = me.id + '.type';
-					selectType.className = '_uicmp_frm_input';
-
-			var tdNumber = document.createElement( 'td' );
-				tdNumber.id = 'frmAcTfTdNumber' + this.commonId;
-				tdNumber.className = '_uicmp_frm_field_rest';
-
-				var inputNumber = document.createElement( 'input' );
-					inputNumber.id = me.id + '.number';
-					inputNumber.className = '_uicmp_frm_input';
-
-			var tdComment = document.createElement( 'td' );
-				tdComment.id = 'frmAcTfTdComment' + this.commonId;
-				tdComment.className = '_uicmp_frm_field_rest';
-
-				var inputComment = document.createElement( 'input' );
-					inputComment.id = me.id + '.comment';
-					inputComment.className = '_uicmp_frm_input';
-
-			var tdErase = document.createElement( 'td' );
-				tdErase.id = 'frmAcTfTdErase' + this.commonId;
-				tdErase.className = '_uicmp_frm_field_rest _uicmp_fri';
-
-				var divErase = document.createElement( 'div' );
-					divErase.id = me.id + '.div';
-					divErase.className = me.action.style;
+		var tr = this.element( 'tr', 'tr', null );
+			var tdType = this.element( 'td', 'td_type', '_uicmp_frm_field_1st' );
+				var selectType = this.element( 'select', 'type', '_uicmp_frm_input' );
+			var tdNumber = this.element( 'td', 'td_number', '_uicmp_frm_field_rest' );
+				var inputNumber = this.element( 'input', 'number', '_uicmp_frm_input' );
+			var tdComment = this.element( 'td', 'td_comment', '_uicmp_frm_field_rest' );
+				var inputComment = this.element( 'input', 'comment', '_uicmp_frm_input' );
+			var tdErase = this.element( 'td', 'td_erase', '_uicmp_frm_field_rest _uicmp_fri' );
+				var divErase = this.element( 'div', 'div', me.action.style );
 					if ( me.action.method == 'del' )
-						divErase.onclick = function( ) { me.ctrl.typed_del( me.id ); };
+						divErase.onclick = function( ) {me.ctrl.typed_del( me.id );};
 					else if ( me.action.method == 'add' )
-						divErase.onclick = function( ) { me.ctrl.typed_add( ); };
+						divErase.onclick = function( ) {me.ctrl.typed_add( );};
 					divErase.innerHTML = me.action.text;
 					disableSelection( divErase );
 
@@ -156,6 +161,8 @@ function _uicmp_ab_typed ( id, parent_id, ctrl, types, action )
 	this.build( );
 	this.populate( );
 }
+
+_uicmp_ab_custom.prototype = new _uicmp_ab_multiel;
 
 /**
  * This class is instantiated in form instances. Parameters should be provided
@@ -196,44 +203,19 @@ function _uicmp_ab_custom ( id, parent_id, ctrl, action )
 	{
 		var parentEl = document.getElementById( me.parent_id );
 
-		var tr = document.createElement( 'tr' );
-			tr.id = me.id + '.tr';
-
-			var tdType = document.createElement( 'td' );
-				tdType.id = me.id + '.td_type';
-				tdType.className = '_uicmp_frm_field_1st';
-
-				var inputName = document.createElement( 'input' );
-					inputName.id = me.id + '.name';
-					inputName.className = '_uicmp_frm_input';
-
-			var tdNumber = document.createElement( 'td' );
-				tdNumber.id = 'frmAcTfTdNumber' + this.commonId;
-				tdNumber.className = '_uicmp_frm_field_rest';
-
-				var inputNumber = document.createElement( 'input' );
-					inputNumber.id = me.id + '.number';
-					inputNumber.className = '_uicmp_frm_input';
-
-			var tdComment = document.createElement( 'td' );
-				tdComment.id = 'frmAcTfTdComment' + this.commonId;
-				tdComment.className = '_uicmp_frm_field_rest';
-
-				var inputComment = document.createElement( 'input' );
-					inputComment.id = me.id + '.comment';
-					inputComment.className = '_uicmp_frm_input';
-
-			var tdErase = document.createElement( 'td' );
-				tdErase.id = 'frmAcTfTdErase' + this.commonId;
-				tdErase.className = '_uicmp_frm_field_rest _uicmp_fri';
-
-				var divErase = document.createElement( 'div' );
-					divErase.id = me.id + '.div';
-					divErase.className = me.action.style;
+		var tr = this.element( 'tr', 'tr', null );
+			var tdType = this.element( 'td', 'td_type', '_uicmp_frm_field_1st' );
+				var inputName = this.element( 'input', 'name', '_uicmp_frm_input' );
+			var tdNumber = this.element( 'td', 'td_number', '_uicmp_frm_field_rest' );
+				var inputNumber = this.element( 'input', 'number', '_uicmp_frm_input' );
+			var tdComment = this.element( 'td', 'td_comment', '_uicmp_frm_field_rest' );
+				var inputComment = this.element( 'input', 'comment', '_uicmp_frm_input' );
+			var tdErase = this.element( 'td', 'td_erase', '_uicmp_frm_field_rest _uicmp_fri' );
+				var divErase = this.element( 'div', 'div', me.action.style );
 					if ( me.action.method == 'del' )
-						divErase.onclick = function( ) { me.ctrl.custom_del( me.id ); };
+						divErase.onclick = function( ) {me.ctrl.custom_del( me.id );};
 					else if ( me.action.method == 'add' )
-						divErase.onclick = function( ) { me.ctrl.custom_add( ); };
+						divErase.onclick = function( ) {me.ctrl.custom_add( );};
 					divErase.innerHTML = me.action.text;
 					disableSelection( divErase );
 
@@ -270,6 +252,8 @@ function _uicmp_ab_custom ( id, parent_id, ctrl, action )
 	
 	this.build( );
 }
+
+_uicmp_ab_address.prototype = new _uicmp_ab_multiel;
 
 function _uicmp_ab_address ( id, parent_id, ctrl, display, strings, action )
 {
@@ -313,62 +297,33 @@ function _uicmp_ab_address ( id, parent_id, ctrl, display, strings, action )
 	{
 		var parentEl = document.getElementById( me.parent_id );
 
-		var tr = document.createElement( 'tr' );
-			tr.id = me.id + '.tr';
-
-			var td = document.createElement( 'td' );
-				td.id = me.id + '.td';
+		var tr = this.element( 'tr', 'tr', null );
+			var td = this.element( 'td', 'td', null );
 				td.setAttribute( 'colSpan' , 2 );
-
-				var table = document.createElement( 'table' );
-					table.id = me.id + '.table';
+				var table = this.element( 'table', 'table', null );
 					table.setAttribute( 'cellspacing' , '0' );
 					table.setAttribute( 'cellpadding' , '0' );
 					table.setAttribute( 'width' , '100%' );
-
-					var tbody = document.createElement( 'tbody' );
-						tbody.id = me.id + '.tbody';
-
-					var trCap = document.createElement( 'tr' );
-						trCap.id = me.id + '.trCap';
-
-						var tdCap = document.createElement( 'td' );
-							tdCap.id = me.id + '.tdCap';
+					var tbody = this.element( 'tbody', 'tbody', null );
+					var trCap = this.element( 'tr', 'trCap', null);
+						var tdCap = this.element( 'td', 'tdCap', '_uicmp_frm_hdr' );
 							tdCap.setAttribute( 'colSpan' , 2 );
-							tdCap.className = '_uicmp_frm_hdr';
-							
-							var table_cap = document.createElement( 'table' );
-								table_cap.id = me.id + '.table_cap';
+							var table_cap = this.element( 'table', 'table_cap', null );
 								table_cap.setAttribute( 'cellspacing' , '0' );
 								table_cap.setAttribute( 'cellpadding' , '0' );
-								
-								var tbody_cap = document.createElement( 'tbody' );
-									tbody_cap.id = me.id + '.tbody_cap';
-								
-									var tr_cap = document.createElement( 'tr' );
-										tr_cap.id = me.id + '.tr_cap';
-										
-										var td_cap = document.createElement( 'td' );
-											td_cap.id = me.id + '.td_cap';
-											td_cap.className = '_uicmp_frm_hdr_item';
-											
-											var div_cap = document.createElement( 'div' );
-												div_cap.id = me.id + '.div_cap';
-												div_cap.className = '_uicmp_frm_hdr_cap';
+								var tbody_cap = this.element( 'tbody', 'tbody_cap', null );
+									var tr_cap = this.element( 'tr', 'tr_cap', null );
+										var td_cap = this.element( 'td', 'td_cap', '_uicmp_frm_hdr_item' );
+											var div_cap = this.element( 'div', 'div_cap', '_uicmp_frm_hdr_cap' );
 												div_cap.innerHTML = this.display;
-												
-										var td_erase = document.createElement( 'td' );
-											td_erase.id = me.id + '.td_erase';
-											td_erase.className = '_uicmp_frm_hdr_item';
-											
-											var div_erase = document.createElement( 'div' );
-												div_erase.id = me.id + '.div_erase';
-												div_erase.className = action.style;
+										var td_erase = this.element( 'td', 'td_erase', '_uicmp_frm_hdr_item' );
+											var div_erase = this.element( 'div', '.div_erase', action.style );
 												div_erase.innerHTML = action.text;
 												if ( action.method == 'add' )
-													div_erase.onclick = function ( ) { me.ctrl.address_add( ); };
+													div_erase.onclick = function ( ) {me.ctrl.address_add( );};
 												else if ( action.method == 'del' )
-													div_erase.onclick = function ( ) { me.ctrl.address_del( me.id ); };
+													div_erase.onclick = function ( ) {me.ctrl.address_del( me.id );};
+												disableSelection( div_erase );
 
 		tr.appendChild( td );
 			td.appendChild( table );
@@ -383,46 +338,27 @@ function _uicmp_ab_address ( id, parent_id, ctrl, display, strings, action )
 										tr_cap.appendChild( td_erase );
 											td_erase.appendChild( div_erase );
 
-					var trContainer = document.createElement( 'tr' );
-						trContainer.id = me.id + '.trContainer';
-
-						var tdContainer = document.createElement( 'td' );
-							tdContainer.id = me.id + '.tdContainer';
+					var trContainer = this.element( 'tr', 'trContainer', null );
+						var tdContainer = this.element( 'td', 'tdContainer', '_uicmp_body_frm' );
 							tdContainer.setAttribute( 'colSpan' , 2 );
-							tdContainer.className = '_uicmp_body_frm';
-
-							var tableContainer = document.createElement( 'table' );
-								tableContainer.id = me.id + '.tableContainer';
+							var tableContainer = this.element( 'table', 'tableContainer', null );
 								tableContainer.setAttribute( 'cellspacing' , '0' );
 								tableContainer.setAttribute( 'cellpadding' , '0' );
 								tableContainer.setAttribute( 'width' , '100%' );
-
-								var tbodyContainer = document.createElement( 'tbody' );
-									tbodyContainer.id = me.id + '.tbodyContainer';
-
+								var tbodyContainer = this.element( 'tbody', 'tbodyContainer', null );
+								
 					tbody.appendChild( trContainer );
 						trContainer.appendChild( tdContainer );
 							tdContainer.appendChild( tableContainer );
 								tableContainer.appendChild( tbodyContainer );
 
 									/* Description field */
-									var trDesc = document.createElement( 'tr' );
-										trDesc.id = me.id + '.trDesc';
-
-										var tdDescPrompt = document.createElement( 'td' );
-											tdDescPrompt.id = me.id + '.tdDescP';
-											tdDescPrompt.className = '_uicmp_frm_prompt';
+									var trDesc = this.element( 'tr', 'trDesc', null );
+										var tdDescPrompt = this.element( 'td', 'tdDescP', '_uicmp_frm_prompt' );
 											tdDescPrompt.innerHTML = strings['comment'];
-
-										var tdDesc = document.createElement( 'td' );
-											tdDesc.id = me.id + '.tdDesc';
-											tdDesc.className = '_uicmp_frm_field';
+										var tdDesc = this.element( 'td', 'tdDesc', '_uicmp_frm_field' );
 											tdDesc.setAttribute( 'colSpan', 3 );
-
-											var inputDesc = document.createElement( 'input' );
-												inputDesc.id = me.id + '.desc';
-												inputDesc.className = '_uicmp_frm_input';
-
+											var inputDesc = this.element( 'input', 'desc', '_uicmp_frm_input' );
 
 									tbodyContainer.appendChild( trDesc );
 										trDesc.appendChild( tdDescPrompt );
@@ -430,39 +366,18 @@ function _uicmp_ab_address ( id, parent_id, ctrl, display, strings, action )
 											tdDesc.appendChild( inputDesc );
 
 									/* Address lines */
-									var trAddr1 = document.createElement( 'tr' );
-										trAddr1.id = me.id + '.trAddr1';
-
-										var tdAddr1Prompt = document.createElement( 'td' );
-											tdAddr1Prompt.id = me.id + '.tdAddr1P';
-											tdAddr1Prompt.className = '_uicmp_frm_prompt';
+									var trAddr1 = this.element( 'tr', 'trAddr1', null );
+										var tdAddr1Prompt = this.element( 'td', 'tdAddr1P', '_uicmp_frm_prompt' );
 											tdAddr1Prompt.innerHTML = strings['address'];
-
-										var tdAddr1 = document.createElement( 'td' );
-											tdAddr1.id = me.id + '.tdAddr1';
-											tdAddr1.className = '_uicmp_frm_field';
+										var tdAddr1 = this.element( 'td', '.tdAddr1', '_uicmp_frm_field' );
 											tdAddr1.setAttribute( 'colSpan', 3 );
-
-											var inputAddr1 = document.createElement( 'input' );
-												inputAddr1.id = me.id + '.addr1';
-												inputAddr1.className = '_uicmp_frm_input';
-
-									var trAddr2 = document.createElement( 'tr' );
-										trAddr2.id = me.id + '.trAddr2';
-
-										var tdAddr2Prompt = document.createElement( 'td' );
-											tdAddr2Prompt.id = me.id + '.tdAddr2P';
-
-										var tdAddr2 = document.createElement( 'td' );
-											tdAddr2.id = me.id + '.tdAddr2';
-											tdAddr2.className = '_uicmp_frm_field';
+											var inputAddr1 = this.element( 'input', 'addr1', '_uicmp_frm_input' );
+									var trAddr2 = this.element( 'tr', 'trAddr2', null );
+										var tdAddr2Prompt = this.element( 'td', 'tdAddr2P', null );
+										var tdAddr2 = this.element( 'td', 'tdAddr2', '_uicmp_frm_field' );
 											tdAddr2.setAttribute( 'colSpan', 3 );
-
-											var inputAddr2 = document.createElement( 'input' );
-												inputAddr2.id = me.id + '.addr2';
-												inputAddr2.className = '_uicmp_frm_input';
-
-
+											var inputAddr2 = this.element( 'input', 'addr2', '_uicmp_frm_input' );
+											
 									tbodyContainer.appendChild( trAddr1 );
 										trAddr1.appendChild( tdAddr1Prompt );
 										trAddr1.appendChild( tdAddr1 );
@@ -474,39 +389,18 @@ function _uicmp_ab_address ( id, parent_id, ctrl, display, strings, action )
 											tdAddr2.appendChild( inputAddr2 );
 
 									/* Zip code and City */
-									var trZipCity = document.createElement( 'tr' );
-										trZipCity.id = me.id + '.trZip';
-
-										var tdZipPrompt = document.createElement( 'td' );
-											tdZipPrompt.id = me.id + '.tdZipP';
-											tdZipPrompt.className = '_uicmp_frm_prompt';
+									var trZipCity = this.element( 'tr', 'trZip', null );
+										var tdZipPrompt = this.element( 'td', 'tdZipP', '_uicmp_frm_prompt' );
 											tdZipPrompt.innerHTML = strings['zip'];
-
-										var tdZip = document.createElement( 'td' );
-											tdZip.id = me.id + '.tdZip';
-											tdZip.className = '_uicmp_frm_field_1st';
+										var tdZip = this.element( 'td', 'tdZip', '_uicmp_frm_field_1st' );
 											tdZip.setAttribute( 'width', '10%' );
-
-											var inputZip = document.createElement( 'input' );
-												inputZip.id = me.id + '.zip';
-												inputZip.className = '_uicmp_frm_input';
-												//inputZip.setAttribute( 'size', 20 );
-
-										var tdCityPrompt = document.createElement( 'td' );
-											tdCityPrompt.id = me.id + '.tdCityP';
-											tdCityPrompt.className = '_uicmp_frm_prompt';
+											var inputZip = this.element( 'input', 'zip', '_uicmp_frm_input' );
+										var tdCityPrompt = this.element( 'td', 'tdCityP', '_uicmp_frm_prompt' );
 											tdCityPrompt.innerHTML = strings['city'];
 											tdCityPrompt.setAttribute( 'width', '1%' );
-
-										var tdCity = document.createElement( 'td' );
-											tdCity.id = me.id + '.tdCity';
-											tdCity.className = '_uicmp_frm_field_rest';
+										var tdCity = this.element( 'td', 'tdCity', '_uicmp_frm_field_rest' );
 											tdCity.setAttribute( 'width', '100%' );
-
-											var inputCity = document.createElement( 'input' );
-												inputCity.id = me.id + '.city';
-												inputCity.className = '_uicmp_frm_input';
-
+											var inputCity = this.element( 'input', 'city', '_uicmp_frm_input' );
 
 									tbodyContainer.appendChild( trZipCity );
 										trZipCity.appendChild( tdZipPrompt );
@@ -517,70 +411,38 @@ function _uicmp_ab_address ( id, parent_id, ctrl, display, strings, action )
 											tdCity.appendChild( inputCity );
 
 									/* Country field */
-									var trCountry = document.createElement( 'tr' );
-										trCountry.id = me.id + '.trCountry';
-
-										var tdCountryPrompt = document.createElement( 'td' );
-											tdCountryPrompt.id = me.id + '.tdCountryP';
-											tdCountryPrompt.className = '_uicmp_frm_prompt';
+									var trCountry = this.element( 'tr', 'trCountry', null );
+										var tdCountryPrompt = this.element( 'td', 'tdCountryP', '_uicmp_frm_prompt' );
 											tdCountryPrompt.innerHTML = strings['country'];
-
-										var tdCountry = document.createElement( 'td' );
-											tdCountry.id = me.id + '.tdCountry';
-											tdCountry.className = '_uicmp_frm_field';
+										var tdCountry = this.element( 'td', 'tdCountry', '_uicmp_frm_field' );
 											tdCountry.setAttribute( 'colSpan', 3 );
-
-											var inputCountry = document.createElement( 'input' );
-												inputCountry.id = me.id + '.country';
-												inputCountry.className = '_uicmp_frm_input';
-
-
+											var inputCountry = this.element( 'input', 'country', '_uicmp_frm_input' );
+											
 									tbodyContainer.appendChild( trCountry );
 										trCountry.appendChild( tdCountryPrompt );
 										trCountry.appendChild( tdCountry );
 											tdCountry.appendChild( inputCountry );
 
 									/* Phone(s) field */
-									var trPhones = document.createElement( 'tr' );
-										trPhones.id = me.id + '.trPhones';
-
-										var tdPhonesPrompt = document.createElement( 'td' );
-											tdPhonesPrompt.id = me.id + '.tdPhonesP';
-											tdPhonesPrompt.className = '_uicmp_frm_prompt';
+									var trPhones = this.element( 'tr', 'trPhones', null );
+										var tdPhonesPrompt = this.element( 'td', 'tdPhonesP', '_uicmp_frm_prompt' );
 											tdPhonesPrompt.innerHTML = strings['phones'];
-
-										var tdPhones = document.createElement( 'td' );
-											tdPhones.id = me.id + '.tdPhones';
-											tdPhones.className = '_uicmp_frm_field';
+										var tdPhones = this.element( 'td', 'tdPhones', '_uicmp_frm_field' );
 											tdPhones.setAttribute( 'colSpan', 3 );
-
-											var inputPhones = document.createElement( 'input' );
-												inputPhones.id = me.id + '.phones';
-												inputPhones.className = '_uicmp_frm_input';
-
-
+											var inputPhones = this.element( 'input', 'phones', '_uicmp_frm_input' );
+											
 									tbodyContainer.appendChild( trPhones );
 										trPhones.appendChild( tdPhonesPrompt );
 										trPhones.appendChild( tdPhones );
 											tdPhones.appendChild( inputPhones );
 
 									/* Faxe(s) field */
-									var trFaxes = document.createElement( 'tr' );
-										trFaxes.id = me.id + '.trFaxes';
-
-										var tdFaxesPrompt = document.createElement( 'td' );
-											tdFaxesPrompt.id = me.id + '.tdFaxesP';
-											tdFaxesPrompt.className = '_uicmp_frm_prompt';
+									var trFaxes = this.element( 'tr', 'trFaxes', null );	
+										var tdFaxesPrompt = this.element( 'td', 'tdFaxesP', '_uicmp_frm_prompt' );
 											tdFaxesPrompt.innerHTML = strings['faxes'];
-
-										var tdFaxes = document.createElement( 'td' );
-											tdFaxes.id = me.id + '.tdFaxes';
-											tdFaxes.className = '_uicmp_frm_field';
+										var tdFaxes = this.element( 'td', 'tdFaxes', '_uicmp_frm_field' );
 											tdFaxes.setAttribute( 'colSpan', 3 );
-
-											var inputFaxes = document.createElement( 'input' );
-												inputFaxes.id = me.id + '.faxes';
-												inputFaxes.className = '_uicmp_frm_input';
+											var inputFaxes = this.element( 'input', 'faxes', '_uicmp_frm_input' );
 
 
 									tbodyContainer.appendChild( trFaxes );
@@ -618,18 +480,192 @@ function _uicmp_ab_address ( id, parent_id, ctrl, display, strings, action )
 	this.build( );
 }
 
+/**
+ * Common part of editors.
+ */
+function _uicmp_ab_frm ( )
+{
+	/**
+	 * Copy scope.
+	 */
+	var me = this;
+	
+	/**
+	 * HTML ID of my form.
+	 */
+	this.my_id = null;
+	
+	/**
+	 * Indicates whether form is in edit mode. false value represents
+	 * 'Add new contact' mode.
+	 */
+	this.edit = false;
+	
+	/**
+	 * Array holding widgets for pre-typed information (phones, IM's, etc.).
+	 */
+	this.typed = new Array( );
+	
+	/**
+	 * Custom data fields.
+	 */
+	this.custom = new Array( );
+	
+	/**
+	 * Custom addresses.
+	 */
+	this.addresses = new Array( );
+	
+	/**
+	 * Multidimensional associative array of strings.
+	 */
+	this.strings = null;
+	
+	/**
+	 * Creates new pretyped contact detail field.
+	 */
+	this.typed_add = function ( )
+	{
+		this.typed[this.typed.length] = new _uicmp_ab_typed( this.my_id + '.typed_' + this.typed.length, this.my_id + '.typed', this, this.strings['types'], {text: this.strings['del_row'], method: 'del', style: '_uicmp_blue _uicmp_gi_close'} );
+	};
+	
+	/**
+	 * Deletes pretyped contact field given by its ID. This method is called
+	 * from onClick() event of typed field instance itself.
+	 */
+	this.typed_del = function ( id )
+	{
+		for ( var i = 0; i < this.typed.length ; ++i )
+		{
+			if ( ( this.typed[i] != null ) && ( this.typed[i].id == id ) )
+			{
+				this.typed[i].destroy( );
+				this.typed[i] = null;
+			}
+		}
+	};
+	
+	/**
+	 * Creates new custom added contact detail field.
+	 */
+	this.custom_add = function ( )
+	{
+		this.custom[this.custom.length] = new _uicmp_ab_custom( this.my_id + '.custom_' + this.custom.length, this.my_id + '.custom', this, {text: this.strings['del_row'], method: 'del', style: '_uicmp_blue _uicmp_gi_close'} );
+	};
+	
+	/**
+	 * Deletes custom contact field given by its ID. This method is called
+	 * from onClick() event of custom field instance itself.
+	 */
+	this.custom_del = function ( id )
+	{
+		for ( var i = 0; i < this.custom.length ; ++i )
+		{
+			if ( ( this.custom[i] != null ) && ( this.custom[i].id == id ) )
+			{
+				this.custom[i].destroy( );
+				this.custom[i] = null;
+			}
+		}
+	};
+	
+	/**
+	 * Creates new address field in the form.
+	 */
+	this.address_add = function ( )
+	{
+		this.addresses[this.addresses.length] = new _uicmp_ab_address( this.my_id + '.address_' + this.addresses.length, this.my_id + '.addresses', this, this.strings['address']['address'] + this.strings['address']['no'] + ( this.addresses.length + 1 ), this.strings['address']['field'], {text: this.strings['address']['del_address'], method: 'del', style: '_uicmp_blue _uicmp_gi_close'} );
+	};
+	
+	/**
+	 * Deletes address field given by its ID. This method is called
+	 * from onClick() event of address field instance itself.
+	 */
+	this.address_del = function ( id )
+	{
+		for ( var i = 0; i < this.addresses.length ; ++i )
+		{
+			if ( ( this.addresses[i] != null ) && ( this.addresses[i].id == id ) )
+			{
+				this.addresses[i].destroy( );
+				this.addresses[i] = null;
+			}
+		}
+	};
+	
+	/**
+	 * Performs reset on dynamically created form widgets.
+	 */
+	this.dyn_reset = function ( )
+	{
+		/**
+		 * Erase dynamic widgets and create initial instances to control content.
+		 */
+		for ( var i = 0; i < this.typed.length ; ++i )
+			if ( this.typed[i] != null )
+			{
+				this.typed[i].destroy( );
+				this.typed[i] = null;
+			}
+		for ( var i = 0; i < this.custom.length ; ++i )
+			if ( this.custom[i] != null )
+			{
+				this.custom[i].destroy( );
+				this.custom[i] = null;
+			}
+		for ( var i = 0; i < this.addresses.length ; ++i )
+			if ( this.addresses[i] != null )
+			{
+				this.addresses[i].destroy( );
+				this.addresses[i] = null;
+			}
+		this.typed = new Array( );
+		this.custom = new Array( );
+		this.addresses = new Array( );
+		
+		this.typed[this.typed.length] = new _uicmp_ab_typed( this.my_id + '.typed_' + this.typed.length, this.my_id + '.typed', this, this.strings['types'], {text: this.strings['add_row'], method: 'add', style: '_uicmp_blue _uicmp_gi_add'} );
+		this.custom[this.custom.length] = new _uicmp_ab_custom( this.my_id + '.custom_' + this.custom.length, this.my_id + '.custom', this, {text: this.strings['add_row'], method: 'add', style: '_uicmp_blue _uicmp_gi_add'} );
+		this.addresses[this.addresses.length] = new _uicmp_ab_address( this.my_id + '.address_' + this.addresses.length, this.my_id + '.addresses', this, this.strings['address']['address'], this.strings['address']['field'], {text: this.strings['address']['add_address'], method: 'add', style: '_uicmp_blue _uicmp_gi_add'} );
+	};
+	
+	/**
+	 * Sends actual height to Ajax server.
+	 */
+	this.tah = function ( height )
+	{
+		/**
+		 * Copy me into this scope. Awkward, but works.
+		 */
+		var scope = this;
+
+		/**
+		 * Compose request parameters.
+		 */
+		var reqParams = '';
+		for ( var key in scope.params )
+			reqParams += '&' + key + '=' + scope.params[key];
+
+		reqParams += '&method=tah' +
+					 '&val=' + height;
+
+		var sender = new Ajax.Request( scope.url,
+									{
+										method: 'post',
+										parameters: reqParams
+									}
+								);
+		return sender;
+	};
+}
+
+_uicmp_ab_perse.prototype = new _uicmp_ab_frm;
+
 function _uicmp_ab_perse ( layout, tab_id, my_name, my_id, title_id, url, params, strings_id, ind )
 {
 	/**
 	 * Copy scope;
 	 */
 	var me = this;
-	
-	/**
-	 * Indicates whether form is in edit mode. false value represents
-	 * 'Add new person' mode.
-	 */
-	this.edit = false;
 	
 	/**
 	 * Reference to layout instance.
@@ -678,29 +714,9 @@ function _uicmp_ab_perse ( layout, tab_id, my_name, my_id, title_id, url, params
 	this.strings_id = strings_id;
 	
 	/**
-	 * Multidimensional associative array of strings.
-	 */
-	this.strings = null;
-	
-	/**
 	 * Indicator instance.
 	 */
 	this.ind = ind;
-	
-	/**
-	 * Array holding widgets for pre-typed information (phones, IM's, etc.).
-	 */
-	this.typed = new Array( );
-	
-	/**
-	 * Custom data fields.
-	 */
-	this.custom = new Array( );
-	
-	/**
-	 * Custom addresses.
-	 */
-	this.addresses = new Array( );
 	
 	/**
 	 * Contact ID. should be 0 for new contact.
@@ -719,63 +735,12 @@ function _uicmp_ab_perse ( layout, tab_id, my_name, my_id, title_id, url, params
 		me.formats = me.strings['fmt'];
 		
 		var res_opts = new Object();
-		res_opts.afterDrag = me.tah;
+		res_opts.afterDrag = me.tah_save;
 
 		new TextAreaResizer( document.getElementById( me.my_id + '.comments' ), res_opts );
 		
 		disableSelection( document.getElementById( me.my_id + '.pPredef' ) );
 		disableSelection( document.getElementById( me.my_id + '.pBDay' ) );
-	};
-	
-	this.typed_add = function ( )
-	{
-		this.typed[this.typed.length] = new _uicmp_ab_typed( me.my_id + '.typed_' + this.typed.length, me.my_id + '.typed', me, me.strings['types'], { text: me.strings['del_row'], method: 'del', style: '_uicmp_blue _uicmp_gi_close' } );
-	};
-	
-	this.typed_del = function ( id )
-	{
-		for ( var i = 0; i < this.typed.length ; ++i )
-		{
-			if ( ( this.typed[i] != null ) && ( this.typed[i].id == id ) )
-			{
-				this.typed[i].destroy( );
-				this.typed[i] = null;
-			}
-		}
-	};
-	
-	this.custom_add = function ( )
-	{
-		this.custom[this.custom.length] = new _uicmp_ab_custom( me.my_id + '.custom_' + this.custom.length, me.my_id + '.custom', me, { text: me.strings['del_row'], method: 'del', style: '_uicmp_blue _uicmp_gi_close' } );
-	};
-	
-	this.custom_del = function ( id )
-	{
-		for ( var i = 0; i < this.custom.length ; ++i )
-		{
-			if ( ( this.custom[i] != null ) && ( this.custom[i].id == id ) )
-			{
-				this.custom[i].destroy( );
-				this.custom[i] = null;
-			}
-		}
-	};
-	
-	this.address_add = function ( )
-	{
-		this.addresses[this.addresses.length] = new _uicmp_ab_address( me.my_id + '.address_' + this.addresses.length, me.my_id + '.addresses', me, me.strings['address']['address'] + me.strings['address']['no'] + ( this.addresses.length + 1 ), me.strings['address']['field'], { text: me.strings['address']['del_address'], method: 'del', style: '_uicmp_blue _uicmp_gi_close' } );
-	};
-	
-	this.address_del = function ( id )
-	{
-		for ( var i = 0; i < this.addresses.length ; ++i )
-		{
-			if ( ( this.addresses[i] != null ) && ( this.addresses[i].id == id ) )
-			{
-				this.addresses[i].destroy( );
-				this.addresses[i] = null;
-			}
-		}
 	};
 	
 	/**
@@ -786,34 +751,30 @@ function _uicmp_ab_perse ( layout, tab_id, my_name, my_id, title_id, url, params
 		this.person_id = 0;
 		
 		this.cloud.get( );
+
+		document.getElementById( me.my_id + '.predef' ).checked = false;
+		document.getElementById( me.my_id + '.format' ).selectedIndex = 0;
+		document.getElementById( me.my_id + '.display' ).value = '';
+
+		document.getElementById( me.my_id + '.nick' ).value = '';
+		document.getElementById( me.my_id + '.titles' ).value = '';
+		document.getElementById( me.my_id + '.first' ).value = '';
+		document.getElementById( me.my_id + '.second' ).value = '';
+		document.getElementById( me.my_id + '.anames' ).value = '';
+		document.getElementById( me.my_id + '.surname' ).value = '';
+		document.getElementById( me.my_id + '.ssurname' ).value = '';
+		document.getElementById( me.my_id + '.asurnames' ).value = '';
+		document.getElementById( me.my_id + '.comments' ).value = '';
+
+		document.getElementById( me.my_id + '.bday' ).checked = false;
 		
-		/**
-		 * Erase dynamic widgets and create initial instances to control content.
-		 */
-		for ( var i = 0; i < this.typed.length ; ++i )
-			if ( this.typed[i] != null )
-			{
-				this.typed[i].destroy( );
-				this.typed[i] = null;
-			}
-		for ( var i = 0; i < this.custom.length ; ++i )
-			if ( this.custom[i] != null )
-			{
-				this.custom[i].destroy( );
-				this.custom[i] = null;
-			}
-		for ( var i = 0; i < this.addresses.length ; ++i )
-			if ( this.addresses[i] != null )
-			{
-				this.addresses[i].destroy( );
-				this.addresses[i] = null;
-			}
-		this.typed = new Array( );
-		this.custom = new Array( );
-		this.addresses = new Array( );
-		this.typed[this.typed.length] = new _uicmp_ab_typed( me.my_id + '.typed_' + this.typed.length, me.my_id + '.typed', me, me.strings['types'], { text: me.strings['add_row'], method: 'add', style: '_uicmp_blue _uicmp_gi_add' } );
-		this.custom[this.custom.length] = new _uicmp_ab_custom( me.my_id + '.custom_' + this.custom.length, me.my_id + '.custom', me, { text: me.strings['add_row'], method: 'add', style: '_uicmp_blue _uicmp_gi_add' } );
-		this.addresses[this.addresses.length] = new _uicmp_ab_address( me.my_id + '.address_' + this.addresses.length, me.my_id + '.addresses', me, me.strings['address']['address'], me.strings['address']['field'], { text: me.strings['address']['add_address'], method: 'add', style: '_uicmp_blue _uicmp_gi_add' } );
+		this.bday_toggle( );
+		this.predef_toggle( );
+		
+		this.dyn_reset( );
+		/*this.typed[this.typed.length] = new _uicmp_ab_typed( me.my_id + '.typed_' + this.typed.length, me.my_id + '.typed', me, me.strings['types'], {text: me.strings['add_row'], method: 'add', style: '_uicmp_blue _uicmp_gi_add'} );
+		this.custom[this.custom.length] = new _uicmp_ab_custom( me.my_id + '.custom_' + this.custom.length, me.my_id + '.custom', me, {text: me.strings['add_row'], method: 'add', style: '_uicmp_blue _uicmp_gi_add'} );
+		this.addresses[this.addresses.length] = new _uicmp_ab_address( me.my_id + '.address_' + this.addresses.length, me.my_id + '.addresses', me, me.strings['address']['address'], me.strings['address']['field'], {text: me.strings['address']['add_address'], method: 'add', style: '_uicmp_blue _uicmp_gi_add'} );*/
 	};
 	
 	/**
@@ -821,7 +782,7 @@ function _uicmp_ab_perse ( layout, tab_id, my_name, my_id, title_id, url, params
 	 */
 	this.format = function ( )
 	{
-		function load_atom( atoms, id ) { atoms[id]	= document.getElementById( me.my_id + '.' + id ).value; }
+		function load_atom( atoms, id ) {atoms[id]	= document.getElementById( me.my_id + '.' + id ).value;}
 		
 		/**
 		 * Extract data.
@@ -953,41 +914,6 @@ function _uicmp_ab_perse ( layout, tab_id, my_name, my_id, title_id, url, params
 		this.ind.fade( 'prepared', '_uicmp_ind_green' );
 	};
 	
-	/**
-	 * Sends actual height to Ajax server.
-	 */
-	this.tah = function ( )
-	{
-		/**
-		 * Copy me into this scope. Awkward, but works.
-		 */
-		var scope = me;
-		
-		/**
-		 * Get actuall textarea height.
-		 */
-		var el = document.getElementById( scope.my_id + '.comments' );
-		var height = el.getHeight( );
-
-		/**
-		 * Compose request parameters.
-		 */
-		var reqParams = '';
-		for ( var key in scope.params )
-			reqParams += '&' + key + '=' + scope.params[key];
-
-		reqParams += '&method=tah' +
-					 '&val=' + height;
-
-		var sender = new Ajax.Request( scope.url,
-									{
-										method: 'post',
-										parameters: reqParams
-									}
-								);
-		return sender;
-	};
-	
 	this.get_types = function ( )
 	{
 		
@@ -1051,6 +977,19 @@ function _uicmp_ab_perse ( layout, tab_id, my_name, my_id, title_id, url, params
 		var input = new Date( year, month, day );
 
 		return ( ( input.getFullYear() == year ) && ( input.getMonth() == month ) && ( input.getDate() == day ) );
+	};
+	
+	/**
+	 * Calls parent method to save height of textarea.
+	 */
+	this.tah_save = function( )
+	{
+		/**
+		 * Get actuall textarea height.
+		 */
+		var el = document.getElementById( me.my_id + '.comments' );
+		var height = el.getHeight( );
+		me.tah( height );
 	};
 	
 	this.save = function ( )
@@ -1166,4 +1105,134 @@ function _uicmp_ab_perse ( layout, tab_id, my_name, my_id, title_id, url, params
 								);
 		return sender;
 	};
+}
+
+_uicmp_ab_orge.prototype = new _uicmp_ab_frm;
+
+function _uicmp_ab_orge ( layout, tab_id, my_name, my_id, title_id, url, params, strings_id, ind )
+{
+	/**
+	 * Copy scope;
+	 */
+	var me = this;
+	
+	/**
+	 * Reference to layout instance.
+	 */
+	this.layout = layout;
+	
+	/**
+	 * ID of UICMP tab component holding this form.
+	 */
+	this.tab_id = tab_id;
+	
+	/**
+	 * Name of Javascript variable holding reference to this instance.
+	 */
+	this.my_name = my_name;
+	
+	/**
+	 * HTML ID of my form.
+	 */
+	this.my_id = my_id;
+	
+	/**
+	 * ID of tab title component.
+	 */
+	this.title_id = title_id;
+	
+	/**
+	 * Ajax requests URL.
+	 */
+	this.url = url;
+	
+	/**
+	 * Base set of Ajax request parameters.
+	 */
+	this.params = params;
+	
+	/**
+	 * HTML ID of UICMP strings data container.
+	 */
+	this.strings_id = strings_id;
+	
+	/**
+	 * Indicator instance.
+	 */
+	this.ind = ind;
+	
+	/**
+	 * Contact ID. should be 0 for new contact.
+	 */
+	this.org_id = 0;
+	
+	/**
+	 * CDES cloud client side logic instance.
+	 */
+	this.cloud = new _uicmp_cdes_cloud( this.my_name + '.cloud', this.my_id + '.ctxs', this.url, this.params );
+	
+	this.startup = function ( )
+	{
+		var strings_prov = new _uicmp_strings( me.strings_id );
+		me.strings = strings_prov.data;
+		
+		var res_opts = new Object();
+		res_opts.afterDrag = me.tah_save;
+
+		new TextAreaResizer( document.getElementById( me.my_id + '.comments' ), res_opts );
+		
+		/*disableSelection( document.getElementById( me.my_id + '.pPredef' ) );
+		disableSelection( document.getElementById( me.my_id + '.pBDay' ) );*/
+	};
+	
+	this.reset = function ( )
+	{
+		this.org_id = 0;
+		
+		this.cloud.get( );
+
+	/*	document.getElementById( me.my_id + '.predef' ).checked = false;
+		document.getElementById( me.my_id + '.format' ).selectedIndex = 0;
+		document.getElementById( me.my_id + '.display' ).value = '';
+
+		document.getElementById( me.my_id + '.nick' ).value = '';
+		document.getElementById( me.my_id + '.titles' ).value = '';
+		document.getElementById( me.my_id + '.first' ).value = '';
+		document.getElementById( me.my_id + '.second' ).value = '';
+		document.getElementById( me.my_id + '.anames' ).value = '';
+		document.getElementById( me.my_id + '.surname' ).value = '';
+		document.getElementById( me.my_id + '.ssurname' ).value = '';
+		document.getElementById( me.my_id + '.asurnames' ).value = '';
+		document.getElementById( me.my_id + '.comments' ).value = '';
+
+		document.getElementById( me.my_id + '.bday' ).checked = false;
+		
+		this.bday_toggle( );
+		this.predef_toggle( );*/
+		
+		this.dyn_reset( );
+	};
+	
+	/**
+	 * Put form into Adding new person mode.
+	 */
+	this.add = function ( )
+	{
+		this.ind.show( 'preparing', '_uicmp_ind_gray' );
+		this.layout.show( this.tab_id );
+		this.edit = false;
+		this.reset( );
+		this.ind.fade( 'prepared', '_uicmp_ind_green' );
+	};
+	
+	this.tah_save = function ( )
+	{
+		/**
+		 * Get actuall textarea height.
+		 */
+		var el = document.getElementById( me.my_id + '.comments' );
+		var height = el.getHeight( );
+		me.tah( height );
+	};
+	
 }

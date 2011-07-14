@@ -30,6 +30,14 @@ class _uicmp_perse_frm extends _uicmp_comp
 	 */
 	protected $strings = NULL;
 	
+	/**
+	 * Constructor.
+	 * 
+	 * @param _uicmp_body $parent parent element
+	 * @param string $id identifier of the component
+	 * @param array $messages localization messages
+	 * @param int $tah height of comments textarea
+	 */
 	public function __construct ( &$parent, $id, $messages, $tah )
 	{
 		parent::__construct( $parent, $id );

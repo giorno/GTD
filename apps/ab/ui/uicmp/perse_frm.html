@@ -1,6 +1,6 @@
-{* Renderer of AddressBook app person-class contact editor form.
+{* Renderer of AddressBook app Person-class contact editor form.
  *
- * @file index.html
+ * @file perse.html
  * @author giorno
  * @package GTD
  * @subpackage AB
@@ -109,7 +109,7 @@
 					</tr>
 					<tr>
 						<td class="_uicmp_frm_field_1st">
-							{html_select_date end_year="+12" day_extra="id={$USR_UICMP_CMP->getHtmlId()}.day disabled=disabled" month_extra="id={$USR_UICMP_CMP->getHtmlId()}.month disabled=disabled" year_extra="id={$USR_UICMP_CMP->getHtmlId()}.year disabled=disabled"}
+							{html_select_date end_year="-99" day_extra="id={$USR_UICMP_CMP->getHtmlId()}.day disabled=disabled" month_extra="id={$USR_UICMP_CMP->getHtmlId()}.month disabled=disabled" year_extra="id={$USR_UICMP_CMP->getHtmlId()}.year disabled=disabled"}
 						</td>
 						<td class="_uicmp_frm_field_rest">
 							<input onKeyUp="{$USR_UICMP_CMP->getJsVar()}.preview();" class="_uicmp_frm_input" id="{$USR_UICMP_CMP->getHtmlId()}.anames" type="text">

@@ -11,6 +11,7 @@
 require_once APP_AB_LIB . '_app.Ab.php';
 require_once APP_AB_LIB . 'class.AbCfgFactory.php';
 require_once APP_AB_LIB . 'uicmp/_vcmp_perse.php';
+require_once APP_AB_LIB . 'uicmp/_vcmp_orge.php';
 
 /**
  * Main implementation of AddressBook application for Request-Response phase.
@@ -54,11 +55,17 @@ class AbMainImpl extends Ab
 			 */
 			$tab = $layout->createTab( $this->id . '.PersE' );
 				$tab->unstack( );
-				/**
-				 * @todo implement TAH settign value instead of constant
-				 */
 				$perse = new _vcmp_perse( $tab, $tab->getId( ) . '.Sol', $url, $params, $this->messages['perse'], $settings->get( 'usr.ta.h.perse' ) );
 				$tab->addVcmp( $perse );
+				
+			/**
+			 * Organization-class editor tab.
+			 */
+			$params['action'] = 'orge';
+			$tab = $layout->createTab( $this->id . '.OrgE' );
+				$tab->unstack( );
+				$orge = new _vcmp_orge( $tab, $tab->getId( ) . '.Sol', $url, $params, $this->messages['orge'], $settings->get( 'usr.ta.h.orge' ) );
+				$tab->addVcmp( $orge );
 			
 			$params['action'] = 'search';
 			
@@ -69,7 +76,7 @@ class AbMainImpl extends Ab
 				$rszr = $srch->getResizer( );
 				$rszr->add( new _uicmp_gi( $rszr, $rszr->getId( ) . '.mi1', _uicmp_gi::IT_A,  $this->messages['mi_add_person'], $perse->getJsVar() . '.add();', '_uicmp_gi_add' ) );
 				$rszr->add( new _uicmp_gi( $rszr, $rszr->getId( ) . '.S1', _uicmp_gi::IT_TXT, '|' ));
-				$rszr->add( new _uicmp_gi( $rszr, $rszr->getId( ) . '.mi2', _uicmp_gi::IT_A,  $this->messages['mi_add_company'], /*$perse->getJsVar() . */'.add();', '_uicmp_gi_add' ) );
+				$rszr->add( new _uicmp_gi( $rszr, $rszr->getId( ) . '.mi2', _uicmp_gi::IT_A,  $this->messages['mi_add_company'], $orge->getJsVar() . '.add();', '_uicmp_gi_add' ) );
 				
 				
 			/**
@@ -93,7 +100,7 @@ class AbMainImpl extends Ab
 		
 		n7_ui::getInstance( )->getMenu( )->register(	new MenuItem(	MenuItem::TYPE_JS,
 														$this->messages['mi_add_company'],
-														/*$compe->getJsVar( ) . */'.add( );',
+														$orge->getJsVar( ) . '.add( );',
 														'_uicmp_blue' ) );
 		
 		$smarty->assignByRef( 'APP_AB_LAYOUT', $layout );

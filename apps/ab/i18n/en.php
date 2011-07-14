@@ -102,18 +102,21 @@ $__msgAb['perse']['ind']['saved']			= 'Saved';
 $__msgAb['perse']['ind']['e_unknown']		= 'Error: unknown error! Contact administrators.';
 $__msgAb['perse']['ind']['e_bday']			= 'Error: incorrect value for field Birthday! Please correct date or disable Birthday field.';
 
-/*
-$__msgAb['editfrmFieldComments']          = 'Comments';
-$__msgAb['editfrmSepAddress']             = 'Address';
-$__msgAb['editfrmSaveAsNew']              = 'Save contact as new';
-$__msgAb['editfrmReset']                  = 'Reset form';
-$__msgAb['editfrmCaptionError']           = "Error!";
-
-$__msgAb['compfrmCapAdd']                 = 'New company';
-$__msgAb['compfrmCapEdit']                = 'Edit company';
-$__msgAb['compfrmFieldName']              = 'Company full name';
-$__msgAb['compfrmFieldDisplay']           = 'Display name';
-*/
+/**
+ * Organization-class contact editor form.
+ */
+$__msgAb['orge']['bt_back']					= $__msgAb['perse']['bt_back'];
+$__msgAb['orge']['bt_save']					= $__msgAb['perse']['bt_save'];
+$__msgAb['orge']['title']					= 'New company';
+$__msgAb['orge']['disp_as']					= 'Display as';
+$__msgAb['orge']['name']					= 'Company full name';
+$__msgAb['orge']['ind']						= $__msgAb['perse']['ind'];
+$__msgAb['orge']['js']['edit']				= 'Edit company';
+$__msgAb['orge']['js']['create']			= $__msgAb['orge']['title'];
+$__msgAb['orge']['js']['add_row']			= $__msgAb['typed']['add_row'];
+$__msgAb['orge']['js']['del_row']			= $__msgAb['typed']['del_row'];
+$__msgAb['orge']['js']['address']			= $__msgAb['address'];
+$__msgAb['orge']['js']['types']				= $__msgAb['typed']['types'];
 
 $__msgAb['mi_add_person']					= 'Add new person';
 $__msgAb['mi_add_company']					= 'Add new company';
@@ -122,9 +125,6 @@ $__msgAb['mi_add_company']					= 'Add new company';
 $__msgAb['listAddNewDepartment']          = 'new department';
 $__msgAb['listEmptyPerson']               = 'person not named!';
 $__msgAb['listEmptyCompany']              = 'company not named!';
-$__msgAb['listFieldName']                 = 'Name';
-$__msgAb['listi18nOf']                    = 'of';
-$__msgAb['listi18nTo']                    = '-';
 $__msgAb['listi18nItems']                 = 'Contacts';
 $__msgAb['listQuestionRemove']            = "Do you really want to remove contact <b>%s</b>?";
 $__msgAb['listCaptionRemove']             = "Warning!";

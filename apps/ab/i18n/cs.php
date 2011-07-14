@@ -24,7 +24,6 @@ $__msgAb['cdes']['title']					= 'Nálepky pro označování kontaktů';
 $__msgAb['f_all']							= 'Všechny kontakty';
 $__msgAb['t_all']							= 'Lidé a organizace';
 
-
 /**
  * Pretyped contact fields.
  */
@@ -103,19 +102,21 @@ $__msgAb['perse']['ind']['saved']			= 'Uloženo';
 $__msgAb['perse']['ind']['e_unknown']		= 'Chyba: neznáma chyba! Kontaktujte správce.';
 $__msgAb['perse']['ind']['e_bday']			= 'Chyba: nesprávna hodnota v poli Narozeniny! Opravte datum nebo vypněte pole zcela.';
 
-/*
-$__msgAb['editfrmFieldComments']          = 'Poznámky';
-$__msgAb['editfrmSepAddress']             = 'Adresa';
-$__msgAb['editfrmSaveAsNew']              = 'Uložit jako nový';
-$__msgAb['editfrmReset']                  = 'Reset';
-$__msgAb['editfrmCaptionError']           = "Chyba!";
-
-$__msgAb['compfrmCapAdd']                 = 'Nová společnost';
-$__msgAb['compfrmCapEdit']                = 'Upravit společnost';
-$__msgAb['compfrmFieldName']              = 'Úplný název';
-$__msgAb['compfrmFieldDisplay']           = 'Zobrazovat ako';*/
-
-/*$__msgAb['listCap']                       = 'Kontakty';*/
+/**
+ * Organization-class contact editor form.
+ */
+$__msgAb['orge']['bt_back']					= $__msgAb['perse']['bt_back'];
+$__msgAb['orge']['bt_save']					= $__msgAb['perse']['bt_save'];
+$__msgAb['orge']['title']					= 'Nová společnost';
+$__msgAb['orge']['disp_as']					= 'Zobrazovat jako';
+$__msgAb['orge']['name']					= 'Úplný název';
+$__msgAb['orge']['ind']						= $__msgAb['perse']['ind'];
+$__msgAb['orge']['js']['edit']				= 'Upravit společnost';
+$__msgAb['orge']['js']['create']			= $__msgAb['orge']['title'];
+$__msgAb['orge']['js']['add_row']			= $__msgAb['typed']['add_row'];
+$__msgAb['orge']['js']['del_row']			= $__msgAb['typed']['del_row'];
+$__msgAb['orge']['js']['address']			= $__msgAb['address'];
+$__msgAb['orge']['js']['types']				= $__msgAb['typed']['types'];
 
 $__msgAb['mi_add_person']					= 'Přidat novou osobu';
 $__msgAb['mi_add_company']					= 'Přidat novou spoleočnost';
@@ -125,9 +126,6 @@ $__msgAb['listAddNewDepartment']          = 'nové oddělení';
 $__msgAb['listEmptyPerson']               = 'nepojmenovaná osoba!';
 $__msgAb['listEmptyCompany']              = 'nepojmenovaná společnost!';
 $__msgAb['listFieldName']                 = 'Jméno';
-$__msgAb['listi18nOf']                    = 'z';
-$__msgAb['listi18nTo']                    = '-';
-$__msgAb['listi18nItems']                 = 'Kontakty';
 $__msgAb['listQuestionRemove']            = "Skutečně si přejte odstránit kontakt <b>%s</b>? Tato operace je nevratná.";
 $__msgAb['listCaptionRemove']             = "Varovanie!";
 

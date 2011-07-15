@@ -84,11 +84,29 @@ class AbAjaxImpl extends Ab
 				switch ($_POST['method'])
 				{
 					/**
+					 * Provides actual cloud of contexts.
+					 */
+					case 'get':
+						$this->getCdesCloud( AbConfig::T_ABCTX, $_POST['js_var'], $_POST['id'], $this->messages['perse']['no_labels'] );
+					break;
+				
+					/**
 					 * Saves person editor comments textarea height into app
 					 * namespace settings. This is unconfirmed service.
 					 */
 					case 'tah':
 						$this->handleTah( AbCfgFactory::getInstance( ), 'usr.ta.h.orge', (int)$_POST['val'] );
+					break;
+					
+					/*
+					 * Save new contact data for organization. Data should be passed from client
+					 * as XML document.
+					 */
+					case 'save':
+						require_once APP_AB_LIB . 'class.AbOrg.php';
+						$org = new AbOrg( _session_wrapper::getInstance( )->getUid( ) );
+							$org->importXml( htmlspecialchars_decode( $_POST['data'] ) );
+							$org->add( );
 					break;
 				}
 			break;

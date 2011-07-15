@@ -656,6 +656,30 @@ function _uicmp_ab_frm ( )
 								);
 		return sender;
 	};
+	
+	/**
+	 * Encodes dynamic widgets data into XML using XML writer.
+	 */
+	this.dyn_xml = function ( writer )
+	{
+		writer.writeStartElement( 'tfields' );			// typed fields
+			for ( var i = 0; i < this.typed.length; ++i )
+				if ( this.typed[i] != null )
+					this.typed[i].xml( writer );
+		writer.writeEndElement( );
+		
+		writer.writeStartElement( 'cfields' );			// custom fields
+			for ( var i = 0; i < this.custom.length; ++i )
+				if ( this.custom[i] != null )
+					this.custom[i].xml( writer );
+		writer.writeEndElement( );
+					
+		writer.writeStartElement( 'addresses' );		// addresses
+			for ( var i = 0; i < this.addresses.length; ++i )
+				if ( this.addresses[i] != null )
+					this.addresses[i].xml( writer );
+		writer.writeEndElement( );
+	};
 }
 
 _uicmp_ab_perse.prototype = new _uicmp_ab_frm;
@@ -1040,23 +1064,7 @@ function _uicmp_ab_perse ( layout, tab_id, my_name, my_id, title_id, url, params
 
 					writer.writeEndElement( );
 
-					writer.writeStartElement( 'tfields' );			// typed fields
-						for ( var i = 0; i < this.typed.length; ++i )
-							if ( this.typed[i] != null )
-								this.typed[i].xml( writer );
-					writer.writeEndElement( );
-
-					writer.writeStartElement( 'cfields' );			// custom fields
-						for ( var i = 0; i < this.custom.length; ++i )
-							if ( this.custom[i] != null )
-								this.custom[i].xml( writer );
-					writer.writeEndElement( );
-
-					writer.writeStartElement( 'addresses' );		// addresses
-						for ( var i = 0; i < this.addresses.length; ++i )
-							if ( this.addresses[i] != null )
-								this.addresses[i].xml( writer );
-					writer.writeEndElement( );
+					this.dyn_xml( writer );
 
 				writer.writeEndElement( );
 
@@ -1191,24 +1199,12 @@ function _uicmp_ab_orge ( layout, tab_id, my_name, my_id, title_id, url, params,
 		
 		this.cloud.get( );
 
-	/*	document.getElementById( me.my_id + '.predef' ).checked = false;
-		document.getElementById( me.my_id + '.format' ).selectedIndex = 0;
-		document.getElementById( me.my_id + '.display' ).value = '';
-
-		document.getElementById( me.my_id + '.nick' ).value = '';
-		document.getElementById( me.my_id + '.titles' ).value = '';
-		document.getElementById( me.my_id + '.first' ).value = '';
-		document.getElementById( me.my_id + '.second' ).value = '';
-		document.getElementById( me.my_id + '.anames' ).value = '';
-		document.getElementById( me.my_id + '.surname' ).value = '';
-		document.getElementById( me.my_id + '.ssurname' ).value = '';
-		document.getElementById( me.my_id + '.asurnames' ).value = '';
+		document.getElementById( me.my_id + '.dispName' ).value = '';
+		document.getElementById( me.my_id + '.name' ).value = '';
 		document.getElementById( me.my_id + '.comments' ).value = '';
 
-		document.getElementById( me.my_id + '.bday' ).checked = false;
-		
-		this.bday_toggle( );
-		this.predef_toggle( );*/
+		document.getElementById( me.my_id + '.disp' ).checked = false;
+		this.disp_toggle( );
 		
 		this.dyn_reset( );
 	};
@@ -1225,6 +1221,38 @@ function _uicmp_ab_orge ( layout, tab_id, my_name, my_id, title_id, url, params,
 		this.ind.fade( 'prepared', '_uicmp_ind_green' );
 	};
 	
+	this.preview = function ( )
+	{
+		var display = '';
+		
+		if ( document.getElementById( me.my_id + '.disp' ).checked == true )
+			display = document.getElementById( me.my_id + '.dispName' ).value;
+		else
+			display = document.getElementById( me.my_id + '.name' ).value;
+		
+		var caption = ( this.edit ) ? this.strings['edit'] : this.strings['create'];
+		caption += ' <i>' + display + '</i>';
+		document.getElementById( me.title_id ).innerHTML = caption;
+		
+		return display;
+	};
+	
+	this.disp_toggle = function ( )
+	{
+		var checked = document.getElementById( me.my_id + '.disp' ).checked;
+/*		if ( checked )
+		{*/
+			document.getElementById( me.my_id + '.dispName' ).disabled = !checked;
+		/*}
+		else
+		{	
+			document.getElementById( me.my_id + '.disp' ).disabled = true;
+		}*/
+		me.preview( );
+		
+		return checked;
+	};
+	
 	this.tah_save = function ( )
 	{
 		/**
@@ -1233,6 +1261,78 @@ function _uicmp_ab_orge ( layout, tab_id, my_name, my_id, title_id, url, params,
 		var el = document.getElementById( me.my_id + '.comments' );
 		var height = el.getHeight( );
 		me.tah( height );
+	};
+	
+	this.save = function ( )
+	{
+		this/ind.show( 'saving', '_uicmp_ind_gray' );
+		var disp = this.disp_toggle( );
+		//frmAcompStatusIndicatorShow( 'gtdEditorStatus', __Msg['editorStatusSaving'] );
+	
+		writer = new XMLWriter( 'UTF-8', '1.0' );
+
+		writer.writeStartDocument( false );
+			writer.writeStartElement( 'company' )
+
+				writer.writeStartElement( 'global' );			// global
+					writer.writeAttributeString( 'companyId', ( me.org_id != null ) ? me.org_id : '' );
+
+					writer.writeStartElement( 'general' );			// display names, comments, etc.
+						writer.writeAttributeString( 'display', ( ( disp === true ) ? 'true' : 'false' ) );			// use predefined
+						writer.writeAttributeString( 'displayName',Base64.encode( document.getElementById( me.my_id + '.dispName' ).value ) );	// predefined name string
+						writer.writeAttributeString( 'name', Base64.encode( document.getElementById( me.my_id + '.name' ).value ) );					// full name
+						writer.writeElementString( 'comments', Base64.encode( document.getElementById( me.my_id + '.comments' ).value ) );
+						me.cloud.write( writer );
+					writer.writeEndElement( );
+
+					this.dyn_xml( writer );
+
+				writer.writeEndElement( );
+
+			writer.writeEndElement( );
+		writer.writeEndDocument( );
+
+		var data = waPlusSignWaEncode( writer.flush() );
+
+		writer.close( );
+
+		/**
+		 * Copy me into this scope. Awkward, but works.
+		 */
+		var scope = me;
+
+		/**
+		 * Compose request parameters.
+		 */
+		var reqParams = '';
+		for ( var key in scope.params )
+			reqParams += '&' + key + '=' + scope.params[key];
+
+		reqParams += '&method=save';
+
+		var sender = new Ajax.Request( scope.url,
+									{
+										method: 'post',
+										parameters: reqParams,
+										postBody: reqParams + '&data=' + data,
+										onCreate: function ( ) {scope.ind.show( 'saving', '_uicmp_ind_gray' );},
+										onFailure: function ( )
+										{
+										//	me.enable( );
+											scope.ind.show( 'e_unknown', '_uicmp_ind_red' );
+										},
+										onSuccess: function ( data )
+										{
+											alert(data.responseText);
+											//scope.folds.update( );
+											//me.enable( );
+											scope.ind.fade( 'saved', '_uicmp_ind_green' );
+											//if ( ( document.getElementById( scope.chk_id + '.box' ).checked ) || ( scope.mode != 'C' ) )
+												scope.layout.back( );
+										}
+									}
+								);
+		return sender;
 	};
 	
 }

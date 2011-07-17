@@ -72,7 +72,7 @@ class AbMainImpl extends Ab
 			$tab = $layout->createTab( $this->id . '.All', FALSE );
 				$tab->createFold( $this->messages['f_all'] );
 				$tab->getHead( )->add( new _uicmp_title( $tab, $tab->getId( ) . '.Title', $this->messages['t_all'] ) );
-				$srch = $tab->createSearch( $this->getVcmpSearchId( 'All' ), 0, $url, $params, StuffCfgFactory::getCfg( 'usr.lst.All' ), $pageSize );
+				$srch = $tab->createSearch( $this->getVcmpSearchId( 'All' ), 0, $url, $params, AbCfgFactory::getCfg( 'usr.lst.All' ), $pageSize );
 				$rszr = $srch->getResizer( );
 				$rszr->add( new _uicmp_gi( $rszr, $rszr->getId( ) . '.mi1', _uicmp_gi::IT_A,  $this->messages['mi_add_person'], $perse->getJsVar() . '.add();', '_uicmp_gi_add' ) );
 				$rszr->add( new _uicmp_gi( $rszr, $rszr->getId( ) . '.S1', _uicmp_gi::IT_TXT, '|' ));

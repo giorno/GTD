@@ -121,11 +121,21 @@ $__msgAb['orge']['js']['types']				= $__msgAb['typed']['types'];
 $__msgAb['mi_add_person']					= 'Přidat novou osobu';
 $__msgAb['mi_add_company']					= 'Přidat novou spoleočnost';
 
+/**
+ * List of search results.
+ */
+$__msgAb['list']['noname_pers']				= 'nepojmenovaná osoba!';
+$__msgAb['list']['noname_org']				= 'nepojmenovaná společnost!';
+$__msgAb['list']['name']					= 'Kontakt';
+$__msgAb['list']['empty']					= 'Nemáte žádné kontakty.';
+$__msgAb['list']['no_match']				= 'Vyhledávání nevrátilo žádné výsledky.';
+$__msgAb['list']['again']					= 'Změnit frázi nebo zopakovat vyhledávaní';
+$__msgAb['list']['all']						= 'Zobrazit všechny kontakty';
+$__msgAb['list']['add_pers']				= 'Přidat osobu';
+$__msgAb['list']['add_org']					= 'organizaci';
+
 /*$__msgAb['listAddNewCompanyTop']          = 'Nová společnost';
 $__msgAb['listAddNewDepartment']          = 'nové oddělení';
-$__msgAb['listEmptyPerson']               = 'nepojmenovaná osoba!';
-$__msgAb['listEmptyCompany']              = 'nepojmenovaná společnost!';
-$__msgAb['listFieldName']                 = 'Jméno';
 $__msgAb['listQuestionRemove']            = "Skutečně si přejte odstránit kontakt <b>%s</b>? Tato operace je nevratná.";
 $__msgAb['listCaptionRemove']             = "Varovanie!";
 

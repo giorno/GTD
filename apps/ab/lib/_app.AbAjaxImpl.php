@@ -20,8 +20,46 @@ class AbAjaxImpl extends Ab
 {
 	public function exec ( )
 	{
+		$smarty = _smarty_wrapper::getInstance( )->getEngine( );
+		
 		switch ( $_POST['action'] )
 		{
+			/**
+			 * Performs search operation and returns results.
+			 * 
+			 * @todo redesign to use some kind of template in N7App
+			 */
+			case 'search':
+				require_once APP_AB_LIB . 'class.AbSearch.php';
+				$engine = new AbSearch( _session_wrapper::getInstance( )->getUid( ), $this );
+
+				$results = $engine->search( n7_globals::settings( )->get( 'usr.lst.len' ), $_POST['keywords'], $_POST['page'], $_POST['order'], $_POST['dir'] );
+
+				if ( $results !== false )
+				{
+					$smarty->assignByRef( 'USR_LIST_DATA', $results );
+					_smarty_wrapper::getInstance( )->setContent( CHASSIS_UI . '/list/list.html' );
+					_smarty_wrapper::getInstance( )->render( );
+				}
+				else
+				{
+					$search_id = $this->getVcmpSearchId( 'All' );
+					if ( trim( $_POST['keywords'] ) != '' )
+					{
+						$empty = new _list_empty( $this->messages['list']['no_match'] );
+						$empty->add( $this->messages['list']['again'], "_uicmp_lookup.lookup( '{$search_id}' ).focus();" );
+						$empty->add( $this->messages['list']['all'], "_uicmp_lookup.lookup( '{$search_id}' ).showAll();" );
+					}
+					else
+					{
+						$empty = new _list_empty( $this->messages['list']['empty'] );
+						$empty->add( $this->messages['list']['add_pers'], "{$_POST['cpe_js_var']}.collect();" );
+						$empty->add( $this->messages['list']['add_org'], "{$_POST['cpe_js_var']}.collect();" );
+					}
+					$empty->render( );
+				}
+			break;
+		
 			/**
 			 * Handling of requests from CDES client code.
 			 */

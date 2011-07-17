@@ -118,14 +118,24 @@ $__msgAb['orge']['js']['del_row']			= $__msgAb['typed']['del_row'];
 $__msgAb['orge']['js']['address']			= $__msgAb['address'];
 $__msgAb['orge']['js']['types']				= $__msgAb['typed']['types'];
 
+/**
+ * List of search results.
+ */
+$__msgAb['list']['noname_pers']				= 'person not named!';
+$__msgAb['list']['noname_org']				= 'company not named!';
+$__msgAb['list']['name']					= 'Contact';
+$__msgAb['list']['empty']					= 'You do not have any contacts.';
+$__msgAb['list']['no_match']				= 'Not match found for search request.';
+$__msgAb['list']['again']					= 'Change keywords and search again';
+$__msgAb['list']['all']						= 'Show all content';
+$__msgAb['list']['add_pers']				= 'Add new person';
+$__msgAb['list']['add_org']					= 'organization';
+
 $__msgAb['mi_add_person']					= 'Add new person';
 $__msgAb['mi_add_company']					= 'Add new company';
 
 /*$__msgAb['listAddNewCompanyTop']          = 'New company';
 $__msgAb['listAddNewDepartment']          = 'new department';
-$__msgAb['listEmptyPerson']               = 'person not named!';
-$__msgAb['listEmptyCompany']              = 'company not named!';
-$__msgAb['listi18nItems']                 = 'Contacts';
 $__msgAb['listQuestionRemove']            = "Do you really want to remove contact <b>%s</b>?";
 $__msgAb['listCaptionRemove']             = "Warning!";
 

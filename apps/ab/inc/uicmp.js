@@ -1102,7 +1102,7 @@ function _uicmp_ab_perse ( layout, tab_id, my_name, my_id, title_id, url, params
 										},
 										onSuccess: function ( data )
 										{
-											alert(data.responseText);
+											//alert(data.responseText);
 											//scope.folds.update( );
 											//me.enable( );
 											scope.ind.fade( 'saved', '_uicmp_ind_green' );
@@ -1323,7 +1323,7 @@ function _uicmp_ab_orge ( layout, tab_id, my_name, my_id, title_id, url, params,
 										},
 										onSuccess: function ( data )
 										{
-											alert(data.responseText);
+										//	alert(data.responseText);
 											//scope.folds.update( );
 											//me.enable( );
 											scope.ind.fade( 'saved', '_uicmp_ind_green' );

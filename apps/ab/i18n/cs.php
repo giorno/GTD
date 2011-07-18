@@ -99,6 +99,8 @@ $__msgAb['perse']['ind']['preparing']		= 'Připravuji...';
 $__msgAb['perse']['ind']['prepared']		= 'Připraveno';
 $__msgAb['perse']['ind']['saving']			= 'Ukládám...';
 $__msgAb['perse']['ind']['saved']			= 'Uloženo';
+$__msgAb['perse']['ind']['executing']		= 'Vykonávám...';
+$__msgAb['perse']['ind']['executed']		= 'Vykonáno';
 $__msgAb['perse']['ind']['e_unknown']		= 'Chyba: neznáma chyba! Kontaktujte správce.';
 $__msgAb['perse']['ind']['e_bday']			= 'Chyba: nesprávna hodnota v poli Narozeniny! Opravte datum nebo vypněte pole zcela.';
 
@@ -118,9 +120,6 @@ $__msgAb['orge']['js']['del_row']			= $__msgAb['typed']['del_row'];
 $__msgAb['orge']['js']['address']			= $__msgAb['address'];
 $__msgAb['orge']['js']['types']				= $__msgAb['typed']['types'];
 
-$__msgAb['mi_add_person']					= 'Přidat novou osobu';
-$__msgAb['mi_add_company']					= 'Přidat novou spoleočnost';
-
 /**
  * List of search results.
  */
@@ -133,21 +132,20 @@ $__msgAb['list']['again']					= 'Změnit frázi nebo zopakovat vyhledávaní';
 $__msgAb['list']['all']						= 'Zobrazit všechny kontakty';
 $__msgAb['list']['add_pers']				= 'Přidat osobu';
 $__msgAb['list']['add_org']					= 'organizaci';
+$__msgAb['list']['question']				= "Skutečně si přejte odstránit kontakt <b>%s</b>? Tato operace je nevratná.";
+$__msgAb['list']['warning']					= "Varování!";
+$__msgAb['list']['bt_yes']					= 'Ano';
+$__msgAb['list']['bt_no']					= 'Ne';
+$__msgAb['list']['alt_remove']				= 'Odstranit kontakt';
+
+$__msgAb['mi_add_person']					= 'Přidat novou osobu';
+$__msgAb['mi_add_company']					= 'Přidat novou spoleočnost';
 
 /*$__msgAb['listAddNewCompanyTop']          = 'Nová společnost';
 $__msgAb['listAddNewDepartment']          = 'nové oddělení';
-$__msgAb['listQuestionRemove']            = "Skutečně si přejte odstránit kontakt <b>%s</b>? Tato operace je nevratná.";
-$__msgAb['listCaptionRemove']             = "Varovanie!";
-
-$__msgAb['bubbleYes']                     = 'Ano';
-$__msgAb['bubbleNo']                      = 'Ne';
 $__msgAb['bubbleOk']                      = 'OK';
-
 $__msgAb['tagPerson']                     = 'Osoba';
 $__msgAb['tagCompany']                    = 'Společnost';
-
 $__msgAb['noResultsNoContacts']           = "Nemáte žádné kontakty. Zkuste %s nebo %s.";*/
-
-
 
 ?>

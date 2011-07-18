@@ -99,6 +99,8 @@ $__msgAb['perse']['ind']['preparing']		= 'Pripravujem...';
 $__msgAb['perse']['ind']['prepared']		= 'Pripravené';
 $__msgAb['perse']['ind']['saving']			= 'Ukladám...';
 $__msgAb['perse']['ind']['saved']			= 'Uložené';
+$__msgAb['perse']['ind']['executing']		= 'Vykonávam...';
+$__msgAb['perse']['ind']['executed']		= 'Vykonané';
 $__msgAb['perse']['ind']['e_unknown']		= 'Chyba: neznáma chyba! Kontaktujte správcov.';
 $__msgAb['perse']['ind']['e_bday']			= 'Chyba: nesprávna hodnota v poli Narodeniny! Opravte dátum alebo vypnite pole úplne.';
 
@@ -130,22 +132,20 @@ $__msgAb['list']['again']					= 'Zmeniť frázu a zopakovať vyhľadávanie';
 $__msgAb['list']['all']						= 'Zobraziť všetky kontakty';
 $__msgAb['list']['add_pers']				= 'Pridať osobu';
 $__msgAb['list']['add_org']					= 'organizáciu';
+$__msgAb['list']['question']				= "Skutočne si prajete odstrániť kontakt <b>%s</b>? Táto operácia je nevratná.";
+$__msgAb['list']['warning']					= "Varovanie!";
+$__msgAb['list']['bt_yes']					= 'Áno';
+$__msgAb['list']['bt_no']					= 'Nie';
+$__msgAb['list']['alt_remove']				= 'Odstrániť kontakt';
 
 $__msgAb['mi_add_person']					= 'Pridať novú osobu';
 $__msgAb['mi_add_company']					= 'Pridať novú spoločnosť';
+
 /*$__msgAb['listAddNewCompanyTop']          = 'Nová spoločnosť';
 $__msgAb['listAddNewDepartment']          = 'nové oddelenie';
-
-$__msgAb['listQuestionRemove']            = "Skutočne si prajete odstrániť kontakt <b>%s</b>? Táto operácia je nevratná.";
-$__msgAb['listCaptionRemove']             = "Varovanie!";
-
-$__msgAb['bubbleYes']                     = 'Áno';
-$__msgAb['bubbleNo']                      = 'Nie';
 $__msgAb['bubbleOk']                      = 'OK';
-
 $__msgAb['tagPerson']                     = 'Osoba';
 $__msgAb['tagCompany']                    = 'Spoločnosť';
-
 $__msgAb['noResultsNoContacts']           = "Nemáte žiadne kontakty. Skúste %s alebo %s.";*/
 
 ?>

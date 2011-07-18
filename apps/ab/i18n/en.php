@@ -99,6 +99,8 @@ $__msgAb['perse']['ind']['preparing']		= 'Preparing...';
 $__msgAb['perse']['ind']['prepared']		= 'Prepared';
 $__msgAb['perse']['ind']['saving']			= 'Saving...';
 $__msgAb['perse']['ind']['saved']			= 'Saved';
+$__msgAb['perse']['ind']['executing']		= 'Executing...';
+$__msgAb['perse']['ind']['executed']		= 'Execute';
 $__msgAb['perse']['ind']['e_unknown']		= 'Error: unknown error! Contact administrators.';
 $__msgAb['perse']['ind']['e_bday']			= 'Error: incorrect value for field Birthday! Please correct date or disable Birthday field.';
 
@@ -130,22 +132,20 @@ $__msgAb['list']['again']					= 'Change keywords and search again';
 $__msgAb['list']['all']						= 'Show all content';
 $__msgAb['list']['add_pers']				= 'Add new person';
 $__msgAb['list']['add_org']					= 'organization';
+$__msgAb['list']['question']				= "Do you really want to remove contact <b>%s</b>? This operation cannot be undone.";
+$__msgAb['list']['warning']					= "Warning!";
+$__msgAb['list']['bt_yes']					= 'Yes';
+$__msgAb['list']['bt_no']					= 'No';
+$__msgAb['list']['alt_remove']				= 'Remove contact';
 
 $__msgAb['mi_add_person']					= 'Add new person';
 $__msgAb['mi_add_company']					= 'Add new company';
 
 /*$__msgAb['listAddNewCompanyTop']          = 'New company';
 $__msgAb['listAddNewDepartment']          = 'new department';
-$__msgAb['listQuestionRemove']            = "Do you really want to remove contact <b>%s</b>?";
-$__msgAb['listCaptionRemove']             = "Warning!";
-
-$__msgAb['bubbleYes']                     = 'Yes';
-$__msgAb['bubbleNo']                      = 'No';
 $__msgAb['bubbleOk']                      = 'OK';
-
 $__msgAb['tagPerson']                     = 'Person';
 $__msgAb['tagCompany']                    = 'Company';
-
 $__msgAb['noResultsNoContacts']           = "You have no contacts. Try to %s or %s.";*/
 
 ?>

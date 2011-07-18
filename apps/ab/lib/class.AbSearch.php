@@ -57,6 +57,8 @@ class AbSearch extends AbConfig
 	/**
 	 * Prepare data for list of search results given by search conditions.
 	 * 
+	 * @param string $perse_js_var client side Javascript variable for Person-class editor instance
+	 * @param string $orge_js_var client side Javascript variable for Organization-class editor instance
 	 * @param int $page_size list size
 	 * @param string $keyword search phrase
 	 * @param int $page page of search results to display
@@ -64,7 +66,7 @@ class AbSearch extends AbConfig
 	 * @param string $dir 'ASC' or 'DESC', direction of ordering
 	 * @return mixed 
 	 */
-	public function search ( $page_size, $keyword, $page, $order, $dir )
+	public function search ( $perse_js_var, $orge_js_var, $page_size, $keyword, $page, $order, $dir )
 	{
 		AbPerson::updateSearchIndexAll();
 		AbOrg::updateSearchIndexAll();
@@ -81,6 +83,7 @@ class AbSearch extends AbConfig
 			$builder->addField( 'email', $messages['typed']['types']['email'], 19, 1, '', false );
 			$builder->addField( '__rem', '', 1, 1, '', false );
 
+		$where = '';
 		if ( trim( $keyword ) != '' )
 			$where = "AND `" . self::T_ABSEARCHINDEX . "`.`" . self::F_ABDISPLAY . "` LIKE \"%" . _db_escape( $keyword ) . "%\"";
 
@@ -99,7 +102,7 @@ class AbSearch extends AbConfig
 			
 		$record_first = ( $page - 1 ) * $page_size;
 
-		$builder->computePaging( $page_size, $record_count, $page, $page_count, PAGE_HALFSIZE );
+		$builder->computePaging( $page_size, $record_count, $page, $page_count, n7_globals::settings( )->get( 'usr.lst.pagerhalf' ) );
 		
 		/*
 		 * Remember list configuration into database.
@@ -129,13 +132,15 @@ class AbSearch extends AbConfig
 				switch ( $row[self::F_ABSCHEME] )
 				{
 					case self::V_ABSCHCOMPANY:
-						$onClick = "frmAcompLoad(" . $row[self::F_ABID] . ");";
+						$edit = $orge_js_var . ".edit(" . $row[self::F_ABID] . ");";
+						$rm = "data['class']='org';";
 						if ( trim( $row[self::F_ABDISPLAY] ) == '' )
 							$row[self::F_ABDISPLAY] = $messages['list']['noname_org'];
 					break;
 
 					case self::V_ABSCHPERSON:
-						$onClick = "frmAcLoad(" . $row[self::F_ABID] . ");";
+						$edit = $perse_js_var . ".edit(" . $row[self::F_ABID] . ");";
+						$rm = "data['class']='pers';";
 						if ( trim( $row[self::F_ABDISPLAY] ) == '' )
 							$row[self::F_ABDISPLAY] = $messages['list']['noname_pers'];
 					break;
@@ -146,13 +151,21 @@ class AbSearch extends AbConfig
 				}
 				
 				$ctx = _cdes::badges( $ctxs, $row[self::F_ABCTXS] );
-
-				$builder->addRow( new _list_cell( _list_cell::deco( $row[self::F_ABDISPLAY], $row[self::F_ABCOMMENT], $ctx, $row[self::F_ABID], $classComm . " " . $classTask, $onClick ), _list_cell::MAN_DECO ),
+				/**
+				 * Common part of Javascript code for icons actions.
+				 */
+				$js_common = "var data = new Array();data['id']=" . $row[self::F_ABID] . ";data['client_var']=_uicmp_lookup.lookup('" . $this->app->getVcmpSearchId( 'All' ) . "');";
+				
+				$builder->addRow( new _list_cell( _list_cell::deco( $row[self::F_ABDISPLAY], $row[self::F_ABCOMMENT], $ctx, '', $edit ), _list_cell::MAN_DECO ),
 									new _list_cell( _list_cell::Text( $row['phone'] ), _list_cell::MAN_DEFAULT ),
 									new _list_cell( _list_cell::Text( $row['cell'] ), _list_cell::MAN_DEFAULT ),
 									new _list_cell( _list_cell::Text( $row['email'] ), ( trim( $row['email'] ) != '' ) ? _list_cell::MAN_EMAIL : _list_cell::MAN_DEFAULT ),
-									new _list_cell( _list_cell::Code( "iFwDlgYnShow( '" . $__msgAb['listCaptionRemove'] . "', '" . sprintf( $__msgAb['listQuestionRemove'], Wa::JsStringEscape( $row[self::F_ABDISPLAY] ) ) . "', '" . $__msgAb['bubbleYes'] . "', '" . $__msgAb['bubbleNo'] . "', frmAcRemove, " . $row[self::F_ABID] . " );" ), _list_cell::MAN_ICONREMOVE ) );
+					
+									new _list_cell(	_list_cell::Code(	$js_common . $rm . "var yes = new _sd_dlg_bt ( _ab_rm_single, '{$messages['list']['bt_yes']}', data );var no = new _sd_dlg_bt ( null, '{$messages['list']['bt_no']}', null );_wdg_dlg_yn.show( '{$messages['list']['warning']}', '" . sprintf( $messages['list']['question'], Wa::JsStringEscape( $row[self::F_ABDISPLAY], ENT_QUOTES ) ) . "', yes, no );",
+																		$messages['list']['alt_remove'],
+																		'' ), _list_cell::MAN_ICONREMOVE ) );
 
+//									new _list_cell( _list_cell::Code( "iFwDlgYnShow( '" . $__msgAb['listCaptionRemove'] . "', '" . sprintf( $__msgAb['listQuestionRemove'], Wa::JsStringEscape( $row[self::F_ABDISPLAY] ) ) . "', '" . $__msgAb['bubbleYes'] . "', '" . $__msgAb['bubbleNo'] . "', frmAcRemove, " . $row[self::F_ABID] . " );" )
 
 			}
 		}

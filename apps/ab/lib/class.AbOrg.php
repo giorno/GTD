@@ -1,6 +1,6 @@
 <?php
 
-/**
+	/**
  * @file class.AbOrg.php
  * @author giorno
  * @package GTD
@@ -192,8 +192,8 @@ class AbOrg extends AbScheme
 		if ( $res && _db_rowcount( $res ) )
 			while ( $row = _db_fetchrow ( $res ) )
 			{
-				$rc = new RosterCompany( $row[self::F_ABUID] );
-				$rc->UpdateSearchIndex( $row[self::F_ABID] );
+				$rc = new AbOrg( $row[self::F_ABUID] );
+				$rc->updateSearchIndex( $row[self::F_ABID] );
 			}
 
 		_db_query( 'COMMIT' );
@@ -301,7 +301,7 @@ class AbOrg extends AbScheme
 				_db_query( 'ROLLBACK' );
 				return false;
 			}
-			$this->RemovePartial( );
+			$this->removePartial( );
 			_db_query( "DELETE FROM `" . self::T_ABSEARCHINDEX . "` WHERE `" . self::F_ABID . "` = \"" . _db_escape( $companyId ) . "\"" );
 			_db_query( "DELETE FROM `" . self::T_ABCOMPANIES . "` WHERE `" . self::F_ABID . "` = \"" . _db_escape( $companyId ) . "\"" );
 			_db_query( "DELETE FROM `" . self::T_AB . "` WHERE `" . self::F_ABID . "` = \"" . _db_escape( $companyId ) . "\"" );

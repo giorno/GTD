@@ -30,33 +30,55 @@ class AbAjaxImpl extends Ab
 			 * @todo redesign to use some kind of template in N7App
 			 */
 			case 'search':
-				require_once APP_AB_LIB . 'class.AbSearch.php';
-				$engine = new AbSearch( _session_wrapper::getInstance( )->getUid( ), $this );
-
-				$results = $engine->search( n7_globals::settings( )->get( 'usr.lst.len' ), $_POST['keywords'], $_POST['page'], $_POST['order'], $_POST['dir'] );
-
-				if ( $results !== false )
+				
+				switch ( $_POST['method'] )
 				{
-					$smarty->assignByRef( 'USR_LIST_DATA', $results );
-					_smarty_wrapper::getInstance( )->setContent( CHASSIS_UI . '/list/list.html' );
-					_smarty_wrapper::getInstance( )->render( );
-				}
-				else
-				{
-					$search_id = $this->getVcmpSearchId( 'All' );
-					if ( trim( $_POST['keywords'] ) != '' )
+					case 'refresh':
+
+					require_once APP_AB_LIB . 'class.AbSearch.php';
+					$engine = new AbSearch( _session_wrapper::getInstance( )->getUid( ), $this );
+
+					$results = $engine->search( $_POST['perse_js_var'], $_POST['orge_js_var'], n7_globals::settings( )->get( 'usr.lst.len' ), $_POST['keywords'], $_POST['page'], $_POST['order'], $_POST['dir'] );
+
+					if ( $results !== false )
 					{
-						$empty = new _list_empty( $this->messages['list']['no_match'] );
-						$empty->add( $this->messages['list']['again'], "_uicmp_lookup.lookup( '{$search_id}' ).focus();" );
-						$empty->add( $this->messages['list']['all'], "_uicmp_lookup.lookup( '{$search_id}' ).showAll();" );
+						$smarty->assignByRef( 'USR_LIST_DATA', $results );
+						_smarty_wrapper::getInstance( )->setContent( CHASSIS_UI . '/list/list.html' );
+						_smarty_wrapper::getInstance( )->render( );
 					}
 					else
 					{
-						$empty = new _list_empty( $this->messages['list']['empty'] );
-						$empty->add( $this->messages['list']['add_pers'], "{$_POST['cpe_js_var']}.collect();" );
-						$empty->add( $this->messages['list']['add_org'], "{$_POST['cpe_js_var']}.collect();" );
+						$search_id = $this->getVcmpSearchId( 'All' );
+						if ( trim( $_POST['keywords'] ) != '' )
+						{
+							$empty = new _list_empty( $this->messages['list']['no_match'] );
+							$empty->add( $this->messages['list']['again'], "_uicmp_lookup.lookup( '{$search_id}' ).focus();" );
+							$empty->add( $this->messages['list']['all'], "_uicmp_lookup.lookup( '{$search_id}' ).showAll();" );
+						}
+						else
+						{
+							$empty = new _list_empty( $this->messages['list']['empty'] );
+							$empty->add( $this->messages['list']['add_pers'], "{$_POST['cpe_js_var']}.collect();" );
+							$empty->add( $this->messages['list']['add_org'], "{$_POST['cpe_js_var']}.collect();" );
+						}
+						$empty->render( );
 					}
-					$empty->render( );
+					break;
+					
+					case '_ab_rm_batch':
+						require_once APP_AB_LIB . 'class.AbPerson.php';
+						require_once APP_AB_LIB . 'class.AbOrg.php';
+						
+						$ids = explode( ',', $_POST['ids'] );
+						$id = $ids[0];
+						
+						if ( $_POST['class'] == 'pers' )
+							$contact = new AbPerson( _session_wrapper::getInstance( )->getUid( ) );
+						else
+							$contact = new AbOrg( _session_wrapper::getInstance( )->getUid( ) );
+						
+						$contact->remove( $id );
+					break;
 				}
 			break;
 		

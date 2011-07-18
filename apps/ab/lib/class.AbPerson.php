@@ -463,13 +463,13 @@ class AbPerson extends AbScheme
 	{
 		_db_query( 'BEGIN' );
 		
-			$id = db_1Field( "SELECT `" . self::F_ABUID . "` FROM `" . self::T_AB . "` WHERE `" . self::F_ABID . "` = \"" . _db_escape( $personId ) . "\" AND `" . self::F_ABUID . "` = \"" . _db_escape( $this->UID ) . "\"" );
-			if ( $id != $this->UID )
+			$id = _db_1field( "SELECT `" . self::F_ABUID . "` FROM `" . self::T_AB . "` WHERE `" . self::F_ABID . "` = \"" . _db_escape( $personId ) . "\" AND `" . self::F_ABUID . "` = \"" . _db_escape( $this->uid ) . "\"" );
+			if ( $id != $this->uid )
 			{
 				db_Query( 'ROLLBACK' );
 				return false;
 			}
-			$this->RemovePartial( );
+			$this->removePartial( );
 			_db_query( "DELETE FROM `" . self::T_ABSEARCHINDEX . "` WHERE `" . self::F_ABID . "` = \"" . _db_escape( $personId ) . "\"" );
 			_db_query( "DELETE FROM `" . self::T_ABPERSONS . "` WHERE `" . self::F_ABID . "` = \"" . _db_escape( $personId ) . "\"" );
 			_db_query( "DELETE FROM `" . self::T_AB . "` WHERE `" . self::F_ABID . "` = \"" . _db_escape( $personId ) . "\"" );

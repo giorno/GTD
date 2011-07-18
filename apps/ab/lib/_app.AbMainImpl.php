@@ -67,7 +67,9 @@ class AbMainImpl extends Ab
 				$orge = new _vcmp_orge( $tab, $tab->getId( ) . '.Sol', $url, $params, $this->messages['orge'], $settings->get( 'usr.ta.h.orge' ) );
 				$tab->addVcmp( $orge );
 			
-			$params['action'] = 'search';
+			$params['action']		= 'search';
+			$params['perse_js_var']	= $perse->getJsVar( );
+			$params['orge_js_var']	= $orge->getJsVar( );
 			
 			$tab = $layout->createTab( $this->id . '.All', FALSE );
 				$tab->createFold( $this->messages['f_all'] );
@@ -102,6 +104,11 @@ class AbMainImpl extends Ab
 														$this->messages['mi_add_company'],
 														$orge->getJsVar( ) . '.add( );',
 														'_uicmp_blue' ) );
+		
+		if ( ( $_app_registry = _app_registry::getInstance( ) ) != NULL )
+		{
+			$_app_registry->requireJs( "inc/ab/ab.js",	$this->id );
+		}
 		
 		$smarty->assignByRef( 'APP_AB_LAYOUT', $layout );
 	}

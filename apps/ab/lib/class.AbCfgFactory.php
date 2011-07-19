@@ -26,6 +26,16 @@ class AbSettings extends _settings
 class AbCfgFactory
 {
 	/**
+	 * Width of Person/Organization name column.
+	 */
+	const LIST_HDRW_NAME		= '*';
+	
+	/**
+	 * Width of contact field column (emial, phone).
+	 */
+	const LIST_HDRW_FIELD		= '180px';
+	
+	/**
 	 * Cache used for created instances.
 	 *
 	 * @var array

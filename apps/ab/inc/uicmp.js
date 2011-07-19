@@ -158,6 +158,33 @@ function _uicmp_ab_typed ( id, parent_id, ctrl, types, action )
 		writer.writeEndElement( );
 	};
 	
+	/**
+	 * Populate instance with data.
+	 */
+	this.set = function ( kind, number, comment )
+	{
+		var sel = document.getElementById( me.id + '.type' );
+		for ( var i = 0; i < sel.length; ++i )
+			if ( sel[i].value == kind )
+			{
+				sel.selectedIndex = i;
+			}
+			
+		/**
+		 * New type of information is not present in <SELECT> box. This should
+		 * not happen, but we must treat it properly byt adding new option into
+		 * the <SELECT> box.
+		 */
+		if ( sel[sel.selectedIndex].value != kind )
+		{
+			_uicmp_ab_opt_add( sel, kind, kind );
+			sel.selectedIndex = sel.length - 1;
+		}
+		
+		document.getElementById( me.id + '.number' ).value = number;
+		document.getElementById( me.id + '.comment' ).value = comment;
+	};
+	
 	this.build( );
 	this.populate( );
 }
@@ -477,6 +504,21 @@ function _uicmp_ab_address ( id, parent_id, ctrl, display, strings, action )
 		writer.writeEndElement( );
 	};
 	
+	/**
+	 * Populates instance with data.
+	 */
+	this.set = function ( desc, addr1, addr2, zip, city, country, phones, faxes )
+	{
+		document.getElementById( me.id + '.desc' ).value	= desc;
+		document.getElementById( me.id + '.addr1' ).value	= addr1;
+		document.getElementById( me.id + '.addr2' ).value	= addr2;
+		document.getElementById( me.id + '.zip' ).value		= zip;
+		document.getElementById( me.id + '.city' ).value	= city;
+		document.getElementById( me.id + '.country' ).value	= country;
+		document.getElementById( me.id + '.phones' ).value	= phones;
+		document.getElementById( me.id + '.faxes' ).value	= faxes;
+	};
+	
 	this.build( );
 }
 
@@ -499,7 +541,7 @@ function _uicmp_ab_frm ( )
 	 * Indicates whether form is in edit mode. false value represents
 	 * 'Add new contact' mode.
 	 */
-	this.edit = false;
+	this.editing = false;
 	
 	/**
 	 * Array holding widgets for pre-typed information (phones, IM's, etc.).
@@ -679,6 +721,84 @@ function _uicmp_ab_frm ( )
 				if ( this.addresses[i] != null )
 					this.addresses[i].xml( writer );
 		writer.writeEndElement( );
+	};
+	
+	this.dyn_parse = function ( global )
+	{
+		var i = 0;
+
+		/*
+		 * Pretyped fields. This is optional information.
+		 */
+		if ( global.getElementsByTagName( 'tfields' ).length > 0 )
+		{
+			var typed = global.getElementsByTagName( 'tfields' ).item( 0 );
+		//	var tId = 1;				// partial id of first-non erasable widget
+			var tField = null;
+			for ( i = 0; i < typed.getElementsByTagName( 'field' ).length; i++ )
+			{
+				tField = typed.getElementsByTagName( 'field' ).item( i );
+				
+//				for ( j = ; j >= 0; --j )
+//alert(Field.getAttribute( 'type' ).toString( ));
+				if ( i != 0 )
+					this.typed_add( );
+				
+				this.typed[this.typed.length - 1].set( tField.getAttribute( 'type' ).toString( ), tField.getAttribute( 'number' ).toString( ), tField.getAttribute( 'comment' ).toString( ) );
+				
+				//if ( i != 0 )
+					//tId = frmAcPersonTypedFields.addTypedEmptyRow( true );
+
+				//frmAcPersonTypedFields.setTypedData( tId, tField.getAttribute( 'type' ).toString( ), tField.getAttribute( 'number' ).toString( ), tField.getAttribute( 'comment' ).toString( ) );
+			}
+		}
+//alert('a');
+		/*
+		 * Addresses. This is optional information.
+		 */
+		if ( global.getElementsByTagName( 'addresses' ).length > 0 )
+		{
+			var addresses = global.getElementsByTagName( 'addresses' ).item( 0 );
+			//var aId = 1;				// partial id of first-non erasable widget
+			var aField = null;
+			for ( i = 0; i < addresses.getElementsByTagName( 'address' ).length; i++ )
+			{
+				aField = addresses.getElementsByTagName( 'address' ).item( i );
+				
+				if ( i != 0 )
+					this.address_add( );
+				
+				this.addresses[this.addresses.length - 1].set( aField.getAttribute( 'desc' ).toString( ),
+															aField.getAttribute( 'addr1' ).toString( ),
+															aField.getAttribute( 'addr2' ).toString( ),
+															aField.getAttribute( 'zip' ).toString( ),
+															aField.getAttribute( 'city' ).toString( ),
+															aField.getAttribute( 'country' ).toString( ),
+															aField.getAttribute( 'phones' ).toString( ),
+															aField.getAttribute( 'faxes' ).toString( ) );
+				/*if ( i != 0 )
+					aId = frmAcPersonAddresses.addAddress( true );
+
+				frmAcPersonAddresses.setAddressData( aId, aField.getAttribute( 'desc' ).toString( ),
+															aField.getAttribute( 'addr1' ).toString( ),
+															aField.getAttribute( 'addr2' ).toString( ),
+															aField.getAttribute( 'zip' ).toString( ),
+															aField.getAttribute( 'city' ).toString( ),
+															aField.getAttribute( 'country' ).toString( ),
+															aField.getAttribute( 'phones' ).toString( ),
+															aField.getAttribute( 'faxes' ).toString( ) );*/
+			}
+		}
+
+		/*var elCtxs = display.getElementsByTagName( 'ctxs' ).item( 0 );
+		var ctxId = 0;
+			frmAcCtxCloud.on = new Object( );
+			for ( i = 0; i < elCtxs.getElementsByTagName( 'ctx' ).length; i++ )
+			{
+				ctxId = Number( elCtxs.getElementsByTagName( 'ctx' ).item( i ).getFirstChild( ).getNodeValue( ) );
+				frmAcCtxCloud.on[ctxId] = true;
+				frmAcCtxCloud.colorize ( ctxId );
+			}*/
 	};
 }
 
@@ -919,7 +1039,7 @@ function _uicmp_ab_perse ( layout, tab_id, my_name, my_id, title_id, url, params
 			display = document.getElementById( me.my_id + '.display' ).value;
 		}
 		
-		var caption = ( this.edit ) ? this.strings['edit'] : this.strings['create'];
+		var caption = ( this.editing ) ? this.strings['edit'] : this.strings['create'];
 		caption += ' <i>' + display + '</i>';
 		document.getElementById( me.title_id ).innerHTML = caption;
 		
@@ -933,8 +1053,22 @@ function _uicmp_ab_perse ( layout, tab_id, my_name, my_id, title_id, url, params
 	{
 		this.ind.show( 'preparing', '_uicmp_ind_gray' );
 		this.layout.show( this.tab_id );
-		this.edit = false;
+		this.editing = false;
 		this.reset( );
+		this.ind.fade( 'prepared', '_uicmp_ind_green' );
+	};
+	
+	/**
+	 * Put form into Editing new person mode.
+	 */
+	this.edit = function ( id )
+	{
+		this.ind.show( 'preparing', '_uicmp_ind_gray' );
+		this.layout.show( this.tab_id );
+		this.editing = true;
+		this.reset( );
+		this.open( id );
+		this.person_id = id;
 		this.ind.fade( 'prepared', '_uicmp_ind_green' );
 	};
 	
@@ -1001,6 +1135,24 @@ function _uicmp_ab_perse ( layout, tab_id, my_name, my_id, title_id, url, params
 		var input = new Date( year, month, day );
 
 		return ( ( input.getFullYear() == year ) && ( input.getMonth() == month ) && ( input.getDate() == day ) );
+	};
+	
+	this.bday_set = function ( day, month, year )
+	{
+		var dayEl = document.getElementById( me.my_id + '.day' );
+		for ( i = 0; i < dayEl.options.length; i++ )
+			if ( dayEl.options[i].value == day ) { dayEl.selectedIndex = i;	break; }
+
+		/*
+		 * date.getMonth() result is indexed from 0 (=January).
+		 */
+		var monthEl = document.getElementById( me.my_id + '.month' );
+		for ( i = 0; i < monthEl.options.length; i++ )
+			if ( Number( monthEl.options[i].value ) == month ) { monthEl.selectedIndex = i;	break; }
+
+		var yearEl = document.getElementById( me.my_id + '.year' );
+		for ( i = 0; i < yearEl.options.length; i++ )
+			if ( yearEl.options[i].value == year ) { yearEl.selectedIndex = i;	break; }
 	};
 	
 	/**
@@ -1113,6 +1265,111 @@ function _uicmp_ab_perse ( layout, tab_id, my_name, my_id, title_id, url, params
 								);
 		return sender;
 	};
+	
+	this.open = function ( id )
+	{
+		/**
+		 * Copy me into this scope. Awkward, but works.
+		 */
+		var scope = me;
+
+		/**
+		 * Compose request parameters.
+		 */
+		var reqParams = '';
+		for ( var key in scope.params )
+			reqParams += '&' + key + '=' + scope.params[key];
+
+		reqParams += '&method=load' +
+					 '&id=' + id;
+
+		var sender = new Ajax.Request( scope.url,
+									{
+										method: 'post',
+										parameters: reqParams,
+										onCreate: function ( ) {scope.ind.show( 'loading', '_uicmp_ind_gray' );},
+										onFailure: function ( )
+										{
+										//	me.enable( );
+											scope.ind.show( 'e_unknown', '_uicmp_ind_red' );
+										},
+										onSuccess: function ( data )
+										{
+											//alert(data.responseText);
+											//scope.folds.update( );
+											//me.enable( );
+											scope.parse( data.responseText );
+											scope.ind.fade( 'loaded', '_uicmp_ind_green' );
+											//if ( ( document.getElementById( scope.chk_id + '.box' ).checked ) || ( scope.mode != 'C' ) )
+												//scope.layout.back( );
+										}
+									}
+								);
+		return sender;
+	};
+	
+	this.parse = function ( xml )
+	{
+		var parser = new DOMImplementation( );
+		var domDoc = parser.loadXML( xml );
+			var docRoot = domDoc.getDocumentElement( );
+				var global = docRoot.getElementsByTagName( 'global' ).item( 0 );
+				frmAcPersonId = Number( global.getAttribute( 'personId' ) );
+
+					var display = global.getElementsByTagName( 'display' ).item( 0 );
+
+					if ( ( display.getAttribute( 'predefined' ).toString( ) ) == 'true' )
+						document.getElementById( me.my_id + '.predef' ).click();
+
+					document.getElementById( me.my_id + '.display' ).value = display.getAttribute( 'custom' ).toString( );
+
+					var selEl = document.getElementById( me.my_id + '.format' );
+					selEl.selectedIndex = 0;
+					for ( i = 0; i < selEl.length; i++ )
+					{
+						if ( selEl[i].value == Number( display.getAttribute( 'format' ) ) )
+						{
+							selEl.selectedIndex = i;
+							break;
+						}
+					}
+
+					var personal = global.getElementsByTagName( 'personal' ).item( 0 );
+					document.getElementById( me.my_id + '.nick' ).value = personal.getAttribute( 'nick' ).toString( );
+					document.getElementById( me.my_id + '.titles' ).value = personal.getAttribute( 'titles' ).toString( );
+					document.getElementById( me.my_id + '.first' ).value = personal.getAttribute( 'firstname' ).toString( );
+					document.getElementById( me.my_id + '.second' ).value = personal.getAttribute( 'secondname' ).toString( );
+					document.getElementById( me.my_id + '.anames' ).value = personal.getAttribute( 'anothernames' ).toString( );
+					document.getElementById( me.my_id + '.surname' ).value = personal.getAttribute( 'surname' ).toString( );
+					document.getElementById( me.my_id + '.ssurname' ).value = personal.getAttribute( 'secondsurname' ).toString( );
+					document.getElementById( me.my_id + '.asurnames' ).value = personal.getAttribute( 'anothersurnames' ).toString( );
+
+						var comments = personal.getElementsByTagName( 'comments' ).item( 0 );
+						if ( comments.getFirstChild( ) != null )
+							document.getElementById( me.my_id + '.comments' ).value = comments.getFirstChild( ).getNodeValue( );
+
+					me.preview( );
+
+					var birthday = global.getElementsByTagName( 'birthday' ).item( 0 );
+					if ( ( birthday.getAttribute( 'known' ).toString( ) ) == 'true' )
+						document.getElementById( me.my_id + '.bday' ).click();
+					me.bday_set( Number( birthday.getAttribute( 'day' ) ), Number( birthday.getAttribute( 'month' ) ), Number( birthday.getAttribute( 'year' ) ) );
+					
+		this.dyn_parse( global );
+		
+		var elCtxs = display.getElementsByTagName( 'ctxs' ).item( 0 );
+		var ctxId = 0;
+			//frmEdtCtxCloud.on = new Object( );
+			for ( i = 0; i < elCtxs.getElementsByTagName( 'ctx' ).length; i++ )
+			{
+				ctxId = Number( elCtxs.getElementsByTagName( 'ctx' ).item( i ).getFirstChild( ).getNodeValue( ) );
+				this.cloud.set( ctxId );
+				/*frmEdtCtxCloud.on[ctxId] = true;
+				frmEdtCtxCloud.colorize ( ctxId );*/
+			}
+
+				
+	};
 }
 
 _uicmp_ab_orge.prototype = new _uicmp_ab_frm;
@@ -1216,8 +1473,22 @@ function _uicmp_ab_orge ( layout, tab_id, my_name, my_id, title_id, url, params,
 	{
 		this.ind.show( 'preparing', '_uicmp_ind_gray' );
 		this.layout.show( this.tab_id );
-		this.edit = false;
+		this.editing = false;
 		this.reset( );
+		this.ind.fade( 'prepared', '_uicmp_ind_green' );
+	};
+	
+	/**
+	 * Put form into Editing new person mode.
+	 */
+	this.edit = function ( id )
+	{
+		this.ind.show( 'preparing', '_uicmp_ind_gray' );
+		this.layout.show( this.tab_id );
+		this.editing = true;
+		this.reset( );
+		this.open( id );
+		this.org_id = id;
 		this.ind.fade( 'prepared', '_uicmp_ind_green' );
 	};
 	
@@ -1230,7 +1501,7 @@ function _uicmp_ab_orge ( layout, tab_id, my_name, my_id, title_id, url, params,
 		else
 			display = document.getElementById( me.my_id + '.name' ).value;
 		
-		var caption = ( this.edit ) ? this.strings['edit'] : this.strings['create'];
+		var caption = ( this.editing ) ? this.strings['edit'] : this.strings['create'];
 		caption += ' <i>' + display + '</i>';
 		document.getElementById( me.title_id ).innerHTML = caption;
 		
@@ -1333,6 +1604,87 @@ function _uicmp_ab_orge ( layout, tab_id, my_name, my_id, title_id, url, params,
 									}
 								);
 		return sender;
+	};
+	
+	this.open = function ( id )
+	{
+		/**
+		 * Copy me into this scope. Awkward, but works.
+		 */
+		var scope = me;
+
+		/**
+		 * Compose request parameters.
+		 */
+		var reqParams = '';
+		for ( var key in scope.params )
+			reqParams += '&' + key + '=' + scope.params[key];
+
+		reqParams += '&method=load' +
+					 '&id=' + id;
+
+		var sender = new Ajax.Request( scope.url,
+									{
+										method: 'post',
+										parameters: reqParams,
+										onCreate: function ( ) {scope.ind.show( 'loading', '_uicmp_ind_gray' );},
+										onFailure: function ( )
+										{
+										//	me.enable( );
+											scope.ind.show( 'e_unknown', '_uicmp_ind_red' );
+										},
+										onSuccess: function ( data )
+										{
+											//alert(data.responseText);
+											//scope.folds.update( );
+											//me.enable( );
+											scope.parse( data.responseText );
+											scope.ind.fade( 'loaded', '_uicmp_ind_green' );
+											//if ( ( document.getElementById( scope.chk_id + '.box' ).checked ) || ( scope.mode != 'C' ) )
+												//scope.layout.back( );
+										}
+									}
+								);
+		return sender;
+	};
+	
+	this.parse = function ( xml )
+	{
+		var parser = new DOMImplementation( );
+		var domDoc = parser.loadXML( xml );
+			var docRoot = domDoc.getDocumentElement( );
+				var global = docRoot.getElementsByTagName( 'global' ).item( 0 );
+				frmAcompCompanyId = Number( global.getAttribute( 'companyId' ) );
+
+					var display = global.getElementsByTagName( 'general' ).item( 0 );
+
+					if ( ( display.getAttribute( 'display' ).toString( ) ) == 'true' )
+						document.getElementById( me.my_id + '.disp' ).click();
+
+					document.getElementById( me.my_id + '.dispName' ).value = display.getAttribute( 'displayName' ).toString( );
+					document.getElementById( me.my_id + '.name' ).value = display.getAttribute( 'name' ).toString( );
+
+					var comments = display.getElementsByTagName( 'comments' ).item( 0 );
+
+					if ( comments.getFirstChild( ) != null )
+							document.getElementById( me.my_id + '.comments' ).value = comments.getFirstChild( ).getNodeValue( );
+
+					me.preview( );
+					
+		this.dyn_parse( global );
+		
+		var elCtxs = display.getElementsByTagName( 'ctxs' ).item( 0 );
+		var ctxId = 0;
+			//frmEdtCtxCloud.on = new Object( );
+			for ( i = 0; i < elCtxs.getElementsByTagName( 'ctx' ).length; i++ )
+			{
+				ctxId = Number( elCtxs.getElementsByTagName( 'ctx' ).item( i ).getFirstChild( ).getNodeValue( ) );
+				this.cloud.set( ctxId );
+				/*frmEdtCtxCloud.on[ctxId] = true;
+				frmEdtCtxCloud.colorize ( ctxId );*/
+			}
+
+				
 	};
 	
 }

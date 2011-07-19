@@ -58,8 +58,8 @@ class AbAjaxImpl extends Ab
 						else
 						{
 							$empty = new _list_empty( $this->messages['list']['empty'] );
-							$empty->add( $this->messages['list']['add_pers'], "{$_POST['cpe_js_var']}.collect();" );
-							$empty->add( $this->messages['list']['add_org'], "{$_POST['cpe_js_var']}.collect();" );
+							$empty->add( $this->messages['list']['add_pers'], "{$_POST['perse_js_var']}.add();" );
+							$empty->add( $this->messages['list']['add_org'], "{$_POST['orge_js_var']}.add();" );
 						}
 						$empty->render( );
 					}
@@ -134,6 +134,17 @@ class AbAjaxImpl extends Ab
 							$person->importXml( htmlspecialchars_decode( $_POST['data'] ) );
 							$person->add( );
 					break;
+				
+					/**
+					 * Provides contact information in XML to be parsed by
+					 * client side logic.
+					 */
+					case 'load':
+						require_once APP_AB_LIB . 'class.AbPerson.php';
+						$person = new AbPerson( _session_wrapper::getInstance( )->getUid( ) );
+							$person->load( $_POST['id'] );
+							echo $person->exportXml( );
+					break;
 				}
 			break;
 		
@@ -167,6 +178,17 @@ class AbAjaxImpl extends Ab
 						$org = new AbOrg( _session_wrapper::getInstance( )->getUid( ) );
 							$org->importXml( htmlspecialchars_decode( $_POST['data'] ) );
 							$org->add( );
+					break;
+				
+					/**
+					 * Provides contact information in XML to be parsed by
+					 * client side logic.
+					 */
+					case 'load':
+						require_once APP_AB_LIB . 'class.AbOrg.php';
+						$org = new AbOrg( _session_wrapper::getInstance( )->getUid( ) );
+							$org->load( $_POST['id'] );
+							echo $org->exportXml( );
 					break;
 				}
 			break;

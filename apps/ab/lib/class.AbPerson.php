@@ -53,9 +53,9 @@ class AbPerson extends AbScheme
 			$nodeGlobal = $doc->xpath( '//person/global' );
 				$personId = (string)$nodeGlobal[0]['personId'];
 				if ( $personId != '' )
-					$this->Id = (int) $personId;
+					$this->id = (int) $personId;
 				else
-					$this->Id = null;
+					$this->id = null;
 
 			$nodeCtx = $doc->xpath( '//person/global/display/ctxs' );
 				$this->display['contexts'] = null;
@@ -130,7 +130,7 @@ class AbPerson extends AbScheme
 		{
 			$writer = new SimonsXmlWriter( "\t" );
 				$writer->push( 'person' );
-					$writer->push( 'global', array( 'personId' => $this->Id ) );
+					$writer->push( 'global', array( 'personId' => $this->id ) );
 						$writer->push( 'display', array( 'predefined' => ( $this->display['predefined'] ) ? 'true' : 'false',
 															'format' => $this->display['format'],
 															'custom' => $this->display['custom'] ) );
@@ -351,14 +351,14 @@ class AbPerson extends AbScheme
 	 */
 	function load ( $personId )
 	{
-		$this->Id = $personId;
+		$this->id = $personId;
 		_db_query( 'BEGIN' );
         $Personal = _db_1line( "SELECT `" . self::T_ABPERSONS . "`.*
 								FROM `" . self::T_ABPERSONS . "`
 								JOIN `" . self::T_AB . "`
 									ON ( `" . self::T_AB . "`.`" . self::F_ABID . "` = `" . self::T_ABPERSONS . "`.`" . self::F_ABID . "` )
-								WHERE `" . self::T_ABPERSONS . "`.`" . self::F_ABID . "` = \"" . _db_escape( $this->Id ) . "\"
-									AND `" . self::T_AB . "`.`" . self::F_ABUID . "` = \"" . _db_escape( $this->UID ) . "\"" );
+								WHERE `" . self::T_ABPERSONS . "`.`" . self::F_ABID . "` = \"" . _db_escape( $this->id ) . "\"
+									AND `" . self::T_AB . "`.`" . self::F_ABUID . "` = \"" . _db_escape( $this->uid ) . "\"" );
 
 //var_dump( $Personal  );
 		//$Personal = db_1Line( "SELECT * FROM `" . self::T_ABPERSONS . "` WHERE `" . self::F_ABID . "` = \"" . db_Escape( $this->Id ) . "\" AND `" . self::F_ABUID . "` = \"" . db_Escape( $this->UID ) . "\"" );

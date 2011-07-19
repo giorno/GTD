@@ -274,7 +274,7 @@ class AbOrg extends AbScheme
 			$this->display['name']        = (string)$Display[self::F_ABNAME];
 			$this->display['comments']    = (string)$Display[self::F_ABCOMMENTS];
 
-			$this->general['contexts'] = Context::Unserialize( $Display[self::F_ABCTXS] );
+			$this->general['contexts'] = _cdes::unserialize( $Display[self::F_ABCTXS] );
 //var_dump($this->General);
 			$this->LoadPartial( );
 //			var_dump($this->General);

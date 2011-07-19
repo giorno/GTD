@@ -77,10 +77,10 @@ class AbSearch extends AbConfig
 
 		$builder = new _list_builder( $this->app->getVcmpSearchId( 'All' ) );
 
-			$builder->addField( 'composed', $messages['list']['name'], 37, 1, '', true, true, $dir );
-			$builder->addField( 'phone', $messages['typed']['types']['phone'], 19, 1, '', false );
-			$builder->addField( 'cell', $messages['typed']['types']['cell'], 19, 1, '', false );
-			$builder->addField( 'email', $messages['typed']['types']['email'], 19, 1, '', false );
+			$builder->addField( 'composed', $messages['list']['name'], AbCfgFactory::LIST_HDRW_NAME, 1, '', true, true, $dir );
+			$builder->addField( 'phone', $messages['typed']['types']['phone'], AbCfgFactory::LIST_HDRW_FIELD, 1, '', false );
+			$builder->addField( 'cell', $messages['typed']['types']['cell'], AbCfgFactory::LIST_HDRW_FIELD, 1, '', false );
+			$builder->addField( 'email', $messages['typed']['types']['email'], AbCfgFactory::LIST_HDRW_FIELD, 1, '', false );
 			$builder->addField( '__rem', '', 1, 1, '', false );
 
 		$where = '';

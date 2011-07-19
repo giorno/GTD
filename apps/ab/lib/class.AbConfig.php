@@ -11,6 +11,8 @@
 /**
  * Application specific settings or strings, e.g. database tables and fiels
  * names.
+ * 
+ * @todo merge with AbCfgFactory
  */
 class AbConfig
 {

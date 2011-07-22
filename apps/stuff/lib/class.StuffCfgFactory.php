@@ -41,9 +41,18 @@ class _stuff_all_cfg extends _list_cfg
 	}
 }
 
+/**
+ * Settings abstraction for Stuff app.
+ */
 class StuffSettings extends _settings
 {
-	public function __construct ( ) { parent::__construct( _settings::SCOPE_USER, N7_SOLUTION_ID . '.Stuff' ); }
+	/**
+	 * Extension of solution namespace to create unique, application specific
+	 * namespace.
+	 */
+	const NS_EXT = '.Stuff';
+	
+	public function __construct ( ) { parent::__construct( _settings::SCOPE_USER, N7_SOLUTION_ID . self::NS_EXT ); }
 }
 
 

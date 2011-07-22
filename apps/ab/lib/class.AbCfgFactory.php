@@ -11,11 +11,17 @@
 require_once CHASSIS_LIB . 'list/_list_cfg.php';
 
 /**
- * Settings abstraction for Address Book.
+ * Settings abstraction for Address Book app.
  */
 class AbSettings extends _settings
 {
-	public function __construct ( ) { parent::__construct( _settings::SCOPE_USER, N7_SOLUTION_ID . '.AddressBook' ); }
+	/**
+	 * Extension of solution namespace to create unique, application specific
+	 * namespace.
+	 */
+	const NS_EXT = '.AddressBook';
+	
+	public function __construct ( ) { parent::__construct( _settings::SCOPE_USER, N7_SOLUTION_ID . self::NS_EXT ); }
 }
 
 /**

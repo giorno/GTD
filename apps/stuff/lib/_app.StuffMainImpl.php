@@ -108,8 +108,8 @@ class StuffMainImpl extends Stuff implements SemProvider
 		/**
 		 * Build UI.
 		 */
-		$this->layout = new _uicmp_layout( n7_requirer::getInstance( ) );
-		$this->dlgs = new _uicmp_dlgs( n7_requirer::getInstance( ) );
+		$this->layout = n7_ui::getInstance( )->getLayout( );
+		$this->dlgs = n7_ui::getInstance( )->getDlgs( );
 
 			$this->layout->createSep( );
 
@@ -206,9 +206,7 @@ class StuffMainImpl extends Stuff implements SemProvider
 			 */
 			$cdes = new _vcmp_cdes( $this->layout, $this->id . '.Cdes', Array( 'cdesFold' => $this->messages['cdesFold'], 'cdesTitle' => $this->messages['cdesTitle'] ), $url, $params, StuffCfgFactory::getCfg( 'usr.lst.Contexts' ), $pageSize );
 
-			$this->dlgs->init( );		// deploy requirements
 			$this->layout->createSep( );
-			$this->layout->init( );		// deploy requirements
 			
 
 		if ( ( $_app_registry = _app_registry::getInstance( ) ) != NULL )
@@ -227,7 +225,6 @@ class StuffMainImpl extends Stuff implements SemProvider
 
 		$smarty = _smarty_wrapper::getInstance( )->getEngine( );
 		$smarty->assignByRef( 'APP_STUFF_LAYOUT', $this->layout );
-		$smarty->assignByRef( 'USR_UICMP_DLGS', $this->dlgs );
 
 		n7_ui::getInstance( )->getMenu( )->register(	new MenuItem(	MenuItem::TYPE_JS,
 														$this->messages['cpeMenuItem'],

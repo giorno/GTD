@@ -224,14 +224,12 @@ class StuffMainImpl extends Stuff implements SemProvider
 		}
 
 		$smarty = _smarty_wrapper::getInstance( )->getEngine( );
-		$smarty->assignByRef( 'APP_STUFF_LAYOUT', $this->layout );
 
 		n7_ui::getInstance( )->getMenu( )->register(	new MenuItem(	MenuItem::TYPE_JS,
 														$this->messages['cpeMenuItem'],
 														$cpe->getJsVar( ) . '.collect( );',
 														'_uicmp_blue' ) );
 
-		$smarty->assignByRef( 'STUFFMESSAGES',      $this->messages );
 		$smarty->assignByRef( 'APP_STUFF_MSG',      $this->messages );
 	}
 

@@ -79,7 +79,7 @@ class StuffSearchBoxes extends StuffSearch
 		/**
 		 * Initialize framework list builder.
 		 */
-		$builder = new _list_builder( $this->app->getVcmpSearchId( 'Schedule' ) );
+		$builder = new _list_builder( $this->app->getVcmpSearchId( 'Schedule' ), n7_globals::getInstance( )->get('io.creat.chassis.i18n') );
 			$builder->registerJumper( StuffListCell::MAN_STUFFDATETIME );
 
 			$builder->addField( 'timeframe', $this->messages['schTimeFrame'], self::LIST_HDRW_TIMEFRAME, 2, 'left', true, ( $order == 'timeframe' ), $dir );
@@ -281,7 +281,7 @@ class StuffSearchBoxes extends StuffSearch
 			break;
 		}
 
-		$builder = new _list_builder( $this->app->getVcmpSearchId( $box ) );
+		$builder = new _list_builder( $this->app->getVcmpSearchId( $box ), n7_globals::getInstance( )->get('io.creat.chassis.i18n') );
 			$builder->registerJumper( StuffListCell::MAN_STUFFDATETIME );
 
 			if ( $box == self::E_STUFFBOX_AR )
@@ -627,7 +627,7 @@ class StuffSearchBoxes extends StuffSearch
 			break;
 		}
 
-		$builder = new _list_builder( $this->app->getVcmpSearchId( 'All' ) );
+		$builder = new _list_builder( $this->app->getVcmpSearchId( 'All' ), n7_globals::getInstance( )->get('io.creat.chassis.i18n') );
 			$builder->registerJumper( StuffListCell::MAN_STUFFDATETIME );
 			
 

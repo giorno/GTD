@@ -48,11 +48,10 @@
 							<td>
 								<input type="checkbox" {if $STUFF_SEARCH_FRM_DATA.showCtxs=='1'}checked="checked"{/if}id="{$USR_UICMP_CMP->getHtmlId()}.ChkBox">
 							</td>
-							<td class="_uicmp_gi_chk"><div id="{$USR_UICMP_CMP->getHtmlId()}.showCtxs" class="_uicmp_blue" onClick="document.getElementById( '{$USR_UICMP_CMP->getHtmlId()}.ChkBox').click();">{$STUFFMESSAGES.advSearchShowBadges}</div></td>
+							<td class="_uicmp_gi_chk"><div id="{$USR_UICMP_CMP->getHtmlId()}.showCtxs" class="_uicmp_blue" onClick="document.getElementById( '{$USR_UICMP_CMP->getHtmlId()}.ChkBox').click();">{$APP_STUFF_MSG.advSearchShowBadges}</div></td>
 						</tr>
 					</table>
 				</td>
-				{*<td class="_uicmp_search_field"><div id="{$USR_UICMP_CMP->getHtmlId()}:indicator" class="_uicmp_search_indicator_hidden">{$CHASSIS_UICMP_MESSAGES.ajxLoading}</div></td>*}
 				{if !$USR_UICMP_CMP->isEmpty()}
 				{assign var='USR_UICMP_ITEM' value=$USR_UICMP_CMP->getFirst()}
 				{while $USR_UICMP_ITEM}

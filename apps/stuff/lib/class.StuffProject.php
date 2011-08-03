@@ -173,7 +173,7 @@ class StuffProject extends StuffSearch
 			break;
 		}
 
-		$builder = new _list_builder( $this->app->getVcmpSearchId( 'PrjPicker' ) );
+		$builder = new _list_builder( $this->app->getVcmpSearchId( 'PrjPicker' ), n7_globals::getInstance( )->get('io.creat.chassis.i18n') );
 			$builder->registerJumper( StuffListCell::MAN_STUFFDATETIME );
 
 			$builder->addField( self::F_STUFFBOX, $this->messages['editorHistoryBoxName'], self::LIST_HDRW_BOX, 1, 'left', false);
@@ -308,7 +308,7 @@ class StuffProject extends StuffSearch
 			break;
 		}
 
-		$builder = new _list_builder( $this->app->getVcmpSearchId( 'Projects' ) );
+		$builder = new _list_builder( $this->app->getVcmpSearchId( 'Projects' ), n7_globals::getInstance( )->get('io.creat.chassis.i18n') );
 			$builder->registerJumper( StuffListCell::MAN_STUFFDATETIME );
 
 			$builder->addField( self::F_STUFFBOX, $this->messages['schInBox'], self::LIST_HDRW_BOX, 1, '', false );

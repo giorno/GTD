@@ -186,6 +186,7 @@ $__msgStuff['sem']['oPresetsBy'][60]	= 'In last 60 days';
 $__msgStuff['sem']['oPresetsBy'][90]	= 'In last 90 days';
 $__msgStuff['sem']['oPresetsBy'][0]		= 'Since ever';
 
+$__msgStuff['editorHistoryBoxName']     = 'Stored in ';
 $__msgStuff['editorHistoryBoxInbox']    = $__msgStuff['boxInbox'];
 $__msgStuff['editorHistoryBoxNa']       = $__msgStuff['boxNextActions'];
 $__msgStuff['editorHistoryBoxWf']       = $__msgStuff['boxWaitingFor'];

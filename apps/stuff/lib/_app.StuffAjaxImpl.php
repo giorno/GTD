@@ -92,13 +92,13 @@ class StuffAjaxImpl extends Stuff implements SemApplicator
 									$search_id = $this->getVcmpSearchId( 'Schedule' );
 									if ( trim( $_POST['keywords'] ) != '' )
 									{
-										$empty = new _list_empty( $this->messages['nomatch']['Schedule'] );
+										$empty = new _list_empty( $this->messages['nomatch']['Schedule'], n7_globals::getInstance( )->get('io.creat.chassis.i18n') );
 										$empty->add( $this->messages['eo']['again'], "_uicmp_lookup.lookup( '{$search_id}' ).focus();" );
 										$empty->add( $this->messages['eo']['all'], "_uicmp_lookup.lookup( '{$search_id}' ).showAll();" );
 									}
 									else
 									{
-										$empty = new _list_empty( $this->messages['empty']['Schedule'] );
+										$empty = new _list_empty( $this->messages['empty']['Schedule'], n7_globals::getInstance( )->get('io.creat.chassis.i18n') );
 										$empty->add( $this->messages['eo']['collect'], "{$_POST['cpe_js_var']}.collect();" );
 									}
 									$empty->render( );
@@ -126,13 +126,13 @@ class StuffAjaxImpl extends Stuff implements SemApplicator
 									$search_id = $this->getVcmpSearchId( 'Projects' );
 									if ( trim( $_POST['keywords'] ) != '' )
 									{
-										$empty = new _list_empty( $this->messages['nomatch']['Projects'] );
+										$empty = new _list_empty( $this->messages['nomatch']['Projects'], n7_globals::getInstance( )->get('io.creat.chassis.i18n') );
 										$empty->add( $this->messages['eo']['again'], "_uicmp_lookup.lookup( '{$search_id}' ).focus();" );
 										$empty->add( $this->messages['eo']['all'], "_uicmp_lookup.lookup( '{$search_id}' ).showAll();" );
 									}
 									else
 									{
-										$empty = new _list_empty( $this->messages['empty']['Projects'] );
+										$empty = new _list_empty( $this->messages['empty']['Projects'], n7_globals::getInstance( )->get('io.creat.chassis.i18n') );
 										$empty->add( $this->messages['eo']['collect'], "{$_POST['cpe_js_var']}.collect();" );
 									}
 									$empty->render( );
@@ -168,13 +168,13 @@ class StuffAjaxImpl extends Stuff implements SemApplicator
 									$search_id = $_POST['id'];
 									if ( trim( $_POST['keywords'] ) != '' )
 									{
-										$empty = new _list_empty( $this->messages['nomatch']['box'] );
+										$empty = new _list_empty( $this->messages['nomatch']['box'], n7_globals::getInstance( )->get('io.creat.chassis.i18n') );
 										$empty->add( $this->messages['eo']['again'], "_uicmp_lookup.lookup( '{$search_id}' ).focus();" );
 										$empty->add( $this->messages['eo']['all'], "_uicmp_lookup.lookup( '{$search_id}' ).showAll();" );
 									}
 									else
 									{
-										$empty = new _list_empty( $this->messages['empty']['box'] );
+										$empty = new _list_empty( $this->messages['empty']['box'], n7_globals::getInstance( )->get('io.creat.chassis.i18n') );
 										$empty->add( $this->messages['eo']['collect'], "{$_POST['cpe_js_var']}.collect();" );
 									}
 									$empty->render( );
@@ -209,13 +209,13 @@ class StuffAjaxImpl extends Stuff implements SemApplicator
 									$search_id = $this->getVcmpSearchId( 'All' );
 									if ( trim( $_POST['keywords'] ) != '' )
 									{
-										$empty = new _list_empty( $this->messages['nomatch']['All'] );
+										$empty = new _list_empty( $this->messages['nomatch']['All'], n7_globals::getInstance( )->get('io.creat.chassis.i18n') );
 										$empty->add( $this->messages['eo']['again'], "_uicmp_lookup.lookup( '{$search_id}' ).focus();" );
 										$empty->add( $this->messages['eo']['all'], "_uicmp_lookup.lookup( '{$search_id}' ).showAll();" );
 									}
 									else
 									{
-										$empty = new _list_empty( $this->messages['empty']['All'] );
+										$empty = new _list_empty( $this->messages['empty']['All'], n7_globals::getInstance( )->get('io.creat.chassis.i18n') );
 										$empty->add( $this->messages['eo']['collect'], "{$_POST['cpe_js_var']}.collect();" );
 									}
 									$empty->render( );

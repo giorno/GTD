@@ -141,6 +141,14 @@ $__msgAb['list']['alt_remove']				= 'Odstrániť kontakt';
 $__msgAb['mi_add_person']					= 'Pridať novú osobu';
 $__msgAb['mi_add_company']					= 'Pridať novú spoločnosť';
 
+/**
+ * Default contexts created on first login.
+ */
+$__msgAb['1st_login'][0]					= array( 'Rodina',		'des',	'' );
+$__msgAb['1st_login'][1]					= array( 'Priatelia',	'blu',	'' );
+$__msgAb['1st_login'][2]					= array( 'Kolegovia',	'roq',	'' );
+$__msgAb['1st_login'][3]					= array( 'Spolužiaci',	'flw',	'' );
+
 /*$__msgAb['listAddNewCompanyTop']          = 'Nová spoločnosť';
 $__msgAb['listAddNewDepartment']          = 'nové oddelenie';
 $__msgAb['bubbleOk']                      = 'OK';

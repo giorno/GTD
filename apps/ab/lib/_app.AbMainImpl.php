@@ -9,6 +9,7 @@
  */
 
 require_once APP_AB_LIB . '_app.Ab.php';
+require_once APP_AB_LIB . 'class.AbConfig.php';
 require_once APP_AB_LIB . 'class.AbCfgFactory.php';
 require_once APP_AB_LIB . 'uicmp/_vcmp_perse.php';
 require_once APP_AB_LIB . 'uicmp/_vcmp_orge.php';
@@ -23,6 +24,7 @@ class AbMainImpl extends Ab
 	{
 		parent::__construct();
 	
+		$this->firstLogin( );
 		$this->indexTemplatePath = APP_AB_UI . 'index.html';
 		_smarty_wrapper::getInstance( )->getEngine( )->assign( 'APP_AB_TEMPLATES', APP_AB_UI );
 		_smarty_wrapper::getInstance( )->getEngine( )->assignByRef( 'APP_AB_MSG', $this->messages );
@@ -111,6 +113,49 @@ class AbMainImpl extends Ab
 		}
 		
 		$smarty->assignByRef( 'APP_AB_LAYOUT', $layout );
+	}
+	
+	/**
+	 * Detects whether this used has signed in first time and create base set of
+	 * contexts. Code copied from Stuff app method.
+	 * 
+	 * @todo separate and parametrize into common N7App code
+	 */
+	protected function firstLogin ( )
+	{
+		$uid = _session_wrapper::getInstance( )->getUid( );
+		
+		/**
+		 * Check if this user has signed first time.
+		 */
+		$count = _db_1field( "SELECT COUNT(*) FROM `" . Config::T_LOGINS . "`
+								WHERE `" . Config::F_UID . "` = \"" . _db_escape( $uid ) . "\"
+									AND `" . Config::F_NS . "` = \"" . _db_escape( N7_SOLUTION_ID ) . "\"" );
+		
+		if ( $count <= 1 )
+		{
+			/**
+			 * Check for existence of Stuff app contexts. There should be none
+			 * at the time of first login.
+			 */
+			$ctxs = _cdes::allCtxs( $uid, AbConfig::T_ABCTX);
+			if ( !is_array( $ctxs ) || !count( $ctxs ) )
+			{
+				/*_db_query( "INSERT INTO `" . Config::T_LOGINS . "`
+								SET `" . Config::F_UID . "` = \"" . _db_escape( $uid ) . "\",
+									`" . Config::F_NS . "` = \"" . _db_escape( N7_SOLUTION_ID ) . "\",
+									`" . Config::F_STAMP . "` = NOW()" );*/
+				
+				/**
+				 * Create base set of contexts.
+				 */
+				$set = $this->messages['1st_login'];
+				$cdes = new _cdes( $uid, AbConfig::T_ABCTX, n7_globals::getInstance( )->get('io.creat.chassis.i18n')  );
+				$ctx_id = 0;
+				foreach ( $set as $data )
+					$ctx_id = $cdes->add( 0, $data[1], $data[0], $data[2] );
+			}
+		}
 	}
 }
 

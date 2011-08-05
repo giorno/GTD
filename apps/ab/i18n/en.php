@@ -141,6 +141,14 @@ $__msgAb['list']['alt_remove']				= 'Remove contact';
 $__msgAb['mi_add_person']					= 'Add new person';
 $__msgAb['mi_add_company']					= 'Add new company';
 
+/**
+ * Default contexts created on first login.
+ */
+$__msgAb['1st_login'][0]					= array( 'Family',		'des',	'' );
+$__msgAb['1st_login'][1]					= array( 'Friends',		'blu',	'' );
+$__msgAb['1st_login'][2]					= array( 'Colleagues',	'roq',	'' );
+$__msgAb['1st_login'][3]					= array( 'Schoolmates',	'flw',	'' );
+
 /*$__msgAb['listAddNewCompanyTop']          = 'New company';
 $__msgAb['listAddNewDepartment']          = 'new department';
 $__msgAb['bubbleOk']                      = 'OK';

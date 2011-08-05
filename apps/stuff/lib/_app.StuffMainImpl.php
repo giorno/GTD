@@ -373,16 +373,16 @@ class StuffMainImpl extends Stuff implements SemProvider
 			$ctxs = _cdes::allCtxs( $uid, StuffConfig::T_STUFFCTX );
 			if ( !is_array( $ctxs ) || !count( $ctxs ) )
 			{
-				_db_query( "INSERT INTO `" . Config::T_LOGINS . "`
+				/*_db_query( "INSERT INTO `" . Config::T_LOGINS . "`
 								SET `" . Config::F_UID . "` = \"" . _db_escape( $uid ) . "\",
 									`" . Config::F_NS . "` = \"" . _db_escape( N7_SOLUTION_ID ) . "\",
-									`" . Config::F_STAMP . "` = NOW()" );
+									`" . Config::F_STAMP . "` = NOW()" );*/
 				
 				/**
 				 * Create base set of contexts.
 				 */
 				$set = $this->messages['1st_login'];
-				$cdes = new _cdes( $uid, StuffConfig::T_STUFFCTX );
+				$cdes = new _cdes( $uid, StuffConfig::T_STUFFCTX, n7_globals::getInstance( )->get('io.creat.chassis.i18n') );
 				$ctx_id = 0;
 				foreach ( $set as $data )
 					$ctx_id = $cdes->add( 0, $data[1], $data[0], $data[2] );

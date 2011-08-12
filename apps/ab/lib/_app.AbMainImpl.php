@@ -91,7 +91,7 @@ class AbMainImpl extends Ab
 			/**
 			 * Create CDES.
 			 */
-			$cdes = new _vcmp_cdes( $layout, $this->id . '.Cdes', Array( 'cdesFold' => $this->messages['cdes']['fold'], 'cdesTitle' => $this->messages['cdes']['title'] ), $url, $params, abCfgFactory::getCfg( 'usr.lst.Contexts' ), $pageSize );
+			$cdes = new _vcmp_cdes( $layout, $this->id . '.Cdes', Array( 'cdesFold' => $this->messages['cdes']['fold'], 'cdesTitle' => $this->messages['cdes']['title'] ), $url, $params, AbCfgFactory::getCfg( 'usr.lst.Contexts' ), $pageSize );
 			
 			$layout->createSep( );
 		

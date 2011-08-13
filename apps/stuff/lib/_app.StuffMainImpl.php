@@ -216,6 +216,11 @@ class StuffMainImpl extends Stuff implements SemProvider
 			$_app_registry->requireJs( "inc/chassis/3rd/tinyxmlw3cdom.js",			$this->id );
 			$_app_registry->requireJs( "inc/chassis/3rd/base64.js",					$this->id );
 			$_app_registry->requireJs( "inc/stuff/stuff.js",						$this->id );
+			
+			/**
+			 * Client side refresh method for Lifegoals widget is required by CDES instance.
+			 */
+			$_app_registry->requirejs( "inc/stuff/_wwg.Goals.js",					$this->id );
 
 			$_app_registry->requireCss( "inc/chassis/css/_list.css",				$this->id );
 			$_app_registry->requireCss( "inc/stuff/stuff.css",						$this->id );

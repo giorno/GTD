@@ -48,8 +48,6 @@ class StuffSearch extends StuffConfig
 
 	protected $app = NULL;
 
-	//protected $settings = NULL;
-
 	/**
 	 * Designation of server timezone. Value from N7 configuration.
 	 *
@@ -86,10 +84,6 @@ class StuffSearch extends StuffConfig
 	 */
 	protected function FuzzyDateTime ( $stamp, $todayTime = true )
 	{
-		global $__LC_TIME;
-
-		setlocale( LC_TIME, $__LC_TIME );
-
 		$now = _tz_transformation( 'now' );
 
 		if ( date( "Y-m-d", $now ) == date( "Y-m-d", $stamp ) )
@@ -132,11 +126,10 @@ class StuffSearch extends StuffConfig
 		$ret['date'] = $this->FuzzyDateTime( $ts, false );
 
 		if ( (bool)$timeSet === true )
-			//$ret['time'] = strftime( INBOXRECORDEDTIME, _tz_transformation( $dateVal . " " . $timeVal ) );
 			$ret['time'] = strftime( $this->messages['dtFormat']['RECTIME'], $ts );
 
 		$class = '';
-		$tsNow       = strtotime( "now" );
+		$tsNow       = _tz_transformation( 'now' );
 		$tsScheduled = $ts;
 
 		if ( date( "Y-m-d", $tsNow ) == date( "Y-m-d", $tsScheduled ) )

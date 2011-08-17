@@ -101,13 +101,6 @@ class AbAjaxImpl extends Ab
 					 */
 					case 'get':
 						$this->getCdesCloud( AbConfig::T_ABCTX, $_POST['js_var'], $_POST['id'], $this->messages['perse']['no_labels'] );
-						/*require_once CHASSIS_LIB . '_cdes.php';
-						require_once CHASSIS_LIB . 'uicmp/_uicmp_cdes_cloud.php';
-						$cloud = new _uicmp_cdes_cloud( NULL, NULL, $_POST['js_var'], _cdes::allCtxs( _session_wrapper::getInstance( )->getUid( ), AbConfig::T_ABCTX ), $_POST['id'] );
-						$cloud->setErrorMsg( $this->messages['perse']['no_labels'] );
-						_smarty_wrapper::getInstance( )->getEngine( )->assignByRef( 'USR_UICMP_CMP', $cloud );
-						_smarty_wrapper::getInstance( )->setContent( $cloud->getRenderer( ) );
-						_smarty_wrapper::getInstance( )->render( );*/
 					break;
 				
 					/**
@@ -115,12 +108,6 @@ class AbAjaxImpl extends Ab
 					 * namespace settings. This is unconfirmed service.
 					 */
 					case 'tah':
-						/*$tah = (int)$_POST['val'];
-						$min = n7_globals::getInstance()->get( 'config' )->get( 'usr.ta.h.min');
-						if ( $tah < $min )
-							$tah = $min;
-						
-						AbCfgFactory::getInstance( )->saveOne( 'usr.ta.h.perse', $tah );*/
 						$this->handleTah( AbCfgFactory::getInstance( ), 'usr.ta.h.perse', (int)$_POST['val'] );
 					break;
 					

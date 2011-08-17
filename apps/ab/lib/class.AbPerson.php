@@ -228,10 +228,10 @@ class AbPerson extends AbScheme
 			case 40:
 				if ( trim( $name . $secName ) == '' )
 					return trim( $secSurname );
-				elseif ( trim( $secSurname ) == '' )
+				elseif ( trim( $surname ) == '' )
 					return trim( $name . " " . $secName );
 				else
-					return trim( $secSurname . ", " . trim( $name . " " . $secName ) );
+					return trim( $surname . ", " . trim( $name . " " . $secName ) );
 			break;
 
 			/*
@@ -360,9 +360,6 @@ class AbPerson extends AbScheme
 								WHERE `" . self::T_ABPERSONS . "`.`" . self::F_ABID . "` = \"" . _db_escape( $this->id ) . "\"
 									AND `" . self::T_AB . "`.`" . self::F_ABUID . "` = \"" . _db_escape( $this->uid ) . "\"" );
 
-//var_dump( $Personal  );
-		//$Personal = db_1Line( "SELECT * FROM `" . self::T_ABPERSONS . "` WHERE `" . self::F_ABID . "` = \"" . db_Escape( $this->Id ) . "\" AND `" . self::F_ABUID . "` = \"" . db_Escape( $this->UID ) . "\"" );
-
 		if ( $Personal !== false )
 		{
 			$this->personal = null;
@@ -424,7 +421,7 @@ class AbPerson extends AbScheme
 			/*
 			 * Personal details.
 			 */
-			if ( is_null( $this->id ) )
+			if ( (int)$this->id == 0 )
 			{
 				_db_query( "INSERT INTO `" . self::T_AB . "`
 							SET `" . self::F_ABUID . "` = \"" . _db_escape( $this->uid ) . "\",

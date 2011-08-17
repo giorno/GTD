@@ -1249,17 +1249,12 @@ function _uicmp_ab_perse ( layout, tab_id, my_name, my_id, title_id, url, params
 										onCreate: function ( ) {scope.ind.show( 'saving', '_uicmp_ind_gray' );},
 										onFailure: function ( )
 										{
-										//	me.enable( );
 											scope.ind.show( 'e_unknown', '_uicmp_ind_red' );
 										},
 										onSuccess: function ( data )
 										{
-											//alert(data.responseText);
-											//scope.folds.update( );
-											//me.enable( );
 											scope.ind.fade( 'saved', '_uicmp_ind_green' );
-											//if ( ( document.getElementById( scope.chk_id + '.box' ).checked ) || ( scope.mode != 'C' ) )
-												scope.layout.back( );
+											scope.layout.back( );
 										}
 									}
 								);
@@ -1290,18 +1285,12 @@ function _uicmp_ab_perse ( layout, tab_id, my_name, my_id, title_id, url, params
 										onCreate: function ( ) {scope.ind.show( 'loading', '_uicmp_ind_gray' );},
 										onFailure: function ( )
 										{
-										//	me.enable( );
 											scope.ind.show( 'e_unknown', '_uicmp_ind_red' );
 										},
 										onSuccess: function ( data )
 										{
-											//alert(data.responseText);
-											//scope.folds.update( );
-											//me.enable( );
 											scope.parse( data.responseText );
 											scope.ind.fade( 'loaded', '_uicmp_ind_green' );
-											//if ( ( document.getElementById( scope.chk_id + '.box' ).checked ) || ( scope.mode != 'C' ) )
-												//scope.layout.back( );
 										}
 									}
 								);

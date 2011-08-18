@@ -11,7 +11,7 @@
 -- Table of entries.
 --
 
-CREATE TABLE IF NOT EXISTS `tStuffBoxes` (
+CREATE TABLE IF NOT EXISTS `stuff_boxes` (
   `SID` bigint(20) NOT NULL,
   `UID` bigint(20) NOT NULL,
   `sequence` int(11) NOT NULL,
@@ -38,7 +38,7 @@ CREATE TABLE IF NOT EXISTS `tStuffBoxes` (
 -- Labels.
 --
 
-CREATE TABLE IF NOT EXISTS `tStuffContexts` (
+CREATE TABLE IF NOT EXISTS `stuff_tags` (
   `UID` bigint(20) NOT NULL,
   `CID` bigint(20) NOT NULL AUTO_INCREMENT,
   `name` varchar(1024) COLLATE utf8_unicode_ci NOT NULL,
@@ -54,7 +54,7 @@ CREATE TABLE IF NOT EXISTS `tStuffContexts` (
 -- Goals.
 --
 
-CREATE TABLE IF NOT EXISTS `tStuffGoals` (
+CREATE TABLE IF NOT EXISTS `stuff_goals` (
   `SID` bigint(20) NOT NULL,
   `weight` int(2) NOT NULL,
   KEY `SID` (`SID`)
@@ -66,7 +66,7 @@ CREATE TABLE IF NOT EXISTS `tStuffGoals` (
 -- Inbox.
 --
 
-CREATE TABLE IF NOT EXISTS `tStuffInbox` (
+CREATE TABLE IF NOT EXISTS `stuff_inbox` (
   `SID` bigint(20) NOT NULL AUTO_INCREMENT,
   `UID` bigint(20) NOT NULL,
   `parent` bigint(20) NOT NULL,
@@ -81,7 +81,7 @@ CREATE TABLE IF NOT EXISTS `tStuffInbox` (
 -- Projects.
 --
 
-CREATE TABLE IF NOT EXISTS `tStuffProjects` (
+CREATE TABLE IF NOT EXISTS `stuff_projects` (
   `SID` bigint(20) NOT NULL,
   `UID` bigint(20) NOT NULL,
   `name` varchar(1024) NOT NULL,
@@ -94,33 +94,33 @@ CREATE TABLE IF NOT EXISTS `tStuffProjects` (
 --
 
 --
--- Constraints for table `tStuffBoxes`
+-- Constraints for table `stuff_boxes`
 --
-ALTER TABLE `tStuffBoxes`
-  ADD CONSTRAINT `tStuffBoxes_ibfk_1` FOREIGN KEY (`SID`) REFERENCES `tStuffInbox` (`SID`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `tStuffBoxes_ibfk_2` FOREIGN KEY (`UID`) REFERENCES `tUsers` (`uid`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `stuff_boxes`
+  ADD CONSTRAINT `stuff_boxes_ibfk_1` FOREIGN KEY (`SID`) REFERENCES `stuff_inbox` (`SID`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `stuff_boxes_ibfk_2` FOREIGN KEY (`UID`) REFERENCES `tUsers` (`uid`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Constraints for table `tStuffContexts`
+-- Constraints for table `stuff_tags`
 --
-ALTER TABLE `tStuffContexts`
-  ADD CONSTRAINT `tStuffContexts_ibfk_1` FOREIGN KEY (`UID`) REFERENCES `tUsers` (`uid`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `stuff_tags`
+  ADD CONSTRAINT `stuff_tags_ibfk_1` FOREIGN KEY (`UID`) REFERENCES `tUsers` (`uid`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Constraints for table `tStuffGoals`
+-- Constraints for table `stuff_goals`
 --
-ALTER TABLE `tStuffGoals`
-  ADD CONSTRAINT `tStuffGoals_ibfk_1` FOREIGN KEY (`SID`) REFERENCES `tStuffInbox` (`SID`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `stuff_goals`
+  ADD CONSTRAINT `stuff_goals_ibfk_1` FOREIGN KEY (`SID`) REFERENCES `stuff_inbox` (`SID`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Constraints for table `tStuffInbox`
+-- Constraints for table `stuff_inbox`
 --
-ALTER TABLE `tStuffInbox`
-  ADD CONSTRAINT `tStuffInbox_ibfk_1` FOREIGN KEY (`UID`) REFERENCES `tUsers` (`uid`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `stuff_inbox`
+  ADD CONSTRAINT `stuff_inbox_ibfk_1` FOREIGN KEY (`UID`) REFERENCES `tUsers` (`uid`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Constraints for table `tStuffProjects`
+-- Constraints for table `stuff_projects`
 --
-ALTER TABLE `tStuffProjects`
-  ADD CONSTRAINT `tStuffProjects_ibfk_1` FOREIGN KEY (`SID`) REFERENCES `tStuffInbox` (`SID`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `tStuffProjects_ibfk_2` FOREIGN KEY (`uid`) REFERENCES `tUsers` (`uid`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `stuff_projects`
+  ADD CONSTRAINT `stuff_projects_ibfk_1` FOREIGN KEY (`SID`) REFERENCES `stuff_inbox` (`SID`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `stuff_projects_ibfk_2` FOREIGN KEY (`uid`) REFERENCES `tUsers` (`uid`) ON DELETE CASCADE ON UPDATE CASCADE;

@@ -19,13 +19,13 @@ class AbConfig
 	/*
 	 * Database table names.
 	 */
-	const T_AB					= 'tAddrBook';
-	const T_ABPERSONS			= 'tAddrBookPersons';
-	const T_ABCOMPANIES			= 'tAddrBookCompanies';
-	const T_ABNUMBERS			= 'tAddrBookNumbers';
-	const T_ABADDRESSES			= 'tAddrBookAddresses';
-	const T_ABSEARCHINDEX		= 'tAddrBookSearchIndex';
-	const T_ABCTX				= 'tAddrBookContexts';
+	const T_AB					= 'addrbook';
+	const T_ABPERSONS			= 'addrbook_pers';
+	const T_ABCOMPANIES			= 'addrbook_comp';
+	const T_ABNUMBERS			= 'addrbook_numbers';
+	const T_ABADDRESSES			= 'addrbook_addresses';
+	const T_ABSEARCHINDEX		= 'addrbook_index';
+	const T_ABCTX				= 'addrbook_tags';
 
 	/*
 	 * Database field names.

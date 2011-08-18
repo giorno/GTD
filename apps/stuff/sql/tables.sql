@@ -1,8 +1,8 @@
 --
--- Štruktúra tabuľky pre tabuľku `tStuffBoxes`
+-- Štruktúra tabuľky pre tabuľku `stuff_boxes`
 --
 
-CREATE TABLE `tStuffBoxes` (
+CREATE TABLE `stuff_boxes` (
   `SID` bigint(20) NOT NULL,
   `UID` bigint(20) NOT NULL,
   `sequence` int(11) NOT NULL,
@@ -24,10 +24,10 @@ CREATE TABLE `tStuffBoxes` (
 -- --------------------------------------------------------
 
 --
--- Štruktúra tabuľky pre tabuľku `tStuffContexts`
+-- Štruktúra tabuľky pre tabuľku `stuff_tags`
 --
 
-CREATE TABLE `tStuffContexts` (
+CREATE TABLE `stuff_tags` (
   `UID` bigint(20) NOT NULL,
   `CID` bigint(20) NOT NULL auto_increment,
   `name` varchar(1024) collate utf8_unicode_ci NOT NULL,
@@ -40,10 +40,10 @@ CREATE TABLE `tStuffContexts` (
 -- --------------------------------------------------------
 
 --
--- Štruktúra tabuľky pre tabuľku `tStuffInbox`
+-- Štruktúra tabuľky pre tabuľku `stuff_inbox`
 --
 
-CREATE TABLE `tStuffInbox` (
+CREATE TABLE `stuff_inbox` (
   `SID` bigint(20) NOT NULL auto_increment,
   `UID` bigint(20) NOT NULL,
   PRIMARY KEY  (`SID`),
@@ -51,37 +51,37 @@ CREATE TABLE `tStuffInbox` (
 ) ENGINE=InnoDB AUTO_INCREMENT=61 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=61 ;
 
 --
--- Štruktúra tabuľky pre tabuľku `tStuffGoals`
+-- Štruktúra tabuľky pre tabuľku `stuff_goals`
 --
 
-CREATE TABLE `tStuffGoals` (
+CREATE TABLE `stuff_goals` (
   `SID` bigint(20) NOT NULL,
   `weight` int(2) NOT NULL,
   KEY `SID` (`SID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Obmedzenie pre tabuľku `tStuffBoxes`
+-- Obmedzenie pre tabuľku `stuff_boxes`
 --
-ALTER TABLE `tStuffBoxes`
-  ADD CONSTRAINT `tStuffBoxes_ibfk_1` FOREIGN KEY (`SID`) REFERENCES `tStuffInbox` (`SID`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `tStuffBoxes_ibfk_2` FOREIGN KEY (`UID`) REFERENCES `tUsers` (`uid`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `stuff_boxes`
+  ADD CONSTRAINT `stuff_boxes_ibfk_1` FOREIGN KEY (`SID`) REFERENCES `stuff_inbox` (`SID`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `stuff_boxes_ibfk_2` FOREIGN KEY (`UID`) REFERENCES `tUsers` (`uid`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Obmedzenie pre tabuľku `tStuffContexts`
+-- Obmedzenie pre tabuľku `stuff_tags`
 --
-ALTER TABLE `tStuffContexts`
-  ADD CONSTRAINT `tStuffContexts_ibfk_1` FOREIGN KEY (`UID`) REFERENCES `tUsers` (`uid`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `stuff_tags`
+  ADD CONSTRAINT `stuff_tags_ibfk_1` FOREIGN KEY (`UID`) REFERENCES `tUsers` (`uid`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Obmedzenie pre tabuľku `tStuffInbox`
+-- Obmedzenie pre tabuľku `stuff_inbox`
 --
-ALTER TABLE `tStuffInbox`
-  ADD CONSTRAINT `tStuffInbox_ibfk_1` FOREIGN KEY (`UID`) REFERENCES `tUsers` (`uid`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `stuff_inbox`
+  ADD CONSTRAINT `stuff_inbox_ibfk_1` FOREIGN KEY (`UID`) REFERENCES `tUsers` (`uid`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Obmedzenie pre tabuľku `tStuffGoals`
+-- Obmedzenie pre tabuľku `stuff_goals`
 --
-ALTER TABLE `tStuffGoals`
-  ADD CONSTRAINT `tStuffGoals_ibfk_1` FOREIGN KEY (`SID`) REFERENCES `tStuffInbox` (`SID`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `stuff_goals`
+  ADD CONSTRAINT `stuff_goals_ibfk_1` FOREIGN KEY (`SID`) REFERENCES `stuff_inbox` (`SID`) ON DELETE CASCADE ON UPDATE CASCADE;
 

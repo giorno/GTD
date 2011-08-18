@@ -187,7 +187,7 @@ class StuffSearch extends StuffConfig
 		}
 
 		/*
-		 * Collect informations from tStuffBoxes.
+		 * Collect informations from stuff_boxes.
 		 */
 		$res = _db_query( "SELECT `" . self::F_STUFFBOX . "`,AVG(`" . self::F_STUFFPRIORITY . "`) as rating,COUNT(*) as size
 								FROM ( SELECT *

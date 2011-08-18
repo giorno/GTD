@@ -8,10 +8,10 @@
 --- Script installing database tables specific for AddressBook application.
 
 --
--- Table structure for table `tAddrBook`
+-- Table structure for table `addrbook`
 --
 
-CREATE TABLE IF NOT EXISTS `tAddrBook` (
+CREATE TABLE IF NOT EXISTS `addrbook` (
   `uid` bigint(20) NOT NULL,
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `scheme` enum('pers','comp','dep') COLLATE utf8_unicode_ci NOT NULL,
@@ -22,10 +22,10 @@ CREATE TABLE IF NOT EXISTS `tAddrBook` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tAddrBookAddresses`
+-- Table structure for table `addrbook_addresses`
 --
 
-CREATE TABLE IF NOT EXISTS `tAddrBookAddresses` (
+CREATE TABLE IF NOT EXISTS `addrbook_addresses` (
   `id` bigint(20) NOT NULL,
   `desc` varchar(1024) COLLATE utf8_unicode_ci NOT NULL,
   `addr1` varchar(1024) COLLATE utf8_unicode_ci NOT NULL,
@@ -41,10 +41,10 @@ CREATE TABLE IF NOT EXISTS `tAddrBookAddresses` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tAddrBookCompanies`
+-- Table structure for table `addrbook_comp`
 --
 
-CREATE TABLE IF NOT EXISTS `tAddrBookCompanies` (
+CREATE TABLE IF NOT EXISTS `addrbook_comp` (
   `id` bigint(20) NOT NULL,
   `disp_cust` tinyint(1) NOT NULL,
   `disp_name` varchar(512) COLLATE utf8_unicode_ci NOT NULL,
@@ -57,10 +57,10 @@ CREATE TABLE IF NOT EXISTS `tAddrBookCompanies` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tAddrBookContexts`
+-- Table structure for table `addrbook_tags`
 --
 
-CREATE TABLE IF NOT EXISTS `tAddrBookContexts` (
+CREATE TABLE IF NOT EXISTS `addrbook_tags` (
   `UID` bigint(20) NOT NULL,
   `CID` bigint(20) NOT NULL AUTO_INCREMENT,
   `name` varchar(1024) COLLATE utf8_unicode_ci NOT NULL,
@@ -73,10 +73,10 @@ CREATE TABLE IF NOT EXISTS `tAddrBookContexts` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tAddrBookNumbers`
+-- Table structure for table `addrbook_numbers`
 --
 
-CREATE TABLE IF NOT EXISTS `tAddrBookNumbers` (
+CREATE TABLE IF NOT EXISTS `addrbook_numbers` (
   `id` bigint(20) NOT NULL,
   `type` varchar(512) COLLATE utf8_unicode_ci NOT NULL,
   `name` varchar(512) COLLATE utf8_unicode_ci NOT NULL,
@@ -88,10 +88,10 @@ CREATE TABLE IF NOT EXISTS `tAddrBookNumbers` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tAddrBookPersons`
+-- Table structure for table `addrbook_pers`
 --
 
-CREATE TABLE IF NOT EXISTS `tAddrBookPersons` (
+CREATE TABLE IF NOT EXISTS `addrbook_pers` (
   `id` bigint(20) NOT NULL,
   `disp_predef` tinyint(1) NOT NULL,
   `disp_cust` varchar(1024) COLLATE utf8_unicode_ci NOT NULL,
@@ -114,10 +114,10 @@ CREATE TABLE IF NOT EXISTS `tAddrBookPersons` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tAddrBookSearchIndex`
+-- Table structure for table `addrbook_index`
 --
 
-CREATE TABLE IF NOT EXISTS `tAddrBookSearchIndex` (
+CREATE TABLE IF NOT EXISTS `addrbook_index` (
   `id` bigint(20) NOT NULL,
   `display` varchar(1024) COLLATE utf8_unicode_ci NOT NULL,
   `comment` text COLLATE utf8_unicode_ci NOT NULL,
@@ -133,37 +133,37 @@ CREATE TABLE IF NOT EXISTS `tAddrBookSearchIndex` (
 --
 
 --
--- Constraints for table `tAddrBook`
+-- Constraints for table `addrbook`
 --
-ALTER TABLE `tAddrBook`
-  ADD CONSTRAINT `tAddrBook_ibfk_1` FOREIGN KEY (`uid`) REFERENCES `tUsers` (`uid`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `addrbook`
+  ADD CONSTRAINT `addrbook_ibfk_1` FOREIGN KEY (`uid`) REFERENCES `tUsers` (`uid`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Constraints for table `tAddrBookAddresses`
+-- Constraints for table `addrbook_addresses`
 --
-ALTER TABLE `tAddrBookAddresses`
-  ADD CONSTRAINT `tAddrBookAddresses_ibfk_1` FOREIGN KEY (`id`) REFERENCES `tAddrBook` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `addrbook_addresses`
+  ADD CONSTRAINT `addrbook_addresses_ibfk_1` FOREIGN KEY (`id`) REFERENCES `addrbook` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Constraints for table `tAddrBookCompanies`
+-- Constraints for table `addrbook_comp`
 --
-ALTER TABLE `tAddrBookCompanies`
-  ADD CONSTRAINT `tAddrBookCompanies_ibfk_1` FOREIGN KEY (`id`) REFERENCES `tAddrBook` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `addrbook_comp`
+  ADD CONSTRAINT `addrbook_comp_ibfk_1` FOREIGN KEY (`id`) REFERENCES `addrbook` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Constraints for table `tAddrBookContexts`
+-- Constraints for table `addrbook_tags`
 --
-ALTER TABLE `tAddrBookContexts`
-  ADD CONSTRAINT `tAddrBookContexts_ibfk_1` FOREIGN KEY (`UID`) REFERENCES `tUsers` (`uid`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `addrbook_tags`
+  ADD CONSTRAINT `addrbook_tags_ibfk_1` FOREIGN KEY (`UID`) REFERENCES `tUsers` (`uid`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Constraints for table `tAddrBookNumbers`
+-- Constraints for table `addrbook_numbers`
 --
-ALTER TABLE `tAddrBookNumbers`
-  ADD CONSTRAINT `tAddrBookNumbers_ibfk_1` FOREIGN KEY (`id`) REFERENCES `tAddrBook` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `addrbook_numbers`
+  ADD CONSTRAINT `addrbook_numbers_ibfk_1` FOREIGN KEY (`id`) REFERENCES `addrbook` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Constraints for table `tAddrBookPersons`
+-- Constraints for table `addrbook_pers`
 --
-ALTER TABLE `tAddrBookPersons`
-  ADD CONSTRAINT `tAddrBookPersons_ibfk_1` FOREIGN KEY (`id`) REFERENCES `tAddrBook` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `addrbook_pers`
+  ADD CONSTRAINT `addrbook_pers_ibfk_1` FOREIGN KEY (`id`) REFERENCES `addrbook` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;

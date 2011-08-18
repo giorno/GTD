@@ -14,11 +14,11 @@ class StuffConfig
 	/**
 	 * Constants describing Stuff application database tables.
 	 */
-    const T_STUFFINBOX					= 'tStuffInbox';
-	const T_STUFFBOXES					= 'tStuffBoxes';
-	const T_STUFFCTX					= 'tStuffContexts';
-	const T_STUFFGOALS					= 'tStuffGoals';
-	const T_STUFFPROJECTS				= 'tStuffProjects';
+    const T_STUFFINBOX					= 'stuff_inbox';
+	const T_STUFFBOXES					= 'stuff_boxes';
+	const T_STUFFCTX					= 'stuff_tags';
+	const T_STUFFGOALS					= 'stuff_goals';
+	const T_STUFFPROJECTS				= 'stuff_projects';
 
 	/**
 	 * Constants describing Stuff application database tables fields.

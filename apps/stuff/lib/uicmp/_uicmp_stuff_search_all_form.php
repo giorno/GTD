@@ -7,11 +7,11 @@
  * Search form UICMP component for All tab search solution.
  */
 
-require_once CHASSIS_LIB . 'uicmp/_uicmp_srch_frm.php';
+require_once CHASSIS_LIB . 'uicmp/vsearch.php';
 
 require_once APP_STUFF_LIB . 'class.StuffSearchBoxes.php';
 
-class _uicmp_stuff_search_all_form extends _uicmp_srch_frm
+class _uicmp_stuff_search_all_form extends \io\creat\chassis\uicmp\srchfrm
 {
 	/**
 	 * Reference to application localization messages.

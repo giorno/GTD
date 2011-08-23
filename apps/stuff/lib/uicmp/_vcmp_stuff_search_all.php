@@ -7,12 +7,11 @@
  * Virtual component for Stuff application All tab search solution.
  */
 
-require_once CHASSIS_LIB . 'uicmp/_vcmp_search.php';
-require_once CHASSIS_LIB . 'uicmp/_uicmp_srch_cnt.php';
+require_once CHASSIS_LIB . 'uicmp/vsearch.php';
 
 require_once APP_STUFF_LIB . 'uicmp/_uicmp_stuff_search_all_form.php';
 
-class _vcmp_stuff_search_all extends _vcmp_search
+class _vcmp_stuff_search_all extends \io\creat\chassis\uicmp\vsearch
 {
 
 	public function  __construct ( $id, &$tab, $url, $params, $list_cfg, &$settings, &$messages )
@@ -29,13 +28,13 @@ class _vcmp_stuff_search_all extends _vcmp_search
 		/**
 		 * For indicator states messages.
 		 */
-		$_uimcp_messages = $this->layout->getMessages( );
+		$_uimcp_messages = $this->layout->getMsgs( );
 		
 		$this->form = new _uicmp_stuff_search_all_form( $this->tab->getHead( ), $this->id . '.Form', $this->getJsVar( ), ( ( is_array( $this->config ) ) ? $this->config['k'] : '' ), $messages, $this->config );
-			$this->ind = new _uicmp_gi_ind( $this->form, $this->form->getId( ) . '.Ind', _uicmp_gi::IT_IND, $_uimcp_messages['srch'] );
+			$this->ind = new \io\creat\chassis\uicmp\indicator( $this->form, $this->form->getId( ) . '.Ind', \io\creat\chassis\uicmp\grpitem::IT_IND, $_uimcp_messages['srch'] );
 			$this->form->add( $this->ind );
-		$this->container = new _uicmp_srch_cnt( $this->tab->getBody( ), $this->id . '.Results' );
-		$this->resizer = new _uicmp_srch_res( $this->tab->getBody( ), $this->id . '.Resizer', $this->getJsVar( ), $this->size );
+		$this->container = new \io\creat\chassis\uicmp\srchcnt( $this->tab->getBody( ), $this->id . '.Results' );
+		$this->resizer = new \io\creat\chassis\uicmp\srchres( $this->tab->getBody( ), $this->id . '.Resizer', $this->getJsVar( ), $this->size );
 
 		$this->tab->getHead( )->add( $this->form );
 		$this->tab->getBody( )->add( $this->container );

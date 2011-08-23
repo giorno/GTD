@@ -8,9 +8,9 @@
  * for Today and Tomorrow shortcuts.
  */
 
-require_once CHASSIS_LIB . 'uicmp/_uicmp_comp.php';
+require_once CHASSIS_LIB . 'uicmp/uicmp.php';
 
-class _uicmp_cpe_cal extends _uicmp_comp
+class _uicmp_cpe_cal extends \io\creat\chassis\uicmp\uicmp
 {
 	/**
 	 * Timezone instance for calendar data.
@@ -129,7 +129,7 @@ class _uicmp_cpe_cal extends _uicmp_comp
 	/**
 	 * Dummy implementation to conform abstract parent.
 	 */
-	public function  generateJs ( ) { }
+	public function  generateReqs ( ) { }
 }
 
 ?>

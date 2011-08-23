@@ -8,9 +8,9 @@
  * CPE form component.
  */
 
-require_once CHASSIS_LIB . 'uicmp/_uicmp_comp.php';
+require_once CHASSIS_LIB . 'uicmp/uicmp.php';
 
-class _uicmp_cpe_frm extends _uicmp_comp
+class _uicmp_cpe_frm extends \io\creat\chassis\uicmp\uicmp
 {
 	/**
 	 * Textarea height.
@@ -52,7 +52,7 @@ class _uicmp_cpe_frm extends _uicmp_comp
 	/**
 	 * Dummy implementation to conform abstract parent.
 	 */
-	public function generateJs ( ) { }
+	public function generateReqs ( ) { }
 }
 
 ?>

@@ -8,8 +8,8 @@
  * @license Apache License, Version 2.0, see LICENSE file
  */
 
-require_once CHASSIS_LIB . 'uicmp/_uicmp_comp.php';
-require_once CHASSIS_LIB . 'uicmp/_uicmp_strings.php';
+require_once CHASSIS_LIB . 'uicmp/uicmp.php';
+require_once CHASSIS_LIB . 'uicmp/strings.php';
 
 require_once APP_AB_LIB . 'uicmp/_uicmp_perse_frm.php';
 

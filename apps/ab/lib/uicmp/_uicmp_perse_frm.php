@@ -8,13 +8,13 @@
  * @license Apache License, Version 2.0, see LICENSE file
  */
 
-require_once CHASSIS_LIB . 'uicmp/_uicmp_comp.php';
-require_once CHASSIS_LIB . 'uicmp/_uicmp_strings.php';
+require_once CHASSIS_LIB . 'uicmp/uicmp.php';
+require_once CHASSIS_LIB . 'uicmp/strings.php';
 
 /**
  * Person class contact editor form.
  */
-class _uicmp_perse_frm extends _uicmp_comp
+class _uicmp_perse_frm extends \io\creat\chassis\uicmp\uicmp
 {
 	/**
 	 * Textarea height.
@@ -44,7 +44,7 @@ class _uicmp_perse_frm extends _uicmp_comp
 		$this->jsPrefix	= '_uicmp_perse_frm';
 		$this->renderer	= APP_AB_UI . 'uicmp/perse_frm.html';
 		$this->taH		= $tah;
-		$this->strings	= new _uicmp_strings( $this, $this->id . '.Strings', $messages['js'] );
+		$this->strings	= new \io\creat\chassis\uicmp\strings( $this, $this->id . '.Strings', $messages['js'] );
 	}
 	
 	/**
@@ -64,7 +64,7 @@ class _uicmp_perse_frm extends _uicmp_comp
 	/**
 	 * Dummy implementation to conform abstract parent.
 	 */
-	public function generateJs ( ) { }
+	public function generateReqs ( ) { }
 }
 
 ?>

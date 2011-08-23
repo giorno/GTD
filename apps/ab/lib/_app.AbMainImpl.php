@@ -75,12 +75,12 @@ class AbMainImpl extends Ab
 			
 			$tab = $layout->createTab( $this->id . '.All', FALSE );
 				$tab->createFold( $this->messages['f_all'] );
-				$tab->getHead( )->add( new _uicmp_title( $tab, $tab->getId( ) . '.Title', $this->messages['t_all'] ) );
+				$tab->getHead( )->add( new \io\creat\chassis\uicmp\headline( $tab, $tab->getId( ) . '.Title', $this->messages['t_all'] ) );
 				$srch = $tab->createSearch( $this->getVcmpSearchId( 'All' ), 0, $url, $params, AbCfgFactory::getCfg( 'usr.lst.All' ), $pageSize );
 				$rszr = $srch->getResizer( );
-				$rszr->add( new _uicmp_gi( $rszr, $rszr->getId( ) . '.mi1', _uicmp_gi::IT_A,  $this->messages['mi_add_person'], $perse->getJsVar() . '.add();', '_uicmp_gi_add' ) );
-				$rszr->add( new _uicmp_gi( $rszr, $rszr->getId( ) . '.S1', _uicmp_gi::IT_TXT, '|' ));
-				$rszr->add( new _uicmp_gi( $rszr, $rszr->getId( ) . '.mi2', _uicmp_gi::IT_A,  $this->messages['mi_add_company'], $orge->getJsVar() . '.add();', '_uicmp_gi_add' ) );
+				$rszr->add( new \io\creat\chassis\uicmp\grpitem( $rszr, $rszr->getId( ) . '.mi1', \io\creat\chassis\uicmp\grpitem::IT_A,  $this->messages['mi_add_person'], $perse->getJsVar() . '.add();', '_uicmp_gi_add' ) );
+				$rszr->add( new \io\creat\chassis\uicmp\grpitem( $rszr, $rszr->getId( ) . '.S1', \io\creat\chassis\uicmp\grpitem::IT_TXT, '|' ));
+				$rszr->add( new \io\creat\chassis\uicmp\grpitem( $rszr, $rszr->getId( ) . '.mi2', \io\creat\chassis\uicmp\grpitem::IT_A,  $this->messages['mi_add_company'], $orge->getJsVar() . '.add();', '_uicmp_gi_add' ) );
 				
 				
 			/**
@@ -91,7 +91,7 @@ class AbMainImpl extends Ab
 			/**
 			 * Create CDES.
 			 */
-			$cdes = new _vcmp_cdes( $layout, $this->id . '.Cdes', Array( 'cdesFold' => $this->messages['cdes']['fold'], 'cdesTitle' => $this->messages['cdes']['title'] ), $url, $params, AbCfgFactory::getCfg( 'usr.lst.Contexts' ), $pageSize );
+			$cdes = new \io\creat\chassis\uicmp\vcdes( $layout, $this->id . '.Cdes', Array( 'cdesFold' => $this->messages['cdes']['fold'], 'cdesTitle' => $this->messages['cdes']['title'] ), $url, $params, AbCfgFactory::getCfg( 'usr.lst.Contexts' ), $pageSize );
 			
 			$layout->createSep( );
 		

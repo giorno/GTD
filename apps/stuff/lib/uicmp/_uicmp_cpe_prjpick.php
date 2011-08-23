@@ -8,13 +8,13 @@
  * @license Apache License, Version 2.0, see LICENSE file
  */
 
-require_once CHASSIS_LIB . 'uicmp/_uicmp_tab.php';
+require_once CHASSIS_LIB . 'uicmp/tab.php';
 
 /**
  * Project picker dialog rendered on SkyDome widget. It provides same features
  * as _uicmp_tab.
  */
-class _uicmp_cpe_prjpick extends _uicmp_tab
+class _uicmp_cpe_prjpick extends \io\creat\chassis\uicmp\tab
 {
 	/**
 	 * Constructor. Specializes this implementation.

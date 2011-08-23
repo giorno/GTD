@@ -11,10 +11,9 @@
 require_once CHASSIS_LIB . 'apps/_app_registry.php';
 require_once CHASSIS_LIB . 'apps/_wwg_registry.php';
 
-require_once CHASSIS_LIB . 'uicmp/_uicmp_dlgs.php';
-require_once CHASSIS_LIB . 'uicmp/_uicmp_layout.php';
-require_once CHASSIS_LIB . 'uicmp/_uicmp_title.php';
-require_once CHASSIS_LIB . 'uicmp/_vcmp_cdes.php';
+require_once CHASSIS_LIB . 'uicmp/dialogs.php';
+require_once CHASSIS_LIB . 'uicmp/headline.php';
+require_once CHASSIS_LIB . 'uicmp/vcdes.php';
 
 require_once N7_SOLUTION_LIB . 'n7_requirer.php';
 
@@ -126,7 +125,7 @@ class StuffMainImpl extends Stuff implements SemProvider
 			 */
 			$tab = $this->layout->createTab( $this->id . '.Cpe' );
 				$tab->unstack( );
-				$tab->getHead( )->add( new _uicmp_title( $tab, $tab->getId( ) . '.Title', $this->messages['cpeTitle'] ) );
+				$tab->getHead( )->add( new \io\creat\chassis\uicmp\headline( $tab, $tab->getId( ) . '.Title', $this->messages['cpeTitle'] ) );
 				$cpe = new _vcmp_cpe( $tab, $tab->getId( ) . '.Sol', _uicmp_stuff_fold::getJsName( ), $this->getVcmpSearchId( 'PrjPicker' ), $this->dlgs, $url, $params, StuffCfgFactory::getCfg( 'usr.lst.PrjPicker' ), $this->messages, StuffCfgFactory::getInstance( )->get( 'usr.ta.h.cpe' ), n7_globals::userTz( ), $this->getTimePresets( ) );
 				$tab->addVcmp( $cpe );
 
@@ -138,63 +137,63 @@ class StuffMainImpl extends Stuff implements SemProvider
 
 			$tab = $this->layout->createTab( $this->id . '.Schedule', FALSE );
 				$tab->setFold( new _uicmp_stuff_fold( $tab, $tab->getId( ) . '.Fold', $this->messages['boxSchedule'], 'Schedule', $sizes['size']['Schedule'], $sizes['avg']['Schedule'] ) );
-				$tab->getHead( )->add( new _uicmp_title( $tab, $tab->getId( ) . '.Title', $this->messages['capSchedule'] ) );
+				$tab->getHead( )->add( new \io\creat\chassis\uicmp\headline( $tab, $tab->getId( ) . '.Title', $this->messages['capSchedule'] ) );
 				$srch = $tab->createSearch( $this->getVcmpSearchId( 'Schedule' ), 0, $url, $params, StuffCfgFactory::getCfg( 'usr.lst.Schedule' ), $pageSize );
 				$rszr = $srch->getResizer( );
-				$rszr->add( new _uicmp_gi( $rszr, $rszr->getId( ) . '.mi1', _uicmp_gi::IT_A,  $this->messages['cpeMenuItem'], $cpe->getJsVar() . '.collect();', '_uicmp_gi_add' ) );
+				$rszr->add( new \io\creat\chassis\uicmp\grpitem( $rszr, $rszr->getId( ) . '.mi1', \io\creat\chassis\uicmp\grpitem::IT_A,  $this->messages['cpeMenuItem'], $cpe->getJsVar() . '.collect();', '_uicmp_gi_add' ) );
 
 			$tab = $this->layout->createTab( $this->id . '.Projects' );
 				$tab->setFold( new _uicmp_stuff_fold( $tab, $tab->getId( ) . '.Fold', $this->messages['boxProjects'], 'Projects', $sizes['size']['Projects'], $sizes['avg']['Projects'] ) );
-				$tab->getHead( )->add( new _uicmp_title( $tab, $tab->getId( ) . '.Title', $this->messages['capProjects'] ) );
+				$tab->getHead( )->add( new \io\creat\chassis\uicmp\headline( $tab, $tab->getId( ) . '.Title', $this->messages['capProjects'] ) );
 				$srch = $tab->createSearch( $this->getVcmpSearchId( 'Projects' ), 0, $url, $params, StuffCfgFactory::getCfg( 'usr.lst.Projects' ), $pageSize );
 				$rszr = $srch->getResizer( );
-				$rszr->add( new _uicmp_gi( $rszr, $rszr->getId( ) . '.mi1', _uicmp_gi::IT_A,  $this->messages['cpeMenuItem'], $cpe->getJsVar() . '.collect();', '_uicmp_gi_add' ) );
+				$rszr->add( new \io\creat\chassis\uicmp\grpitem( $rszr, $rszr->getId( ) . '.mi1', \io\creat\chassis\uicmp\grpitem::IT_A,  $this->messages['cpeMenuItem'], $cpe->getJsVar() . '.collect();', '_uicmp_gi_add' ) );
 
 			$tab = $this->layout->createTab( $this->id . '.All' );
 				$tab->createFold( $this->messages['tabAllStuff'] );
-				$tab->getHead( )->add( new _uicmp_title( $tab, $tab->getId( ) . '.Title', $this->messages['capAllStuff'] ) );
+				$tab->getHead( )->add( new \io\creat\chassis\uicmp\headline( $tab, $tab->getId( ) . '.Title', $this->messages['capAllStuff'] ) );
 				$srch = $tab->addVcmp( new _vcmp_stuff_search_all( $this->getVcmpSearchId( 'All' ), $tab, $url, $params, StuffCfgFactory::getCfg( 'usr.lst.All' ), StuffCfgFactory::getInstance( ), $this->messages ) );
 				$rszr = $srch->getResizer( );
-				$rszr->add( new _uicmp_gi( $rszr, $rszr->getId( ) . '.mi1', _uicmp_gi::IT_A,  $this->messages['miScroll2Top'], 'window.scrollTo( 0, 0 );', '_uicmp_gi_top' ) );
-				$rszr->add( new _uicmp_gi( $rszr, $rszr->getId( ) . '.S1', _uicmp_gi::IT_TXT, '|' ));
-				$rszr->add( new _uicmp_gi( $rszr, $rszr->getId( ) . '.mi2', _uicmp_gi::IT_A,  $this->messages['cpeMenuItem'], $cpe->getJsVar() . '.collect();', '_uicmp_gi_add' ) );
+				$rszr->add( new \io\creat\chassis\uicmp\grpitem( $rszr, $rszr->getId( ) . '.mi1', \io\creat\chassis\uicmp\grpitem::IT_A,  $this->messages['miScroll2Top'], 'window.scrollTo( 0, 0 );', '_uicmp_gi_top' ) );
+				$rszr->add( new \io\creat\chassis\uicmp\grpitem( $rszr, $rszr->getId( ) . '.S1', \io\creat\chassis\uicmp\grpitem::IT_TXT, '|' ));
+				$rszr->add( new \io\creat\chassis\uicmp\grpitem( $rszr, $rszr->getId( ) . '.mi2', \io\creat\chassis\uicmp\grpitem::IT_A,  $this->messages['cpeMenuItem'], $cpe->getJsVar() . '.collect();', '_uicmp_gi_add' ) );
 
 			$this->layout->createSep( );
 
 			$tab = $this->layout->createTab( $this->id . '.Inbox' );
 				$tab->setFold( new _uicmp_stuff_fold( $tab, $tab->getId( ) . '.Fold', $this->messages['boxInbox'], 'Inbox', $sizes['size']['Inbox'], $sizes['avg']['Inbox'] ) );
-				$tab->getHead( )->add( new _uicmp_title( $tab, $tab->getId( ) . '.Title', $this->messages['capInbox'] ) );
+				$tab->getHead( )->add( new \io\creat\chassis\uicmp\headline( $tab, $tab->getId( ) . '.Title', $this->messages['capInbox'] ) );
 				$srch = $tab->createSearch( $this->getVcmpSearchId( 'Inbox' ), 0, $url, $params, StuffCfgFactory::getCfg( 'usr.lst.Inbox' ), $pageSize );
 				$rszr = $srch->getResizer( );
-				$rszr->add( new _uicmp_gi( $rszr, $rszr->getId( ) . '.mi1', _uicmp_gi::IT_A,  $this->messages['cpeMenuItem'], $cpe->getJsVar() . '.collect();', '_uicmp_gi_add' ) );
+				$rszr->add( new \io\creat\chassis\uicmp\grpitem( $rszr, $rszr->getId( ) . '.mi1', \io\creat\chassis\uicmp\grpitem::IT_A,  $this->messages['cpeMenuItem'], $cpe->getJsVar() . '.collect();', '_uicmp_gi_add' ) );
 
 			$tab = $this->layout->createTab( $this->id . '.Na' );
 				$tab->setFold( new _uicmp_stuff_fold( $tab, $tab->getId( ) . '.Fold', $this->messages['boxNextActions'], 'Na', $sizes['size']['Na'], $sizes['avg']['Na'] ) );
-				$tab->getHead( )->add( new _uicmp_title( $tab, $tab->getId( ) . '.Title', $this->messages['capNextActions'] ) );
+				$tab->getHead( )->add( new \io\creat\chassis\uicmp\headline( $tab, $tab->getId( ) . '.Title', $this->messages['capNextActions'] ) );
 				$srch = $tab->createSearch( $this->getVcmpSearchId( 'Na' ), 0, $url, $params, StuffCfgFactory::getCfg( 'usr.lst.Na' ), $pageSize );
 				$rszr = $srch->getResizer( );
-				$rszr->add( new _uicmp_gi( $rszr, $rszr->getId( ) . '.mi1', _uicmp_gi::IT_A,  $this->messages['cpeMenuItem'], $cpe->getJsVar() . '.collect();', '_uicmp_gi_add' ) );
+				$rszr->add( new \io\creat\chassis\uicmp\grpitem( $rszr, $rszr->getId( ) . '.mi1', \io\creat\chassis\uicmp\grpitem::IT_A,  $this->messages['cpeMenuItem'], $cpe->getJsVar() . '.collect();', '_uicmp_gi_add' ) );
 
 			$tab = $this->layout->createTab( $this->id . '.Wf' );
 				$tab->setFold( new _uicmp_stuff_fold( $tab, $tab->getId( ) . '.Fold', $this->messages['boxWaitingFor'], 'Wf', $sizes['size']['Wf'], $sizes['avg']['Wf'] ) );
-				$tab->getHead( )->add( new _uicmp_title( $tab, $tab->getId( ) . '.Title', $this->messages['capWaitingFor'] ) );
+				$tab->getHead( )->add( new \io\creat\chassis\uicmp\headline( $tab, $tab->getId( ) . '.Title', $this->messages['capWaitingFor'] ) );
 				$srch = $tab->createSearch( $this->getVcmpSearchId( 'Wf' ), 0, $url, $params, StuffCfgFactory::getCfg( 'usr.lst.Wf' ), $pageSize );
 				$rszr = $srch->getResizer( );
-				$rszr->add( new _uicmp_gi( $rszr, $rszr->getId( ) . '.mi1', _uicmp_gi::IT_A,  $this->messages['cpeMenuItem'], $cpe->getJsVar() . '.collect();', '_uicmp_gi_add' ) );
+				$rszr->add( new \io\creat\chassis\uicmp\grpitem( $rszr, $rszr->getId( ) . '.mi1', \io\creat\chassis\uicmp\grpitem::IT_A,  $this->messages['cpeMenuItem'], $cpe->getJsVar() . '.collect();', '_uicmp_gi_add' ) );
 
 			$tab = $this->layout->createTab( $this->id . '.Sd' );
 				$tab->setFold( new _uicmp_stuff_fold( $tab, $tab->getId( ) . '.Fold', $this->messages['boxSomeday'], 'Sd', $sizes['size']['Sd'], $sizes['avg']['Sd'] ) );
-				$tab->getHead( )->add( new _uicmp_title( $tab, $tab->getId( ) . '.Title', $this->messages['capSomeday'] ) );
+				$tab->getHead( )->add( new \io\creat\chassis\uicmp\headline( $tab, $tab->getId( ) . '.Title', $this->messages['capSomeday'] ) );
 				$srch = $tab->createSearch( $this->getVcmpSearchId( 'Sd' ), 0, $url, $params, StuffCfgFactory::getCfg( 'usr.lst.Sd' ), $pageSize );
 				$rszr = $srch->getResizer( );
-				$rszr->add( new _uicmp_gi( $rszr, $rszr->getId( ) . '.mi1', _uicmp_gi::IT_A,  $this->messages['cpeMenuItem'], $cpe->getJsVar() . '.collect();', '_uicmp_gi_add' ) );
+				$rszr->add( new \io\creat\chassis\uicmp\grpitem( $rszr, $rszr->getId( ) . '.mi1', \io\creat\chassis\uicmp\grpitem::IT_A,  $this->messages['cpeMenuItem'], $cpe->getJsVar() . '.collect();', '_uicmp_gi_add' ) );
 
 			$tab = $this->layout->createTab( $this->id . '.Ar' );
 				$tab->setFold( new _uicmp_stuff_fold( $tab, $tab->getId( ) . '.Fold', $this->messages['boxArchive'], 'Ar', $sizes['size']['Ar'], $sizes['avg']['Ar'] ) );
-				$tab->getHead( )->add( new _uicmp_title( $tab, $tab->getId( ) . '.Title', $this->messages['capArchive'] ) );
+				$tab->getHead( )->add( new \io\creat\chassis\uicmp\headline( $tab, $tab->getId( ) . '.Title', $this->messages['capArchive'] ) );
 				$srch = $tab->createSearch( $this->getVcmpSearchId( 'Ar' ), 0, $url, $params, StuffCfgFactory::getCfg( 'usr.lst.Ar' ), $pageSize );
 				$rszr = $srch->getResizer( );
-				$rszr->add( new _uicmp_gi( $rszr, $rszr->getId( ) . '.mi1', _uicmp_gi::IT_A,  $this->messages['cpeMenuItem'], $cpe->getJsVar() . '.collect();', '_uicmp_gi_add' ) );
+				$rszr->add( new \io\creat\chassis\uicmp\grpitem( $rszr, $rszr->getId( ) . '.mi1', \io\creat\chassis\uicmp\grpitem::IT_A,  $this->messages['cpeMenuItem'], $cpe->getJsVar() . '.collect();', '_uicmp_gi_add' ) );
 
 			/**
 			 * Redefine Ajax parameters 'action' value for CDES.
@@ -204,7 +203,7 @@ class StuffMainImpl extends Stuff implements SemProvider
 			/**
 			 * Create CDES.
 			 */
-			$cdes = new _vcmp_cdes( $this->layout, $this->id . '.Cdes', Array( 'cdesFold' => $this->messages['cdesFold'], 'cdesTitle' => $this->messages['cdesTitle'] ), $url, $params, StuffCfgFactory::getCfg( 'usr.lst.Contexts' ), $pageSize );
+			$cdes = new \io\creat\chassis\uicmp\vcdes( $this->layout, $this->id . '.Cdes', Array( 'cdesFold' => $this->messages['cdesFold'], 'cdesTitle' => $this->messages['cdesTitle'] ), $url, $params, StuffCfgFactory::getCfg( 'usr.lst.Contexts' ), $pageSize );
 
 			$this->layout->createSep( );
 			

@@ -8,9 +8,9 @@
  * fold and Ajax updating of its content (size and color).
  */
 
-require_once CHASSIS_LIB . 'uicmp/_uicmp_fold.php';
+require_once CHASSIS_LIB . 'uicmp/fold.php';
 
-class _uicmp_stuff_fold extends _uicmp_fold
+class _uicmp_stuff_fold extends \io\creat\chassis\uicmp\fold
 {
 	/**
 	 * Identifier of the box.
@@ -90,7 +90,7 @@ class _uicmp_stuff_fold extends _uicmp_fold
 		
 		$requirer = $this->getRequirer( );
 		if ( !is_null( $requirer ) )
-			$requirer->call(_uicmp_layout::RES_CSS, Array( 'inc/stuff/_uicmp_fold.css', $this->id ) );
+			$requirer->call( \io\creat\chassis\uicmp\vlayout::RES_CSS, Array( 'inc/stuff/_uicmp_fold.css', $this->id ) );
 	}
 
 	/**
@@ -103,7 +103,7 @@ class _uicmp_stuff_fold extends _uicmp_fold
 	{
 		if ( !self::$initialized )
 		{
-			$requirer->call( _uicmp_layout::RES_JSPLAIN, 'var ' . self::getJsName( )  . ' = new _uicmp_stuff_folds( \'' . self::$g_url . '\', ' . self::toJsArray( self::$g_params ) . ', \'' . self::$icoId . '\' );' );
+			$requirer->call( \io\creat\chassis\uicmp\vlayout::RES_JSPLAIN, 'var ' . self::getJsName( )  . ' = new _uicmp_stuff_folds( \'' . self::$g_url . '\', ' . self::toJsArray( self::$g_params ) . ', \'' . self::$icoId . '\' );' );
 			self::$initialized = TRUE;
 		}
 	}
@@ -139,7 +139,7 @@ class _uicmp_stuff_fold extends _uicmp_fold
 			self::$initialized = TRUE;
 		}*/
 
-		$requirer->call( _uicmp_layout::RES_JSPLAIN, self::$jsName  . '.register( \'' . $this->boxId . '\', \'' . $this->getHtmlId( ) . '\' );' );
+		$requirer->call( \io\creat\chassis\uicmp\vlayout::RES_JSPLAIN, self::$jsName  . '.register( \'' . $this->boxId . '\', \'' . $this->getHtmlId( ) . '\' );' );
 	}
 
 	/**

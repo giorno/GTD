@@ -11,7 +11,7 @@ require_once CHASSIS_LIB . 'apps/_app_registry.php';
 require_once CHASSIS_LIB . 'ui/_smarty_wrapper.php';
 require_once CHASSIS_LIB . 'apps/_wwg_registry.php';
 require_once CHASSIS_LIB . 'apps/_wwg.Wwg.php';
-require_once CHASSIS_LIB . 'uicmp/_uicmp_gi.php';
+require_once CHASSIS_LIB . 'uicmp/grpitem.php';
 
 require_once APP_STUFF_LIB . 'class.StuffGoals.php';
 
@@ -49,17 +49,17 @@ class Goals extends Wwg
 			 * Instance of indicator is not connected to any particular layout
 			 * hierarchy.
 			 */
-			$ind = new _uicmp_gi ( $this, '_wwg.Goals.Ind', _uicmp_gi::IT_IND, '', $messages['goals']['i'] );
-			$ind->generateJs( );
+			$ind = new \io\creat\chassis\uicmp\grpitem( $this, '_wwg.Goals.Ind', \io\creat\chassis\uicmp\grpitem::IT_IND, '', $messages['goals']['i'] );
+			$ind->generateReqs( );
 			/**
 			 * Stolen from _uicmp_gi_ind and terribly bent.
 			 */
 			$layout = n7_ui::getInstance( )->getLayout( );
-			$layout->getRequirer( )->call( _uicmp_layout::RES_JSPLAIN, 'var ' . $ind->getJsVar( ) . ' = new _uicmp_ind( \'' . $ind->getHtmlId( ) . '\', null, ' . _uicmp_comp::toJsArray( $messages['goals']['i'] ) . ' );' );
+			$layout->getRequirer( )->call( \io\creat\chassis\uicmp\vlayout::RES_JSPLAIN, 'var ' . $ind->getJsVar( ) . ' = new _uicmp_ind( \'' . $ind->getHtmlId( ) . '\', null, ' . \io\creat\chassis\uicmp\uicmp::toJsArray( $messages['goals']['i'] ) . ' );' );
 			
 			$url	= n7_globals::getInstance()->get( 'url' )->myUrl( ) . 'ajax.php';	// Ajax server URL
 			$params	= Array( 'app' => $app->getId( ), 'action' => 'goals' );					// Ajax request parameters
-			$layout->getRequirer( )->call( _uicmp_layout::RES_JSPLAIN, 'var _wwgGoals_i = new _wwgGoals( \'' . $url . '\', ' . _uicmp_comp::toJsArray( $params ) . ', ' . $ind->getJsVar( ) . ' );' );
+			$layout->getRequirer( )->call( \io\creat\chassis\uicmp\vlayout::RES_JSPLAIN, 'var _wwgGoals_i = new _wwgGoals( \'' . $url . '\', ' . \io\creat\chassis\uicmp\uicmp::toJsArray( $params ) . ', ' . $ind->getJsVar( ) . ' );' );
 			
 			_wwg_registry::getInstance( )->register( _wwg_registry::POOL_BOTTOM, $this->id, $this );
 

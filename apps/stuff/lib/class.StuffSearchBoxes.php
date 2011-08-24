@@ -3,17 +3,21 @@
 /**
  * @file class.StuffSearch.php
  * @author giorno
- *
- * Search backend for whole Stuff application boxes. Ugliest piece of code in
- * the solution.
- *
- * @todo icons in lists have a lot in common, centralize their composition
+ * @package GTD
+ * @subpackage Stuff
+ * @license Apache License, Version 2.0, see LICENSE file
  */
 
 require_once CHASSIS_LIB . 'list/_list_builder.php';
 
 require_once APP_STUFF_LIB . 'class.StuffSearch.php';
 
+/**
+ * Search backend for whole Stuff application boxes. Ugliest piece of code in
+ * the solution.
+ *
+ * @todo icons in lists have a lot in common, centralize their composition
+ */
 class StuffSearchBoxes extends StuffSearch
 {
 	/*
@@ -696,6 +700,7 @@ class StuffSearchBoxes extends StuffSearch
 
 			while ( $row = _db_fetchrow ( $res ) )
 			{
+				$ctx = NULL;
 				if ( (int)$showContexts == 1 )
 					$ctx = $this->Badges( $row[self::F_STUFFCTXS] );
 				$tf = self::FuzzyTimeframe( $row[self::F_STUFFDATESET], $row["date"], $row[self::F_STUFFTIMESET], $row["time"] );

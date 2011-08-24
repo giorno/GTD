@@ -3,14 +3,18 @@
 /**
  * @file _vcmp_stuff_search_all.php
  * @author giorno
- *
- * Virtual component for Stuff application All tab search solution.
+ * @package GTD
+ * @subpackage Stuff
+ * @license Apache License, Version 2.0, see LICENSE file
  */
 
 require_once CHASSIS_LIB . 'uicmp/vsearch.php';
 
 require_once APP_STUFF_LIB . 'uicmp/_uicmp_stuff_search_all_form.php';
 
+/**
+ * Virtual component for Stuff application All tab search solution.
+ */
 class _vcmp_stuff_search_all extends \io\creat\chassis\uicmp\vsearch
 {
 
@@ -45,17 +49,17 @@ class _vcmp_stuff_search_all extends \io\creat\chassis\uicmp\vsearch
 	 * Generates Javascript dependencies and code to initialize client side
 	 * of the component.
 	 */
-	public function  generateJs ( )
+	public function  generateReqs ( )
 	{
-		$this->requirer->call( _uicmp_layout::RES_JS, Array( 'inc/stuff/_uicmp_stuff.js' , __CLASS__ ) );
-		$this->requirer->call( _uicmp_layout::RES_CSS, Array( 'inc/stuff/stuff.css' , __CLASS__ ) );
+		$this->requirer->call( \io\creat\chassis\uicmp\vlayout::RES_JS, Array( 'inc/stuff/_uicmp_stuff.js' , __CLASS__ ) );
+		$this->requirer->call( \io\creat\chassis\uicmp\vlayout::RES_CSS, Array( 'inc/stuff/stuff.css' , __CLASS__ ) );
 
 		/**
 		 * Initialize client side.
 		 */
-		$this->requirer->call( _uicmp_layout::RES_JSPLAIN, 'var ' . $this->getJsVar( ) . ' = new _vcmp_stuff_search_all( \'' . $this->id . '\', \'' . $this->tab->getHtmlId( ) . '\', '. $this->ind->getJsVar( ) . ', \'' . $this->url . '\', ' . $this->generateJsArray( $this->params ) . ', ' . $this->generateJsArray( $this->config ) . ', \'' . $this->form->getHtmlId( ) . '\', \'' . $this->container->getHtmlId( ) . '\', \'' . $this->resizer->getHtmlId( ) . '\' );' );
-		$this->requirer->call( _uicmp_layout::RES_JSPLAIN, $this->layout->getJsVar( ) . '.registerTabCb( \'' . $this->tab->getHtmlId( ) . '\', \'onShow\', ' . $this->getJsVar( ) . '.tabShown );' );
-		$this->requirer->call( _uicmp_layout::RES_JSPLAIN, $this->layout->getJsVar( ) . '.registerTabCb( \'' . $this->tab->getHtmlId( ) . '\', \'onLoad\', ' . $this->getJsVar( ) . '.startup );' );
+		$this->requirer->call( \io\creat\chassis\uicmp\vlayout::RES_JSPLAIN, 'var ' . $this->getJsVar( ) . ' = new _vcmp_stuff_search_all( \'' . $this->id . '\', \'' . $this->tab->getHtmlId( ) . '\', '. $this->ind->getJsVar( ) . ', \'' . $this->url . '\', ' . \io\creat\chassis\uicmp\uicmp::toJsArray( $this->params ) . ', ' . \io\creat\chassis\uicmp\uicmp::toJsArray( $this->config ) . ', \'' . $this->form->getHtmlId( ) . '\', \'' . $this->container->getHtmlId( ) . '\', \'' . $this->resizer->getHtmlId( ) . '\' );' );
+		$this->requirer->call( \io\creat\chassis\uicmp\vlayout::RES_JSPLAIN, $this->layout->getJsVar( ) . '.registerTabCb( \'' . $this->tab->getHtmlId( ) . '\', \'onShow\', ' . $this->getJsVar( ) . '.tabShown );' );
+		$this->requirer->call( \io\creat\chassis\uicmp\vlayout::RES_JSPLAIN, $this->layout->getJsVar( ) . '.registerTabCb( \'' . $this->tab->getHtmlId( ) . '\', \'onLoad\', ' . $this->getJsVar( ) . '.startup );' );
 		
 		$this->setJsSize( );
 	}

@@ -185,7 +185,6 @@ class StuffAjaxImpl extends Stuff implements SemApplicator
 							 * Advanced search form action - searching in all stuff.
 							 */
 							case $this->getVcmpSearchId( 'All' ):
-									//var_dump($_POST);
 								$results = $this->getSe( )->AdvSearch( $_POST['cpe_js_var'], $_POST['keywords'], $_POST['box'], $_POST['field'], $_POST['context'], $_POST['display'], $_POST['showCtxs'], n7_globals::settings( )->get( 'usr.lst.len' ), $_POST['page'], $_POST['order'],  $_POST['dir'] );
 
 								if ( $results !== false )

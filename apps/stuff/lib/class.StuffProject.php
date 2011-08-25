@@ -501,9 +501,7 @@ class StuffProject extends StuffSearch
 			{
 				$jsOnClick = $cpe_js_var . ".process( " . $row[self::F_STUFFSID] . " );";
 				$ctx = $this->Badges( $row[self::F_STUFFCTXS] );
-				$subtasks[] = Array(	'key1'		=> $row[self::F_STUFFBOX],
-										'key2'		=> $row[self::F_STUFFNAME],
-										'box'		=> new _list_cell(	_list_cell::Text(	$this->messages["cpe"]["box"][$row[self::F_STUFFBOX]],
+				$subtasks[] = Array(	'box'		=> new _list_cell(	_list_cell::Text(	$this->messages["cpe"]["box"][$row[self::F_STUFFBOX]],
 																							"stuffSubtaskBox" ),
 																		_list_cell::MAN_DEFAULT ),
 										'subtask'	=> new _list_cell(	_list_cell::deco(	$row[self::F_STUFFNAME],

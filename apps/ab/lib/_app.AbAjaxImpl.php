@@ -10,6 +10,7 @@
 
 require_once APP_AB_LIB . '_app.Ab.php';
 
+require_once APP_AB_LIB . 'class.AbScheme.php';
 require_once APP_AB_LIB . 'class.AbConfig.php';
 require_once APP_AB_LIB . 'class.AbCfgFactory.php';
 
@@ -110,6 +111,13 @@ class AbAjaxImpl extends Ab
 					case 'tah':
 						$this->handleTah( AbCfgFactory::getInstance( ), 'usr.ta.h.perse', (int)$_POST['val'] );
 					break;
+				
+					/**
+					 * Provide serialized names for pre-typed fields.
+					 */
+					case 'names_get':
+						echo AbScheme::jsonNumberNames( _session_wrapper::getInstance( )->getUid( ), $this->messages['typed']['types'] );
+					break;
 					
 					/*
 					 * Save new contact data for person. Data should be passed from client
@@ -154,6 +162,13 @@ class AbAjaxImpl extends Ab
 					 */
 					case 'tah':
 						$this->handleTah( AbCfgFactory::getInstance( ), 'usr.ta.h.orge', (int)$_POST['val'] );
+					break;
+				
+					/**
+					 * Provide serialized names for pre-typed fields.
+					 */
+					case 'names_get':
+						echo AbScheme::jsonNumberNames( _session_wrapper::getInstance( )->getUid( ), $this->messages['typed']['types'] );
 					break;
 					
 					/*

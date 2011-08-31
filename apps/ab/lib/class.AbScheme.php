@@ -214,26 +214,27 @@ class AbScheme extends AbConfig
 		_db_query( "DELETE FROM `" . self::T_ABNUMBERS . "` WHERE `" . self::F_ABID . "` = \"" . _db_escape( $this->id ) . "\"" );
 	}
 
-	/*
-	 * Function to provide list of codes/names for pretyped fields in forms.
-	 * List is to be ordered by popularity/frequency of usage.
-	 *
-	 * @param UID (int) id of app user
-	 * @return Javscript code (must be executed via eval() on client side
+	/**
+	 * Provides JSON serialized names of all used number names, including
+	 * pre-typed and custom defined.
+	 * 
+	 * @param int $uid user ID
+	 * @param array $i18n array with pre-typed names
+	 * @return mixed false on failure
 	 */
-	static function typedNames ( $UID )
+	static function jsonNumberNames ( $uid, $i18n )
 	{
-		global $__ACTYPES;
+		$names = NULL;
 		
-		/*
-		 * Load from database.
+		/**
+		 * First load from database and order by frequency of use.
 		 */
 		$res = _db_query( "SELECT `" . self::T_ABNUMBERS . "`.`" . self::F_ABNNAME . "`,
 							`" . self::T_ABNUMBERS . "`.`" . self::F_ABNTYPE . "`,
 							COUNT(*) as frequency
 							FROM `" . self::T_ABNUMBERS . "`
 							JOIN `" . self::T_AB. "` ON ( `" . self::T_AB. "`.`" . self::F_ABID . "` = `" . self::T_ABNUMBERS. "`.`" . self::F_ABID . "` )
-							WHERE `" . self::T_AB. "`.`" . self::F_ABUID . "` = \"" . _db_escape( $UID ) . "\"
+							WHERE `" . self::T_AB. "`.`" . self::F_ABUID . "` = \"" . _db_escape( $uid ) . "\"
 							GROUP BY `" . self::T_ABNUMBERS . "`.`" . self::F_ABNTYPE . "`
 							ORDER BY frequency DESC" );
 
@@ -241,35 +242,38 @@ class AbScheme extends AbConfig
 		{
 			while ( $row = _db_fetchrow( $res ) )
 			{
-				$ret[$row[self::F_ABNTYPE]] = $row[self::F_ABNNAME];
+				$names[$row[self::F_ABNTYPE]] = $row[self::F_ABNNAME];
 			}
 		}
-
-		/*
-		 * Append defaults if there is no usage of each of them.
+		
+		/**
+		 * Now fill the rest from pre-typed keys and names from localization.
 		 */
-		if ( $__ACTYPES && count( $__ACTYPES ) )
-		{
-			foreach ( $__ACTYPES as $type => $name )
+		if ( is_array( $i18n ) )
+			foreach ( $i18n as $id => $display )
 			{
-				if ( !array_key_exists( $type, $ret ) )
-				{
-					$ret[$type] = $name;
-				}
+				if ( array_key_exists( $id, $names) || in_array( $display, $names ) )
+					continue;
+				
+				$names[$id] = $display;
 			}
-		}
-
-		if ( $ret && count( $ret ) )
-		{
-			$code = "__AcPredefinedTypes = new Object( );\n";
-
-			foreach ( $ret as $type => $name )
-			{
-				if ( trim( $type ) != '' )
-					$code .= "\t__AcPredefinedTypes['{$type}'] = '{$name}';\n";
-			}
-		}
-		return $code;
+		
+			
+		/**
+		 * Encode using JSON. Using integer indexed array as custom defined
+		 * names may contain spaces and other characters not allowed for
+		 * Javascript member variables to Object class.
+		 */
+		$result = NULL;		
+		if ( is_array( $names ) )
+			foreach ( $names as $id => $display )
+				$result[] = array ( $id, $display );
+		
+		if ( !is_null( $result ) )
+			return json_encode ( $result );
+		else
+			return false;
+				
 	}
 }
 

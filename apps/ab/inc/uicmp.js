@@ -5,6 +5,9 @@
  * @package GTD
  * @subpackage AB
  * @license Apache License, Version 2.0, see LICENSE file
+ * 
+ * @requires prototype.js
+ * @requires _ajax_req_ad.js
  *
  * Client side logic for Address Book application UICMP components.
  */
@@ -82,7 +85,7 @@ function _uicmp_ab_typed ( id, parent_id, ctrl, types, action )
 	this.ctrl = ctrl;
 	
 	/**
-	 * Associative array of predefined types.
+	 * Array of predefined types.
 	 */
 	this.types = types;
 	
@@ -99,8 +102,8 @@ function _uicmp_ab_typed ( id, parent_id, ctrl, types, action )
 		for ( var i = select.length - 1; i>=0; i-- )
 			select.remove(i);
 
-		for ( var i in me.types )
-			_uicmp_ab_opt_add( select, me.types[i], i );
+		for ( var i = 0; i < me.types.length; ++i )
+			_uicmp_ab_opt_add( select, me.types[i][1], me.types[i][0] );
 	};
 	
 	/*
@@ -564,11 +567,16 @@ function _uicmp_ab_frm ( )
 	this.strings = null;
 	
 	/**
+	 * Array containing number names, both, pre-typed and custom defined.
+	 */
+	this.names = null;
+	
+	/**
 	 * Creates new pretyped contact detail field.
 	 */
 	this.typed_add = function ( )
 	{
-		this.typed[this.typed.length] = new _uicmp_ab_typed( this.my_id + '.typed_' + this.typed.length, this.my_id + '.typed', this, this.strings['types'], {text: this.strings['del_row'], method: 'del', style: '_uicmp_blue _uicmp_gi_close'} );
+		this.typed[this.typed.length] = new _uicmp_ab_typed( this.my_id + '.typed_' + this.typed.length, this.my_id + '.typed', this, this.names, {text: this.strings['del_row'], method: 'del', style: '_uicmp_blue _uicmp_gi_close'} );
 	};
 	
 	/**
@@ -665,7 +673,7 @@ function _uicmp_ab_frm ( )
 		this.custom = new Array( );
 		this.addresses = new Array( );
 		
-		this.typed[this.typed.length] = new _uicmp_ab_typed( this.my_id + '.typed_' + this.typed.length, this.my_id + '.typed', this, this.strings['types'], {text: this.strings['add_row'], method: 'add', style: '_uicmp_blue _uicmp_gi_add'} );
+		this.typed[this.typed.length] = new _uicmp_ab_typed( this.my_id + '.typed_' + this.typed.length, this.my_id + '.typed', this, this.names, {text: this.strings['add_row'], method: 'add', style: '_uicmp_blue _uicmp_gi_add'} );
 		this.custom[this.custom.length] = new _uicmp_ab_custom( this.my_id + '.custom_' + this.custom.length, this.my_id + '.custom', this, {text: this.strings['add_row'], method: 'add', style: '_uicmp_blue _uicmp_gi_add'} );
 		this.addresses[this.addresses.length] = new _uicmp_ab_address( this.my_id + '.address_' + this.addresses.length, this.my_id + '.addresses', this, this.strings['address']['address'], this.strings['address']['field'], {text: this.strings['address']['add_address'], method: 'add', style: '_uicmp_blue _uicmp_gi_add'} );
 	};
@@ -697,6 +705,18 @@ function _uicmp_ab_frm ( )
 									}
 								);
 		return sender;
+	};
+	
+	/**
+	 * Load and populate names for numbers fields.
+	 */
+	this.names_get = function ( )
+	{
+		var me = this;
+		
+		var onSuccess =  function ( data ) { me.names = data.responseText.evalJSON( ); };
+										
+		me.ajax_ad.send( { method: 'names_get' }, { onSuccess: onSuccess } );
 	};
 	
 	/**
@@ -733,26 +753,19 @@ function _uicmp_ab_frm ( )
 		if ( global.getElementsByTagName( 'tfields' ).length > 0 )
 		{
 			var typed = global.getElementsByTagName( 'tfields' ).item( 0 );
-		//	var tId = 1;				// partial id of first-non erasable widget
 			var tField = null;
 			for ( i = 0; i < typed.getElementsByTagName( 'field' ).length; i++ )
 			{
 				tField = typed.getElementsByTagName( 'field' ).item( i );
-				
-//				for ( j = ; j >= 0; --j )
-//alert(Field.getAttribute( 'type' ).toString( ));
+
 				if ( i != 0 )
 					this.typed_add( );
 				
 				this.typed[this.typed.length - 1].set( tField.getAttribute( 'type' ).toString( ), tField.getAttribute( 'number' ).toString( ), tField.getAttribute( 'comment' ).toString( ) );
-				
-				//if ( i != 0 )
-					//tId = frmAcPersonTypedFields.addTypedEmptyRow( true );
 
-				//frmAcPersonTypedFields.setTypedData( tId, tField.getAttribute( 'type' ).toString( ), tField.getAttribute( 'number' ).toString( ), tField.getAttribute( 'comment' ).toString( ) );
 			}
 		}
-//alert('a');
+
 		/*
 		 * Addresses. This is optional information.
 		 */
@@ -776,29 +789,8 @@ function _uicmp_ab_frm ( )
 															aField.getAttribute( 'country' ).toString( ),
 															aField.getAttribute( 'phones' ).toString( ),
 															aField.getAttribute( 'faxes' ).toString( ) );
-				/*if ( i != 0 )
-					aId = frmAcPersonAddresses.addAddress( true );
-
-				frmAcPersonAddresses.setAddressData( aId, aField.getAttribute( 'desc' ).toString( ),
-															aField.getAttribute( 'addr1' ).toString( ),
-															aField.getAttribute( 'addr2' ).toString( ),
-															aField.getAttribute( 'zip' ).toString( ),
-															aField.getAttribute( 'city' ).toString( ),
-															aField.getAttribute( 'country' ).toString( ),
-															aField.getAttribute( 'phones' ).toString( ),
-															aField.getAttribute( 'faxes' ).toString( ) );*/
 			}
 		}
-
-		/*var elCtxs = display.getElementsByTagName( 'ctxs' ).item( 0 );
-		var ctxId = 0;
-			frmAcCtxCloud.on = new Object( );
-			for ( i = 0; i < elCtxs.getElementsByTagName( 'ctx' ).length; i++ )
-			{
-				ctxId = Number( elCtxs.getElementsByTagName( 'ctx' ).item( i ).getFirstChild( ).getNodeValue( ) );
-				frmAcCtxCloud.on[ctxId] = true;
-				frmAcCtxCloud.colorize ( ctxId );
-			}*/
 	};
 }
 
@@ -872,6 +864,11 @@ function _uicmp_ab_perse ( layout, tab_id, my_name, my_id, title_id, url, params
 	 */
 	this.cloud = new _uicmp_cdes_cloud( this.my_name + '.cloud', this.my_id + '.ctxs', this.url, this.params );
 	
+	/**
+	 * Ajax request adapter.
+	 */
+	this.ajax_ad = new _ajax_req_ad( false, url, params );
+	
 	this.startup = function ( )
 	{
 		var strings_prov = new _uicmp_strings( me.strings_id );
@@ -915,10 +912,9 @@ function _uicmp_ab_perse ( layout, tab_id, my_name, my_id, title_id, url, params
 		this.bday_toggle( );
 		this.predef_toggle( );
 		
+		this.names_get( );
+		
 		this.dyn_reset( );
-		/*this.typed[this.typed.length] = new _uicmp_ab_typed( me.my_id + '.typed_' + this.typed.length, me.my_id + '.typed', me, me.strings['types'], {text: me.strings['add_row'], method: 'add', style: '_uicmp_blue _uicmp_gi_add'} );
-		this.custom[this.custom.length] = new _uicmp_ab_custom( me.my_id + '.custom_' + this.custom.length, me.my_id + '.custom', me, {text: me.strings['add_row'], method: 'add', style: '_uicmp_blue _uicmp_gi_add'} );
-		this.addresses[this.addresses.length] = new _uicmp_ab_address( me.my_id + '.address_' + this.addresses.length, me.my_id + '.addresses', me, me.strings['address']['address'], me.strings['address']['field'], {text: me.strings['address']['add_address'], method: 'add', style: '_uicmp_blue _uicmp_gi_add'} );*/
 	};
 	
 	/**
@@ -1425,6 +1421,11 @@ function _uicmp_ab_orge ( layout, tab_id, my_name, my_id, title_id, url, params,
 	 */
 	this.cloud = new _uicmp_cdes_cloud( this.my_name + '.cloud', this.my_id + '.ctxs', this.url, this.params );
 	
+	/**
+	 * Ajax request adapter.
+	 */
+	this.ajax_ad = new _ajax_req_ad( false, url, params );
+	
 	this.startup = function ( )
 	{
 		var strings_prov = new _uicmp_strings( me.strings_id );
@@ -1451,6 +1452,8 @@ function _uicmp_ab_orge ( layout, tab_id, my_name, my_id, title_id, url, params,
 
 		document.getElementById( me.my_id + '.disp' ).checked = false;
 		this.disp_toggle( );
+		
+		this.names_get( );
 		
 		this.dyn_reset( );
 	};

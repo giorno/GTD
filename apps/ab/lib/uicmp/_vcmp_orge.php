@@ -17,7 +17,7 @@ require_once APP_AB_LIB . 'uicmp/_vcmp_perse.php';
  * Virtual component building Organization-class contact editor. Derived from
  * Person-class virtual component to code less.
  */
-class _vcmp_orge extends \io\creat\chassis\uicmp\vcmp
+class _vcmp_orge extends _vcmp_perse
 {	
 	/**
 	 * Constructor. Overriding parent constructor.

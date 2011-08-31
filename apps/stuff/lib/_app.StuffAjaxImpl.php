@@ -275,23 +275,14 @@ class StuffAjaxImpl extends Stuff implements SemApplicator
 								_smarty_wrapper::getInstance( )->setContent( CHASSIS_UI . '/list/list.html' );
 								_smarty_wrapper::getInstance( )->render( );
 							}
-
-							/**
-							 * @todo user framework empty list feature
-							 * if ( $results !== false )
-							{
-								$__SMARTY->assign( 'mFwListData', $results );
-								$__SMARTY->display( CHASSIS_UI . '/list.html' );
-							}
 							else
 							{
-								if ( trim( $_POST['search'] ) != '' )
-									$__SMARTY->assign( 'MESSAGE', sprintf( $this->messages['noResultsNoMatch'], "<span onClick=\"stuffBoxes[9].showAll( );\" class=\"_uicmp_blue_b\">" . $this->messages['btShowAll'] . "</span>", "<span onClick=\"stuffBoxes[9].focus( );\" class=\"_uicmp_blue_b\">" . $this->messages['noResultsChangePhrase'] . "</span>" ) );
+								if ( trim( $_POST['keywords'] ) != '' )
+									$empty = new _list_empty( $this->messages['nomatch']['All'], n7_globals::getInstance( )->get('io.creat.chassis.i18n') );
 								else
-									$__SMARTY->assign( 'MESSAGE', sprintf( $this->messages['noResultsEmptyBox'], $boxName ) );
-
-								$__SMARTY->display( 'x_empty.html' );
-							}*/
+										$empty = new _list_empty( $this->messages['empty']['All'], n7_globals::getInstance( )->get('io.creat.chassis.i18n') );
+								$empty->render( );
+							}
 					break;
 
 					case 'load_prj':

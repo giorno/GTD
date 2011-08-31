@@ -1,20 +1,21 @@
-{* Content of calendar dialog *}
+{* Calendar dialog content. It displays three-month clickable table of days.
+ *
+ * @file cpe_cal.html
+ * @author giorno
+ * @package GTD
+ * @subpackage Stuff
+ * @license Apache License, Version 2.0, see LICENSE file
+ *}
+ 
 {assign var=USR_UICMP_DATA value=$USR_UICMP_DLG->getData()}
 <div id="{$USR_UICMP_DLG->getHtmlId()}.cnt">
 	<table cellspacing="0" cellpadding="0">
 		<tr>
 			<td>
-				<div class="_uicmp_blue _uicmp_dlg_close" id="{$USR_UICMP_DLG->getHtmlId()}.btClose" onClick="{$USR_UICMP_DLG->getJsVar()}.close( );">
-					{$APP_STUFF_MSG.cpeBtClose}
-				</div>
 				<div class="_uicmp_data">
 					<div id="{$USR_UICMP_DLG->getHtmlId()}.today">{$USR_UICMP_DATA.today}</div>
 					<div id="{$USR_UICMP_DLG->getHtmlId()}.tomorrow">{$USR_UICMP_DATA.tomorrow}</div>
 				</div>
-			</td>
-		</tr>
-		<tr>
-			<td>
 				<table cellpadding="0" cellspacing="0">
 					<tr>
 						{foreach from=$USR_UICMP_DATA.cal key=index item=month}

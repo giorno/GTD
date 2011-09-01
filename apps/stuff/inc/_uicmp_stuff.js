@@ -1,7 +1,10 @@
+
 /**
  * @file _uicmp_stuff.js
  * @author giorno
+ * @package GTD
  * @subpackage Stuff
+ * @license Apache License, Version 2.0, see LICENSE file
  *
  * Client side logic for Stuff application specific UICMP components: CPE,
  * folds and search in All.
@@ -1188,6 +1191,7 @@ function _vcmp_stuff_search_all ( id, tabId, ind, url, params, config, formId, c
 	 */
 	this.tabShown = function ( )
 	{
+		me.ctxs_update( );
 		me.focus( );
 		me.render_resizer( );
 		me.refresh( );
@@ -1213,6 +1217,27 @@ function _vcmp_stuff_search_all ( id, tabId, ind, url, params, config, formId, c
 		document.getElementById( this.formId + ':box' ).selectedIndex = 0;
 		document.getElementById( this.formId + ':context' ).selectedIndex = 0;
 		this.search( );
+	};
+	
+	/**
+	 * Updates contexts <SELECT> box with most accurate values.
+	 */
+	this.ctxs_update = function ( )
+	{
+		var ctx = document.getElementById( me.formId + ':context' )[document.getElementById( me.formId + ':context' ).selectedIndex].value;
+		
+		function onSuccess( data )
+		{
+			/**
+			 * Presence of OK comment guarantees that received HTML code is
+			 * correct.
+			 */
+			if ( data.responseText.substr( 0, 6 ) == '<!--OK' )
+				document.getElementById( this.formId + '.ctxs_container' ).innerHTML = data.responseText;
+		};
+		
+		var ajax_ad = new _ajax_req_ad( false, me.url, me.params );
+			ajax_ad.send( { method : 'ctxs_update', id : me.formId, ctx : ctx }, { onSuccess : onSuccess } );
 	};
 
 	this.refresh = function ( )

@@ -1,4 +1,11 @@
-{* HTML code for Stuff app All tab search form *}
+{* HTML code for Stuff app All tab search form.
+ *
+ * @file x_advsrchfrmctxs.html
+ * @author giorno
+ * @package GTD
+ * @subpackage Stuff
+ * @license Apache License, Version 2.0, see LICENSE file
+ *}
 {assign var='STUFF_SEARCH_FRM_DATA' value=$USR_UICMP_CMP->getData()}
 <td class="_uicmp_srch_frm">
 	<div class="_uicmp_srch_frm">
@@ -34,7 +41,8 @@
 						{html_options options=$STUFF_SEARCH_FRM_DATA.box selected=$STUFF_SEARCH_FRM_DATA.selBox}
 					</select>
 				</td>
-				<td class="_uicmp_search_field" id="frmAdvContextContainer">
+				<td class="_uicmp_search_field" id="{$USR_UICMP_CMP->getHtmlId()}:ctxs_container">
+					{assign var=APP_STUFF_ADVSRCHID value=$USR_UICMP_CMP->getHtmlId()}
 					{include file="$APP_STUFF_TEMPLATES/x_advsrchfrmctxs.html"}
 				</td>
 				<td class="_uicmp_search_field">

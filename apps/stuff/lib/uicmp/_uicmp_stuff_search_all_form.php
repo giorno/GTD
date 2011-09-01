@@ -3,30 +3,44 @@
 /**
  * @file _uicmp_stuff_search_all_form.php
  * @author giorno
- *
- * Search form UICMP component for All tab search solution.
+ * @package GTD
+ * @subpackage Stuff
+ * @license Apache License, Version 2.0, see LICENSE file
  */
 
 require_once CHASSIS_LIB . 'uicmp/vsearch.php';
 
 require_once APP_STUFF_LIB . 'class.StuffSearchBoxes.php';
 
+/**
+ * Search form UICMP component for All tab search solution.
+ */
 class _uicmp_stuff_search_all_form extends \io\creat\chassis\uicmp\srchfrm
 {
 	/**
 	 * Reference to application localization messages.
 	 *
-	 * @var <array>
+	 * @var array
 	 */
 	protected $messages = NULL;
 
 	/**
 	 * Export of configuration data from list config instance.
 	 *
-	 * @var <array>
+	 * @var array
 	 */
 	protected $cfg = NULL;
 
+	/**
+	 * Constructor.
+	 * 
+	 * @param \io\creat\chassis\uicmp\head $parent parent element
+	 * @param string $id component ID
+	 * @param string $jsVar search control variable
+	 * @param string $keywords keywords to prefill in the form
+	 * @param array $messages localization messages
+	 * @param _list_cfg $cfg previously saved list display configuration
+	 */
 	public function  __construct ( &$parent, $id, $jsVar, $keywords, &$messages, &$cfg )
 	{
 		parent::__construct( $parent, $id, $jsVar, $keywords );
@@ -36,12 +50,27 @@ class _uicmp_stuff_search_all_form extends \io\creat\chassis\uicmp\srchfrm
 		$this->messages	= $messages;
 		$this->cfg		= $cfg;
 	}
+	
+	/**
+	 * Adds contexts into existing array of data used for UI <SELECT> box.
+	 * 
+	 * @param array $result reference to array to be populated with contexts
+	 */
+	public static function getCtxs ( &$result )
+	{
+		$ctxs = _cdes::allCtxs( _session_wrapper::getInstance( )->getUid( ), StuffConfig::T_STUFFCTX );
+		if ( is_array( $ctxs ) )
+		{
+			foreach ( $ctxs as $CID => $ctx )
+				$result['ctx']["{$CID}"]  = $ctx->disp;
+		}
+	}
 
 	/**
 	 * Returns array populated with form data. This method should be accessed
 	 * from component's Smarty template.
 	 *
-	 * @return <array>
+	 * @return array data for advanced search form
 	 *
 	 * @todo english localization confuses Label as title for task and Label as
 	 * context
@@ -70,12 +99,8 @@ class _uicmp_stuff_search_all_form extends \io\creat\chassis\uicmp\srchfrm
 		$data['selCtx']		= $this->cfg['c'];
 		$data['ctx']['0']	= $this->messages['advSrchAllCtxs'];
 
-		$ctxs = _cdes::allCtxs( _session_wrapper::getInstance( )->getUid( ), StuffConfig::T_STUFFCTX );
-		if ( is_array( $ctxs ) )
-		{
-			foreach ( $ctxs as $CID => $ctx )
-				$data['ctx']["{$CID}"]  = $ctx->disp;
-		}
+		self::getCtxs( $data );
+		
 		return $data;
 	}
 }

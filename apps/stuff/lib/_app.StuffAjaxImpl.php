@@ -16,6 +16,7 @@ require_once N7_SOLUTION_LIB . 'sem/sem_decoder.php';
 
 require_once APP_STUFF_LIB . '_app.Stuff.php';
 require_once APP_STUFF_LIB . '_wwg.Goals.php';
+require_once APP_STUFF_LIB . 'uicmp/_uicmp_stuff_search_all_form.php';
 
 /**
  * Ajax server side implementation of Stuff application.
@@ -65,6 +66,21 @@ class StuffAjaxImpl extends Stuff implements SemApplicator
 						require_once APP_STUFF_LIB . 'class.StuffProcessor.php';
 						$processor = new StuffProcessor( _session_wrapper::getInstance( )->getUid( ) );
 							$processor->archive( $_POST['id'], $_POST['label'] );
+					break;
+				
+					/**
+					 * Update labels <SELECT> box in Search All tab. This uses
+					 * same data structure layout as when populated from main
+					 * implementation.
+					 */
+					case 'ctxs_update':
+						$data = NULL;
+						_uicmp_stuff_search_all_form::getCtxs( $data );
+						$data['selCtx'] = $_POST['ctx'];
+						$smarty->assign( 'STUFF_SEARCH_FRM_DATA', $data );
+						$smarty->assign( 'APP_STUFF_ADVSRCHID', $_POST['id'] );
+						echo "<!--OK-->";
+						echo $smarty->fetch( APP_STUFF_UI . 'x_advsrchfrmctxs.html' );
 					break;
 
 					/**

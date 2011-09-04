@@ -417,12 +417,24 @@ class StuffAjaxImpl extends Stuff implements SemApplicator
 		}
 	}	
 
-	public function chkSemCollection ( $coll )
+	/**
+	 * Implements interface method.
+	 * 
+	 * @param sem_collection $coll
+	 * @return boolean
+	 */
+	public function chkSemCollection ( &$coll )
 	{		
 		return true;	// nothing can go wrong
 	}
 
-	public function setSemCollection ( $coll )
+	/**
+	 * Set data from SEM collection using application specific settings
+	 * instance.
+	 * 
+	 * @param type $coll 
+	 */
+	public function setSemCollection ( &$coll )
 	{
 		/**
 		 * Process Lifegoals settings.

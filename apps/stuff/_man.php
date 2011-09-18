@@ -12,7 +12,7 @@
 
 $man = array(
 				'id'		=> '_app.Stuff',
-				'version'	=> '0.1-alpha',
+				'version'	=> '0.1-beta',
 				'flags'		=> 14,
 				'i18n'		=> array(
 										'cs' => 'Mít vše hotovo',

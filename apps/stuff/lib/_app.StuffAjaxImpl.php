@@ -54,7 +54,7 @@ class StuffAjaxImpl extends Stuff implements SemApplicator
 					 */
 					case '_stuff_purge_batch':
 						require_once APP_STUFF_LIB . 'class.StuffProcessor.php';
-						$processor = new StuffProcessor( _session_wrapper::getInstance( )->getUid( ) );
+						$processor = new StuffProcessor( \io\creat\chassis\session::getInstance( )->getUid( ) );
 							$processor->purgeBatch( $_POST['ids'] );
 					break;
 
@@ -64,7 +64,7 @@ class StuffAjaxImpl extends Stuff implements SemApplicator
 					 */
 					case '_stuff_archive':
 						require_once APP_STUFF_LIB . 'class.StuffProcessor.php';
-						$processor = new StuffProcessor( _session_wrapper::getInstance( )->getUid( ) );
+						$processor = new StuffProcessor( \io\creat\chassis\session::getInstance( )->getUid( ) );
 							$processor->archive( $_POST['id'], $_POST['label'] );
 					break;
 				
@@ -126,7 +126,7 @@ class StuffAjaxImpl extends Stuff implements SemApplicator
 							 */
 							case $this->getVcmpSearchId( 'Projects' ):
 								require_once APP_STUFF_LIB . 'class.StuffProject.php';
-								$engine = new StuffProject( _session_wrapper::getInstance( )->getUid( ) );
+								$engine = new StuffProject( \io\creat\chassis\session::getInstance( )->getUid( ) );
 
 								$results = $engine->Search( $_POST['cpe_js_var'], n7_globals::settings( )->get( 'usr.lst.len' ), $_POST['keywords'], $_POST['page'], $_POST['order'], $_POST['dir'] );
 
@@ -281,7 +281,7 @@ class StuffAjaxImpl extends Stuff implements SemApplicator
 					 */
 					case 'refresh':
 						require_once APP_STUFF_LIB . 'class.StuffProject.php';
-							$engine = new StuffProject( _session_wrapper::getInstance( )->getUid( ) );
+							$engine = new StuffProject( \io\creat\chassis\session::getInstance( )->getUid( ) );
 
 							$results = $engine->SearchPrjPicker( $_POST['cpe_js_var'], $_POST['keywords'], StuffConfig::PRJPICKPAGESIZE, $_POST['page'], $_POST['order'], $_POST['dir'] );
 
@@ -304,7 +304,7 @@ class StuffAjaxImpl extends Stuff implements SemApplicator
 					case 'load_prj':
 						require_once APP_STUFF_LIB . 'class.StuffProject.php';
 
-						$engine = new StuffProject( _session_wrapper::getInstance( )->getUid( ) );
+						$engine = new StuffProject( \io\creat\chassis\session::getInstance( )->getUid( ) );
 
 						$result = $engine->FromFragment( $_POST['cpe_js_var'], $_POST['id'] );
 
@@ -322,7 +322,7 @@ class StuffAjaxImpl extends Stuff implements SemApplicator
 					 */
 					case 'prj_check_loop':
 						require_once APP_STUFF_LIB . 'class.StuffProject.php';
-							$engine = new StuffProject( _session_wrapper::getInstance( )->getUid( ) );
+							$engine = new StuffProject( \io\creat\chassis\session::getInstance( )->getUid( ) );
 							echo "" . (int)$engine->IsChild( (int)$_POST['pid'], (int)$_POST['sid'] );
 					break;
 
@@ -331,7 +331,7 @@ class StuffAjaxImpl extends Stuff implements SemApplicator
 					 */
 					case 'collect':
 						require_once APP_STUFF_LIB . 'class.StuffCollector.php';
-						$collector = new StuffCollector( _session_wrapper::getInstance( )->getUid( ) );
+						$collector = new StuffCollector( \io\creat\chassis\session::getInstance( )->getUid( ) );
 							$collector->importXml( htmlspecialchars_decode( $_POST['data'] ) );
 						if ( $collector->add( ) )
 							echo "OK";
@@ -344,14 +344,14 @@ class StuffAjaxImpl extends Stuff implements SemApplicator
 					 */
 					case 'process':
 						require_once APP_STUFF_LIB . 'class.StuffProcessor.php';
-						$processor = new StuffProcessor( _session_wrapper::getInstance( )->getUid( ), $_POST['sid'] );
+						$processor = new StuffProcessor( \io\creat\chassis\session::getInstance( )->getUid( ), $_POST['sid'] );
 							$processor->ImportXml( htmlspecialchars_decode( $_POST['data'] ) );
 							$processor->add( );
 					break;
 
 					case 'edit':
 						require_once APP_STUFF_LIB . 'class.StuffEditor.php';
-						$editor = new StuffEditor( _session_wrapper::getInstance( )->getUid( ) );
+						$editor = new StuffEditor( \io\creat\chassis\session::getInstance( )->getUid( ) );
 							$editor->ImportXml( htmlspecialchars_decode( $_POST['data'] ) );
 							$editor->save( );
 					break;
@@ -362,7 +362,7 @@ class StuffAjaxImpl extends Stuff implements SemApplicator
 					 */
 					case 'history_load':
 						require_once APP_STUFF_LIB . 'class.StuffHistory.php';
-							$history = new StuffHistory( _session_wrapper::getInstance( )->getUid( ), $_POST['id'] );
+							$history = new StuffHistory( \io\creat\chassis\session::getInstance( )->getUid( ), $_POST['id'] );
 							$smarty->assign( 'HISTORY', $history->ExportArray( ) );
 							$smarty->assign( 'DATA', $history->ExportLastData( ) );
 							// continues to next case as subtasks are part of delivered content
@@ -372,7 +372,7 @@ class StuffAjaxImpl extends Stuff implements SemApplicator
 					 */
 					case 'subtasks_load':
 						require_once APP_STUFF_LIB . 'class.StuffProject.php';
-						$project = new StuffProject( _session_wrapper::getInstance( )->getUid( ) );
+						$project = new StuffProject( \io\creat\chassis\session::getInstance( )->getUid( ) );
 							$smarty->assign( 'SUBTASKS', $project->Subtasks( $_POST['cpe_js_var'], $_POST['id'] ) );
 							$smarty->assign( 'JS_VAR', $_POST['cpe_js_var'] );
 							_smarty_wrapper::getInstance( )->setContent( APP_STUFF_UI . 'uicmp/x_history.html' );
@@ -384,7 +384,7 @@ class StuffAjaxImpl extends Stuff implements SemApplicator
 					 */
 					case 'load':
 						require_once APP_STUFF_LIB . 'class.StuffEditor.php';
-							$editor = new StuffEditor( _session_wrapper::getInstance( )->getUid( ) );
+							$editor = new StuffEditor( \io\creat\chassis\session::getInstance( )->getUid( ) );
 								echo $editor->FragmentXml( $_POST['id'], $_POST['seq'] );
 					break;
 				}

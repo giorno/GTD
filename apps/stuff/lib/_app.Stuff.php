@@ -101,7 +101,7 @@ abstract class Stuff extends N7App
 	protected function getSe ( )
 	{
 		if ( is_null( $this->searchEngine ) )
-			$this->searchEngine = new StuffSearchBoxes( _session_wrapper::getInstance( )->getUid( ) );
+			$this->searchEngine = new StuffSearchBoxes( \io\creat\chassis\session::getInstance( )->getUid( ) );
 
 		return $this->searchEngine;
 	}

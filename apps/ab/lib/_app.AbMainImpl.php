@@ -123,7 +123,7 @@ class AbMainImpl extends Ab
 	 */
 	protected function firstLogin ( )
 	{
-		$uid = _session_wrapper::getInstance( )->getUid( );
+		$uid = \io\creat\chassis\session::getInstance( )->getUid( );
 		
 		/**
 		 * Check if this user has signed first time.

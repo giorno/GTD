@@ -58,7 +58,7 @@ class _uicmp_stuff_search_all_form extends \io\creat\chassis\uicmp\srchfrm
 	 */
 	public static function getCtxs ( &$result )
 	{
-		$ctxs = _cdes::allCtxs( _session_wrapper::getInstance( )->getUid( ), StuffConfig::T_STUFFCTX );
+		$ctxs = _cdes::allCtxs( \io\creat\chassis\session::getInstance( )->getUid( ), StuffConfig::T_STUFFCTX );
 		if ( is_array( $ctxs ) )
 		{
 			foreach ( $ctxs as $CID => $ctx )

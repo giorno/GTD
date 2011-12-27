@@ -72,7 +72,7 @@ class Goals extends Wwg
 			_smarty_wrapper::getInstance( )->getEngine( )->assignByRef( 'WWG_GOALS_IND', $ind );
 		}
 		
-		$this->engine = new StuffGoals( _session_wrapper::getInstance( )->getUid( ) );
+		$this->engine = new StuffGoals( \io\creat\chassis\session::getInstance( )->getUid( ) );
 
 		_smarty_wrapper::getInstance( )->getEngine( )->assign( 'WWG_GOALS', $this->engine->Lifegoals( StuffCfgFactory::getInstance( )->get( 'usr.goals.on' ), StuffCfgFactory::getInstance( )->get( 'usr.goals.box' ) ) );
 	}

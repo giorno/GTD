@@ -263,7 +263,7 @@ class StuffMainImpl extends Stuff implements SemProvider
 		/**
 		 * Extract data.
 		 */
-		$res = _db_query( "SELECT `" . StuffConfig::F_STUFFTIMEVAL . "` FROM `" . StuffConfig::T_STUFFBOXES . "` WHERE `" . StuffConfig::F_STUFFUID . "` = \"" . _session_wrapper::getInstance( )->getUid( ) . "\" {$history} AND `" . StuffConfig::F_STUFFTIMEVAL . "` != \"0\" GROUP BY HOUR(`" . StuffConfig::F_STUFFTIMEVAL . "`), MOD(MINUTE(`" . StuffConfig::F_STUFFTIMEVAL . "`), 30)  LIMIT 0," . _db_escape( $times ) );
+		$res = _db_query( "SELECT `" . StuffConfig::F_STUFFTIMEVAL . "` FROM `" . StuffConfig::T_STUFFBOXES . "` WHERE `" . StuffConfig::F_STUFFUID . "` = \"" . \io\creat\chassis\session::getInstance( )->getUid( ) . "\" {$history} AND `" . StuffConfig::F_STUFFTIMEVAL . "` != \"0\" GROUP BY HOUR(`" . StuffConfig::F_STUFFTIMEVAL . "`), MOD(MINUTE(`" . StuffConfig::F_STUFFTIMEVAL . "`), 30)  LIMIT 0," . _db_escape( $times ) );
 		if ( $res && _db_rowcount( $res ) )
 		{
 			while ( $row = _db_fetchrow( $res ) )
@@ -337,7 +337,7 @@ class StuffMainImpl extends Stuff implements SemProvider
 			$atom = new sem_atom( sem_atom::AT_SELECT, 'usr.goals.on', StuffCfgFactory::getInstance( )->get( 'usr.goals.on'), $this->messages['sem']['aLg'], $this->messages['sem']['dLg'] );
 				$atom->addOption( 0, $this->messages['sem']['oNoLg'] );
 				
-				$ctxs = _cdes::allCtxs( _session_wrapper::getInstance()->getUid( ), StuffConfig::T_STUFFCTX );
+				$ctxs = _cdes::allCtxs( \io\creat\chassis\session::getInstance()->getUid( ), StuffConfig::T_STUFFCTX );
 				if ( is_array( $ctxs ) )
 					foreach( $ctxs as $ctx )
 						$atom->addOption( $ctx->id, $ctx->disp );
@@ -359,7 +359,7 @@ class StuffMainImpl extends Stuff implements SemProvider
 	 */
 	protected function firstLogin ( )
 	{
-		$uid = _session_wrapper::getInstance( )->getUid( );
+		$uid = \io\creat\chassis\session::getInstance( )->getUid( );
 		
 		/**
 		 * Check if this user has signed first time.

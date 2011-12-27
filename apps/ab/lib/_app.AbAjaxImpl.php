@@ -37,7 +37,7 @@ class AbAjaxImpl extends Ab
 					case 'refresh':
 
 					require_once APP_AB_LIB . 'class.AbSearch.php';
-					$engine = new AbSearch( _session_wrapper::getInstance( )->getUid( ), $this );
+					$engine = new AbSearch( \io\creat\chassis\session::getInstance( )->getUid( ), $this );
 
 					$results = $engine->search( $_POST['perse_js_var'], $_POST['orge_js_var'], n7_globals::settings( )->get( 'usr.lst.len' ), $_POST['keywords'], $_POST['page'], $_POST['order'], $_POST['dir'] );
 
@@ -74,9 +74,9 @@ class AbAjaxImpl extends Ab
 						$id = $ids[0];
 						
 						if ( $_POST['class'] == 'pers' )
-							$contact = new AbPerson( _session_wrapper::getInstance( )->getUid( ) );
+							$contact = new AbPerson( \io\creat\chassis\session::getInstance( )->getUid( ) );
 						else
-							$contact = new AbOrg( _session_wrapper::getInstance( )->getUid( ) );
+							$contact = new AbOrg( \io\creat\chassis\session::getInstance( )->getUid( ) );
 						
 						$contact->remove( $id );
 					break;
@@ -116,7 +116,7 @@ class AbAjaxImpl extends Ab
 					 * Provide serialized names for pre-typed fields.
 					 */
 					case 'names_get':
-						echo AbScheme::jsonNumberNames( _session_wrapper::getInstance( )->getUid( ), $this->messages['typed']['types'] );
+						echo AbScheme::jsonNumberNames( \io\creat\chassis\session::getInstance( )->getUid( ), $this->messages['typed']['types'] );
 					break;
 					
 					/*
@@ -125,7 +125,7 @@ class AbAjaxImpl extends Ab
 					 */
 					case 'save':
 						require_once APP_AB_LIB . 'class.AbPerson.php';
-						$person = new AbPerson( _session_wrapper::getInstance( )->getUid( ) );
+						$person = new AbPerson( \io\creat\chassis\session::getInstance( )->getUid( ) );
 							$person->importXml( htmlspecialchars_decode( $_POST['data'] ) );
 							$person->add( );
 					break;
@@ -136,7 +136,7 @@ class AbAjaxImpl extends Ab
 					 */
 					case 'load':
 						require_once APP_AB_LIB . 'class.AbPerson.php';
-						$person = new AbPerson( _session_wrapper::getInstance( )->getUid( ) );
+						$person = new AbPerson( \io\creat\chassis\session::getInstance( )->getUid( ) );
 							$person->load( $_POST['id'] );
 							echo $person->exportXml( );
 					break;
@@ -168,7 +168,7 @@ class AbAjaxImpl extends Ab
 					 * Provide serialized names for pre-typed fields.
 					 */
 					case 'names_get':
-						echo AbScheme::jsonNumberNames( _session_wrapper::getInstance( )->getUid( ), $this->messages['typed']['types'] );
+						echo AbScheme::jsonNumberNames( \io\creat\chassis\session::getInstance( )->getUid( ), $this->messages['typed']['types'] );
 					break;
 					
 					/*
@@ -177,7 +177,7 @@ class AbAjaxImpl extends Ab
 					 */
 					case 'save':
 						require_once APP_AB_LIB . 'class.AbOrg.php';
-						$org = new AbOrg( _session_wrapper::getInstance( )->getUid( ) );
+						$org = new AbOrg( \io\creat\chassis\session::getInstance( )->getUid( ) );
 							$org->importXml( htmlspecialchars_decode( $_POST['data'] ) );
 							$org->add( );
 					break;
@@ -188,7 +188,7 @@ class AbAjaxImpl extends Ab
 					 */
 					case 'load':
 						require_once APP_AB_LIB . 'class.AbOrg.php';
-						$org = new AbOrg( _session_wrapper::getInstance( )->getUid( ) );
+						$org = new AbOrg( \io\creat\chassis\session::getInstance( )->getUid( ) );
 							$org->load( $_POST['id'] );
 							echo $org->exportXml( );
 					break;

@@ -386,7 +386,7 @@ class StuffMainImpl extends Stuff implements SemProvider
 				 * Create base set of contexts.
 				 */
 				$set = $this->messages['1st_login'];
-				$cdes = new _cdes( $uid, StuffConfig::T_STUFFCTX, n7_globals::getInstance( )->get('io.creat.chassis.i18n') );
+				$cdes = new _cdes( $uid, StuffConfig::T_STUFFCTX );
 				$ctx_id = 0;
 				foreach ( $set as $data )
 					$ctx_id = $cdes->add( 0, $data[1], $data[0], $data[2] );

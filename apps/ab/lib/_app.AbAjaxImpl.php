@@ -52,13 +52,13 @@ class AbAjaxImpl extends Ab
 						$search_id = $this->getVcmpSearchId( 'All' );
 						if ( trim( $_POST['keywords'] ) != '' )
 						{
-							$empty = new _list_empty( $this->messages['list']['no_match'], n7_globals::getInstance( )->get('io.creat.chassis.i18n') );
+							$empty = new _list_empty( $this->messages['list']['no_match'] );
 							$empty->add( $this->messages['list']['again'], "_uicmp_lookup.lookup( '{$search_id}' ).focus();" );
 							$empty->add( $this->messages['list']['all'], "_uicmp_lookup.lookup( '{$search_id}' ).showAll();" );
 						}
 						else
 						{
-							$empty = new _list_empty( $this->messages['list']['empty'], n7_globals::getInstance( )->get('io.creat.chassis.i18n') );
+							$empty = new _list_empty( $this->messages['list']['empty'] );
 							$empty->add( $this->messages['list']['add_pers'], "{$_POST['perse_js_var']}.add();" );
 							$empty->add( $this->messages['list']['add_org'], "{$_POST['orge_js_var']}.add();" );
 						}

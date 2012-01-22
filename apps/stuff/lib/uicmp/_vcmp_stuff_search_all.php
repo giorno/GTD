@@ -60,8 +60,6 @@ class _vcmp_stuff_search_all extends \io\creat\chassis\uicmp\vsearch
 		$this->requirer->call( \io\creat\chassis\uicmp\vlayout::RES_JSPLAIN, 'var ' . $this->getJsVar( ) . ' = new _vcmp_stuff_search_all( \'' . $this->id . '\', \'' . $this->tab->getHtmlId( ) . '\', '. $this->ind->getJsVar( ) . ', \'' . $this->url . '\', ' . \io\creat\chassis\uicmp\uicmp::toJsArray( $this->params ) . ', ' . \io\creat\chassis\uicmp\uicmp::toJsArray( $this->config ) . ', \'' . $this->form->getHtmlId( ) . '\', \'' . $this->container->getHtmlId( ) . '\', \'' . $this->resizer->getHtmlId( ) . '\' );' );
 		$this->requirer->call( \io\creat\chassis\uicmp\vlayout::RES_JSPLAIN, $this->layout->getJsVar( ) . '.registerTabCb( \'' . $this->tab->getHtmlId( ) . '\', \'onShow\', ' . $this->getJsVar( ) . '.tabShown );' );
 		$this->requirer->call( \io\creat\chassis\uicmp\vlayout::RES_JSPLAIN, $this->layout->getJsVar( ) . '.registerTabCb( \'' . $this->tab->getHtmlId( ) . '\', \'onLoad\', ' . $this->getJsVar( ) . '.startup );' );
-		
-		$this->setJsSize( );
 	}
 }
 

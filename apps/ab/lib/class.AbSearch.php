@@ -75,7 +75,7 @@ class AbSearch extends AbConfig
 
 		if ( $dir != 'DESC' ) $dir = 'ASC';
 
-		$builder = new _list_builder( $this->app->getVcmpSearchId( 'All' ), n7_globals::getInstance( )->get('io.creat.chassis.i18n') );
+		$builder = new _list_builder( $this->app->getVcmpSearchId( 'All' ) );
 
 			$builder->addField( 'composed', $messages['list']['name'], AbCfgFactory::LIST_HDRW_NAME, 1, '', true, true, $dir );
 			$builder->addField( 'phone', $messages['typed']['types']['phone'], AbCfgFactory::LIST_HDRW_FIELD, 1, '', false );

@@ -150,7 +150,7 @@ class AbMainImpl extends Ab
 				 * Create base set of contexts.
 				 */
 				$set = $this->messages['1st_login'];
-				$cdes = new _cdes( $uid, AbConfig::T_ABCTX, n7_globals::getInstance( )->get('io.creat.chassis.i18n')  );
+				$cdes = new _cdes( $uid, AbConfig::T_ABCTX );
 				$ctx_id = 0;
 				foreach ( $set as $data )
 					$ctx_id = $cdes->add( 0, $data[1], $data[0], $data[2] );

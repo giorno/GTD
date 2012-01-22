@@ -1,18 +1,11 @@
 <?php
 
 require_once CHASSIS_3RD . 'class.SimonsXmlWriter.php';
-//require_once CHASSIS_LIB . 'class.Context.php';
-require_once CHASSIS_LIB . 'list/_list_builder.php';
-require_once CHASSIS_LIB . 'list/_list_cell.php';
 require_once CHASSIS_LIB . '_cdes.php';
-//require_once CHASSIS_LIB . 'class.ListForm.php';
-//require_once CHASSIS_LIB . 'class.FormItem.php';
 require_once CHASSIS_LIB . 'class.Wa.php';
-
 require_once CHASSIS_LIB . 'apps/_app_registry.php';
 
 require_once N7_SOLUTION_LIB . 'libtz.php';
-//require_once N7_SOLUTION_ROOT . 'i18n/system/welcomemsg.php';
 
 require_once APP_STUFF_LIB . 'class.StuffConfig.php';
 require_once APP_STUFF_LIB . 'class.StuffData.php';

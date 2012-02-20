@@ -1,5 +1,15 @@
-/* Decoration of list items created by custom list cell manager */
 
+/* vim: ts=4
+
+ @file stuff.css
+ @author giorno
+ @package GTD
+ @subpackage Stuff
+ @license Apache License, Version 2.0, see LICENSE file
+ 
+ Styles for UI owned by Stuff application.
+ */
+ 
 /* Stylesheet for color indicator of priority */
 div._stuff_pty_ind
 {
@@ -68,14 +78,6 @@ td.stuffListToday span.stuffComposedItemTitle
 	/*font-weight:					bold;*/
 	/*color:							#ce5c00;*/
 }
-/*td.stuffListToday div._stuff_list_ico_done
-{
-	background:						url(./doneToday.png) no-repeat center center;
-}*/
-/*td.stuffListToday div._stuff_list_ico_2m
-{
-	background:						url(./list_ico_2m.png) no-repeat center center;
-}*/
 td.stuffListTooLate
 {
 	color:							#878787;
@@ -104,43 +106,11 @@ div._stuff_list_ico_2m:hover
 {
 	background:						url(./_list_ico_2m_on.gif) no-repeat center center;
 }
-
-/*div.stuffList2mDone
-{
-	_padding-left:					4px;
-	color:							#003387;
-	height:							16px;
-	width:							100%;
-	min-height:						16px;
-	min-width:						16px;
-	cursor:							pointer;
-	white-space:					nowrap;
-}
-
-div.stuffList2mDone:hover
-{
-	text-decoration:				underline;
-}*/
-
-/*div.stuffCtxCloud
-{
-	margin-top:						4px;
-	overflow:						auto;
-}
-
-div.stuffCtxCloud div._tsch,*/
 div._stuff_cpe_hist_ctxs div._tsch
 {
 	margin-right:					2px;
 	margin-bottom:					2px;
 }
-/*
-td.stuffCtxPrompt
-{
-	vertical-align:					top;
-	padding-top:					4px;
-}*/
-
 /* Information about no contexts available in the forms */
 div.stuffNoContexts
 {
@@ -153,20 +123,6 @@ td._stuff_cpe_pty
 {
 	vertical-align:					middle;
 }
-/*
-div#boxStatusSchedule,div#boxStatusInbox,div#boxStatusNa,div#boxStatusWf,div#boxStatusSd,div#boxStatusAr,div#boxStatusProjects
-{
-	min-width:							9px;
-	min-height:							13px;
-	font-size:						11px;
-	border-style:					solid;
-	border-width:					1px;
-	border-left-width:				3px;
-	border-right-width:				3px;
-	text-align:						center;
-	float:							right;
-}*/
-
 div.boxStatusColor0
 {
 	background-color:				#b5b5b5;
@@ -223,11 +179,6 @@ td.stuffAsTreeHeader/*,td.stuffAsTreeContent*/
 	padding-top:					16px;
 	/*background-color:				#ddf7ff;*/
 }
-/*td.stuffAsTreeContent
-{
-	padding-top:					0px;
-	padding-bottom:					0px;
-}*/
 td.stuffAsTreeHeaderItem
 {
 	/*padding-bottom:					2px;
@@ -249,14 +200,6 @@ td#stuffEdtTPresets,td#stuffEdtDPresets
 {
 	vertical-align:					middle;
 }
-
-/* Main area of 3months calendar*/
-/*td.stuffEdtCal
-{
-	border-left:					1px solid #89abcd;
-	border-right:					1px solid #89abcd;
-	background-color:				#e7e7e7;
-}*/
 
 td._stuff_cpe_cal_cap,td._stuff_cpe_cal_cap_last
 {
@@ -318,72 +261,11 @@ div._stuff_cpe_cal_hd
 {
 	color:							#878700;
 }
-
-/*td.stuffEdtCalMonthLt,td.stuffEdtCalMonthRt,td.stuffEdtCalMonthLb,td.stuffEdtCalMonthRb
-{*/
-	/*height:							8px;
-	width:							8px;*/
-/*background:						url(./khakimonth.gif) no-repeat left top;
-}
-td.stuffEdtCalMonthRt
-{
-	background:						url(./khakimonth.gif) no-repeat right top;
-}
-td.stuffEdtCalMonthLb
-{
-	background:						url(./khakimonth.gif) no-repeat left bottom;
-}
-td.stuffEdtCalMonthRb
-{
-	background:						url(./khakimonth.gif) no-repeat right bottom;
-}
-
-td.stuffEdtCalLt,td.stuffEdtCalRt,td.stuffEdtCalLb,td.stuffEdtCalRb
-{
-	width:							8px;
-	height:							8px;
-	background:						url(./khakical.gif) no-repeat left top;
-}
-td.stuffEdtCalRt
-{
-	background:						url(./khakical.gif) no-repeat right top;
-}
-td.stuffEdtCalLb
-{
-	background:						url(./khakical.gif) no-repeat left bottom;
-}
-td.stuffEdtCalRb
-{
-	background:						url(./khakical.gif) no-repeat right bottom;
-}
-td.stuffEdtCalL
-{
-	background-color:				#e7e7e7;
-	border-bottom:					1px solid #89abcd;
-	font-size:						1px;
-	height:							7px;
-}
-td.stuffEdtCalMenu
-{
-	height:							32px;
-	vertical-align:					middle;
-	background-color:				#e7e7e7;
-	border-top:						1px solid #89abcd;
-}
-div#stuffEdtCal
-{
-	z-index:						100;
-	position:						absolute;
-	visibility:						hidden;*/
-	/*top:							-5px;*/
-/*}*/
 div._stuff_cpe_cal_td
 {
 	font-weight:					bold;
 	color:							#000000;
 }
-
-
 
 /* Background of history record */
 td._stuff_cpe_hist_cont,td._stuff_cpe_hist_hl
@@ -502,11 +384,10 @@ div._stuff_cpe_prj
 	padding-right:					12px;
 	padding-left:					12px;
 }
-/*td._stuff_cpe_prj_name,div._stuff_cpe_prj_name
-{
-	vertical-align:					middle;
-	height:							16px;	*/	/* should be same as height of UICMP icon buttons (e.g. _uicmp_gi_close)*/
-/*}*/
+div._stuff_cpe_prj span._list_deco_title {
+  font-weight: bold;
+  font-size: 14px;
+}
 div._stuff_cpe_prj_noprj
 {
 	padding-top:					2px;		/* should be same as padding-top of UICMP icon buttons (e.g. _uicmp_gi_close)*/
@@ -570,7 +451,6 @@ div.stuffPrjIcon
 	min-height:						16px;
 	background:						url(./_list_ico_prj.gif) no-repeat left top;
 }
-
 /* Table holding form for search in All stuff */
 table._stuff_search_all
 {

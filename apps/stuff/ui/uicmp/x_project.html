@@ -1,6 +1,17 @@
-{* Ajax delivered UI of form project section content *}
+{* vim: ts=4
+ *
+ * @file x_project.html
+ * @author giorno
+ * @package GTD
+ * @subpackage Stuff
+ * @license Apache License, Version 2.0, see LICENSE file
+ *
+ * Ajax template delivering UI for project section of CPE.
+ *}
+ 
 <table cellspacing="0" cellpadding="0">
 	<tr>
+		{assign var=allItemClass value=''}
 		{include file="$CHASSIS_UI_ROOT/list/list_cell.html"}
 	</tr>
 	{if $DESC}

@@ -1,7 +1,9 @@
 <?PHP
 
+// vim: ts=4
+
 /**
- * @file class.StuffSearch.php
+ * @file class.StuffSearchBoxes.php
  * @author giorno
  * @package GTD
  * @subpackage Stuff
@@ -190,7 +192,7 @@ class StuffSearchBoxes extends StuffSearch
 
 									/* Task description and details */
 									new _list_cell(	_list_cell::deco(	$row[self::F_STUFFNAME],
-																		$row[self::F_STUFFDESC],
+																		$this->encode( $row[self::F_STUFFDESC] ),
 																		$ctx,
 																		$class,
 																		$cpe_js_var . ".process( " . $row[self::F_STUFFSID] . " );",
@@ -392,7 +394,7 @@ class StuffSearchBoxes extends StuffSearch
 												StuffListCell::MAN_STUFFPRIORITY );
 
 				$name		= new _list_cell(	_list_cell::deco(	$row[self::F_STUFFNAME],
-																	$comment,
+																	$this->encode( $comment ),
 																	$ctx,
 																	$class,
 																	$cpe_js_var . ".process( " . $row[self::F_STUFFSID] . " );",
@@ -723,7 +725,7 @@ class StuffSearchBoxes extends StuffSearch
 													StuffListCell::MAN_STUFFPRIORITY ),
 					
 									new _list_cell(	_list_cell::deco(	$row[self::F_STUFFNAME],
-																		$row[self::F_STUFFDESC],
+																		$this->encode( $row[self::F_STUFFDESC] ),
 																		$ctx,
 																		$class,
 																		$cpe_js_var . ".process( " . $row[self::F_STUFFSID] . " );",
@@ -864,7 +866,7 @@ class StuffSearchBoxes extends StuffSearch
 																	StuffListCell::MAN_STUFFPRIORITY );
 
 							$item['name']		= new _list_cell(	_list_cell::deco(	$row[self::F_STUFFNAME],
-																						$row[self::F_STUFFDESC],
+																						$this->encode( $row[self::F_STUFFDESC] ),
 																						$ctx,
 																						$class,
 																						$cpe_js_var . ".process( " . $row[self::F_STUFFSID] . " );",
@@ -960,7 +962,7 @@ class StuffSearchBoxes extends StuffSearch
 
 
 						$item['priority'] = new _list_cell( StuffListCell::StuffPriority( $row[self::F_STUFFPRIORITY], $class . " " . $classTask ), StuffListCell::MAN_STUFFPRIORITY );
-						$item['name'] = new _list_cell( _list_cell::deco( $row[self::F_STUFFNAME], $row[self::F_STUFFDESC], $ctx, $row[self::F_STUFFSID], $class . " " . $classTask, ( (int)$row['prj'] != 0 ), "stuffShowTab( 'stFrmEdt' );frmEdtLoad( " . $row[self::F_STUFFSID] . " );frmEdtBackBox = 'All';stuffRenderBack( frmEdtBackBox, 'txtFrmEdtBack' );" ), _list_cell::MAN_DECO );
+						$item['name'] = new _list_cell( _list_cell::deco( $row[self::F_STUFFNAME], $this->encode( $row[self::F_STUFFDESC] ), $ctx, $row[self::F_STUFFSID], $class . " " . $classTask, ( (int)$row['prj'] != 0 ), "stuffShowTab( 'stFrmEdt' );frmEdtLoad( " . $row[self::F_STUFFSID] . " );frmEdtBackBox = 'All';stuffRenderBack( frmEdtBackBox, 'txtFrmEdtBack' );" ), _list_cell::MAN_DECO );
 						$item['due'] = new _list_cell(_list_cell::DateTime( $tf['date'], $tf['time'], $class . " " . $classTask ), StuffListCell::MAN_STUFFDATETIME );
 						$item['box'] = new _list_cell(_list_cell::Javascript( $this->messages["box" . $row[self::F_STUFFBOX]], "window.scroll(0,0);stuffShowTab( '{$jsBoxTab}' )" , $class . " " . $classTask ),_list_cell::MAN_JAVASCRIPT );
 

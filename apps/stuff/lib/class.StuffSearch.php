@@ -1,5 +1,15 @@
 <?php
 
+// vim: ts=4
+
+/**
+ * @file class.StuffSearch.php
+ * @author giorno
+ * @package GTD
+ * @subpackage Stuff
+ * @license Apache License, Version 2.0, see LICENSE file
+ */
+
 require_once CHASSIS_3RD . 'class.SimonsXmlWriter.php';
 require_once CHASSIS_LIB . '_cdes.php';
 require_once CHASSIS_LIB . 'class.Wa.php';
@@ -63,6 +73,13 @@ class StuffSearch extends StuffConfig
 		//$this->settings = StuffCfgFactory::getInstance( );
 		$this->serverTz = n7_globals::serverTz( )->getName( );
 	}
+
+	/**
+	 * Encodes HTML entities for list cells.
+	 * @param string $data plain text to encode
+	 * @return string
+	 */
+	protected function encode ( $data ) { return htmlspecialchars( $data ); }
 
 	/**
 	 * Provides fuzzy date or time information.

@@ -1,5 +1,15 @@
 <?php
 
+// vim: ts=4
+
+/**
+ * @file class.StuffProject.php
+ * @author giorno
+ * @package GTD
+ * @subpackage Stuff
+ * @license Apache License, Version 2.0, see LICENSE file
+ */
+
 require_once APP_STUFF_LIB . 'class.StuffConfig.php';
 require_once APP_STUFF_LIB . 'class.StuffSearch.php';
 require_once APP_STUFF_LIB . 'class.StuffListCell.php';
@@ -255,7 +265,7 @@ class StuffProject extends StuffSearch
 													StuffListCell::MAN_STUFFDATETIME ),
 
 									new _list_cell(	_list_cell::deco(	$row[self::F_STUFFNAME],
-																		$row[self::F_STUFFDESC],
+																		$this->encode( $row[self::F_STUFFDESC] ),
 																		$ctx,
 																		$class,
 																		$js_var. ".prj_pick( " . $row[self::F_STUFFSID] . " );",
@@ -420,7 +430,7 @@ class StuffProject extends StuffSearch
 												StuffListCell::MAN_STUFFPRIORITY );
 
 				$name		= new _list_cell(	_list_cell::deco(	$row[self::F_STUFFNAME],
-																	$comment,
+																	$this->encode( $comment ),
 																	$ctx,
 																	$class,
 																	$jsOnClick,

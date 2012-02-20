@@ -1,5 +1,7 @@
 <?php
 
+// vim: ts=4
+
 /**
  * @file class.StuffHistory.php
  * @author giorno
@@ -227,11 +229,10 @@ class StuffHistory extends StuffConfig
 	 */
 	private static function Format ( $plain )
 	{
-		/*
-		 * Match URLs and convert them into links.
-		 */
-		$buf = preg_replace( '@(https?://([-\w\.]+)+(:\d+)?(/([\w/_\-\.]*(\?\S+)?)?)?)@', '<a target="_blank" href="$1">$1</a>', $plain );
+		// Encode HTML entities, match URLs and convert them into links.
+		$buf = preg_replace( '@(https?://([-\w\.]+)+(:\d+)?(/([\w/_\-\.]*(\?\S+)?)?)?)@', '<a target="_blank" href="$1">$1</a>', htmlspecialchars( $plain ) );
 
+		// Apply new line characters.
 		return nl2br( trim( $buf ) );
 	}
 }
